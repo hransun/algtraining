@@ -35,3 +35,8 @@ class Solution(object):
                 res = res * presign + prenum
         res += num * sign 
         return res
+
+https://leetcode-cn.com/problems/subdomain-visit-count/
+
+
+https://leetcode-cn.com/problems/degree-of-an-array/
