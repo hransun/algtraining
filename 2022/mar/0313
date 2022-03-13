@@ -1,0 +1,37 @@
+https://leetcode-cn.com/problems/basic-calculator/
+
+class Solution(object):
+    def calculate(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        res  =0
+        sign =1
+        stack = []
+        num =0
+
+        for index , n in enumerate(s):
+            if n.isdigit():
+                num = num*10 + int(n)
+            elif n == '+':
+                res += sign * num
+                sign =1
+                num =0
+            elif n =='-':
+                res += sign * num
+                sign = -1
+                num =0
+            elif n =='(':
+                stack.append(res)
+                stack.append(sign)
+                res =0
+                sign =1
+            elif n == ')':
+                res += sign * num
+                num =0
+                presign = stack.pop()
+                prenum = stack.pop()
+                res = res * presign + prenum
+        res += num * sign 
+        return res
