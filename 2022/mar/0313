@@ -53,7 +53,27 @@ class Solution(object):
                 key = ".".join(domains[i:])
                 cache[key] += c
         return [str(cache[key]) + " " + key for key in cache]
-        
+
 
 
 https://leetcode-cn.com/problems/degree-of-an-array/
+
+class Solution(object):
+    def findShortestSubArray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        count = 0
+        cache = collections.defaultdict(list)
+        for index , n in enumerate(nums):
+            cache[n].append(index)
+            if len(cache[n]) > count:
+                count = len(cache[n])
+
+        res = len(nums)
+        for key in cache:
+            if count == len(cache[key]):
+                arr = cache[key]
+                res = min(res, arr[-1] - arr[0] +1)
+        return res 
