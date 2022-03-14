@@ -38,5 +38,22 @@ class Solution(object):
 
 https://leetcode-cn.com/problems/subdomain-visit-count/
 
+class Solution(object):
+    def subdomainVisits(self, cpdomains):
+        """
+        :type cpdomains: List[str]
+        :rtype: List[str]
+        """
+        cache = collections.defaultdict(int)
+        for each in cpdomains:
+            count  , domain = each.split(" ")
+            c = int(count)
+            domains = domain.split(".")
+            for i in range(len(domains)):
+                key = ".".join(domains[i:])
+                cache[key] += c
+        return [str(cache[key]) + " " + key for key in cache]
+        
+
 
 https://leetcode-cn.com/problems/degree-of-an-array/
