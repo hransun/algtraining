@@ -1,0 +1,38 @@
+https://leetcode-cn.com/problems/daily-temperatures/
+
+class Solution(object):
+    def dailyTemperatures(self, temperatures):
+        """
+        :type temperatures: List[int]
+        :rtype: List[int]
+        """
+        stack = []
+        n = len(temperatures)
+        res = [0] * n 
+        for index , temperature in enumerate(temperatures):
+            while stack and stack[-1][1] < temperature:
+                pre_day , pre_temperature = stack.pop()
+                res[pre_day] = index - pre_day
+            stack.append((index,temperature))
+        return res
+
+
+https://leetcode-cn.com/problems/next-greater-element-ii/
+
+class Solution(object):
+    def nextGreaterElements(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        n = len(nums)
+        stack = []
+        res = [-1] * n
+
+        for index in range(n*2):
+            while stack and nums[stack[-1]] < nums[index%n]:
+                pre_indx = stack.pop()
+                res[pre_indx] = nums[index%n]
+
+            stack.append(index%n)
+        return res 
