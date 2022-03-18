@@ -1,0 +1,42 @@
+https://leetcode.com/problems/merge-sorted-array/
+
+class Solution(object):
+    def merge(self, nums1, m, nums2, n):
+        """
+        :type nums1: List[int]
+        :type m: int
+        :type nums2: List[int]
+        :type n: int
+        :rtype: None Do not return anything, modify nums1 in-place instead.
+        """
+        i , j = m-1 , n-1
+        for k in range(m+n-1,-1,-1):
+            if j < 0 or (i >=0 and nums1[i] > nums2[j]) :
+                nums1[k] = nums1[i]
+                i -=1
+            
+            else:
+                nums1[k] = nums2[j]
+                j-=1
+              
+https://leetcode.com/problems/reverse-linked-list/
+
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    def reverseList(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        prev = None
+        while head is not None:
+            temp = head.next
+            head.next = prev
+            prev = head
+            head = temp 
+        return prev 
+        
