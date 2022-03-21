@@ -1,0 +1,48 @@
+https://leetcode-cn.com/problems/reverse-nodes-in-k-group/
+
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    def reverseKGroup(self, head, k):
+        """
+        :type head: ListNode
+        :type k: int
+        :rtype: ListNode
+        """
+        dummy = ListNode(0, head)
+        last = dummy
+        while head is not None:
+            end = self.getEnd(head, k )
+            if end is None:
+                break 
+            nextGroupHead = end.next
+            self.reverseList(head,nextGroupHead)
+
+            last.next = end
+            head.next = nextGroupHead
+
+            last = head 
+            head = nextGroupHead
+        return dummy.next 
+    
+
+    def getEnd(self,head, k ):
+        while head is not None:
+            
+            k -=1
+            if k == 0:
+                return head
+            head = head.next 
+        return None
+
+    def reverseList(self, head , stop):
+        last = head 
+        head = head.next 
+        while head != stop:
+            nextHead = head.next 
+            head.next = last 
+            last = head 
+            head = nextHead
