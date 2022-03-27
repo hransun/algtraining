@@ -1,0 +1,73 @@
+https://leetcode-cn.com/problems/lru-cache/
+
+class LRUCache(object):
+
+    def __init__(self, capacity):
+        """
+        :type capacity: int
+        """
+        self.capacity = capacity
+        self.head = Node()
+        self.tail = Node()
+        self.cache = dict()
+        self.head.next = self.tail
+        self.tail.pre= self.head
+
+
+    def get(self, key):
+        """
+        :type key: int
+        :rtype: int
+        """
+        if key not in self.cache:
+            return -1
+        node = self.cache[key]
+        self.remove(node)
+        self.insert(self.head, node)
+        return node.val
+
+
+    def put(self, key, value):
+        """
+        :type key: int
+        :type value: int
+        :rtype: None
+        """
+        if key not in self.cache:
+            node = Node(key,value)
+            
+            self.cache[key] = node
+            self.insert(self.head, node)
+            if len(self.cache) >self.capacity:
+                del self.cache[self.tail.pre.key]
+                self.remove(self.tail.pre)
+        else:
+            node = self.cache[key]
+            node.val = value
+            self.remove(node)
+            self.insert(self.head,node)
+    
+    def remove(self,node):
+        node.pre.next = node.next
+        node.next.pre = node.pre
+    
+    def insert(self,node_p , node):
+        node_p.next.pre = node
+        node.next = node_p.next
+        node_p.next = node
+        node.pre = node_p 
+
+class Node:
+    def __init__(self,key=0, val=0):
+        self.val = val
+        self.pre = None
+        self.next = None
+        self.key = key
+        
+
+
+
+# Your LRUCache object will be instantiated and called as such:
+# obj = LRUCache(capacity)
+# param_1 = obj.get(key)
+# obj.put(key,value)
