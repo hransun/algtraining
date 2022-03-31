@@ -1,0 +1,22 @@
+https://leetcode-cn.com/problems/count-number-of-nice-subarrays/
+
+class Solution(object):
+    def numberOfSubarrays(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """
+        n = len(nums)
+        s = [0 for _ in range(n+1)]
+        for i in range(1,n+1):
+            s[i] = nums[i-1] % 2 + s[i-1]
+        count = [0 for _ in range(n+1)]
+        count[s[0]] +=1
+        ans =0
+        for i in range(1 , n+1):
+            if s[i] - k >=0:
+                ans += count[s[i] - k]
+            count[s[i]] +=1
+        return ans 
+        
