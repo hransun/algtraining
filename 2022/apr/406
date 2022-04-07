@@ -17,3 +17,31 @@ class Solution(object):
             else:
                 i+=1
         return ()
+
+https://leetcode-cn.com/problems/3sum/submissions/
+
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        ans = []
+        nums.sort()
+        for i in range(len(nums)):
+            if i > 0 and nums[i] == nums[i-1]:
+                continue
+            jks = self.twoSum(nums,i+1,-nums[i])
+            
+            for jk in jks:
+                ans.append([nums[i], jk[0],jk[1]])
+        return ans 
+
+    def twoSum(self,nums,start,target):
+        ans = []
+        j = len(nums)-1
+        for i in range(start,len(nums)):
+            if i > start and nums[i] == nums[i-1]:
+                continue
+            while i < j and (nums[i] + nums[j]) > target:
+                j-=1
+            if i < j and (nums[i] + nums[j] )== target:
+                ans.append([nums[i],nums[j]])
+           
+        return ansß
