@@ -15,4 +15,25 @@ class Solution(object):
             else:
                 j-=1
         return ans 
+
+https://leetcode-cn.com/problems/subsets/
+
+class Solution(object):
+    
+    def subsets(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        ans =[]
+        self.helper(nums,0,[],ans)
+        return ans 
         
+    def helper(self,nums,index,current,ans):
+        if index == len(nums):
+            ans.append(current[:])
+            return 
+        current.append(nums[index])
+        self.helper(nums,index +1 , current,ans)
+        current.pop()
+        self.helper(nums,index +1 , current,ans)
