@@ -1,0 +1,23 @@
+https://leetcode-cn.com/problems/combinations/
+
+class Solution(object):
+    def combine(self, n, k):
+        """
+        :type n: int
+        :type k: int
+        :rtype: List[List[int]]
+        """
+        ans = []
+        self.helper(n,k,[],1,ans)
+        return ans 
+
+    def helper(self,n,k,current,index,ans):
+        if len(current) == k:
+                ans.append(current[:])
+                return 
+        if index == n+1:
+            return
+        current.append(index)
+        self.helper(n,k,current,index+1,ans)
+        current.pop()
+        self.helper(n,k,current,index+1,ans)
