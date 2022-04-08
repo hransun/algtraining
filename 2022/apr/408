@@ -21,3 +21,30 @@ class Solution(object):
         self.helper(n,k,current,index+1,ans)
         current.pop()
         self.helper(n,k,current,index+1,ans)
+
+https://leetcode-cn.com/problems/permutations/submissions/
+
+class Solution(object):
+    def permute(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+
+
+        def dfs(nums,size,path,index,used,ans):
+            if len(path) == size:
+                ans.append(path[:])
+            for i in range(size):
+                if not used[i]:
+                    used[i] = True
+                    path.append(nums[i])
+                    dfs(nums,size,path,index+1,used,ans)
+                    used[i] = False
+                    path.pop()
+        
+        n = len(nums)
+        used = [False for _ in range(n)]
+        ans = []
+        dfs(nums,n,[],0,used,ans)
+        return ans 
