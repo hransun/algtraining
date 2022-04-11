@@ -18,4 +18,25 @@ class Solution(object):
         return max(self.maxDepth(root.left) ,self.maxDepth(root.right)) + 1
            
         
+https://leetcode-cn.com/problems/powx-n/submissions/
+
+class Solution(object):
+    def myPow(self, x, n):
+        """
+        :type x: float
+        :type n: int
+        :rtype: float
+        """
+        if n < 0:
+            return 1.0/self.myPow(x,-n)
+        if n == 0:
+            return 1
         
+        
+        temp  = self.myPow(x,n/2)
+        ans = temp * temp 
+        if n %2==1:
+            ans *= x
+        return ans
+        
+            
