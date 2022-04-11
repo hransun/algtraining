@@ -18,3 +18,27 @@ class Solution(object):
         self.invertTree(root.left)
         self.invertTree(root.right)
         return root
+
+https://leetcode-cn.com/problems/validate-binary-search-tree/submissions/
+
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def isValidBST(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        def check(node, min, max):
+            if node is None:
+                return True
+            if node.val <= min or node.val >= max:
+                return False
+            return check(node.left,min,node.val) and check(node.right,node.val, max)
+
+        return check(root,float('-inf'),float('inf'))
+        
