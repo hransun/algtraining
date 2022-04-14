@@ -50,4 +50,30 @@ class Solution(object):
         ans =[]
         dfs(root)
         return ans 
+
+"""
+# Definition for a Node.
+class Node(object):
+    def __init__(self, val=None, children=None):
+        self.val = val
+        self.children = children
+"""
+
+class Solution(object):
+    def preorder(self, root):
+        """
+        :type root: Node
+        :rtype: List[int]
+        """
+        stack =[]
+        ans =[]
+        if not root:
+            return ans 
+        stack.append(root)
+        while stack:
+            node = stack.pop()
+            ans.append(node.val)
+            for i in reversed(range(len(node.children))):
+                stack.append(node.children[i])
+        return ans 
         
