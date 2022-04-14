@@ -22,3 +22,32 @@ class Solution(object):
         ans = []
         dfs(root)
         return ans
+
+https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/submissions/
+
+"""
+# Definition for a Node.
+class Node(object):
+    def __init__(self, val=None, children=None):
+        self.val = val
+        self.children = children
+"""
+
+class Solution(object):
+
+    def preorder(self, root):
+        """
+        :type root: Node
+        :rtype: List[int]
+        """
+        def dfs(node):
+            if node is None:
+                return 
+            ans.append(node.val)
+            for c in node.children:
+                dfs(c)
+        
+        ans =[]
+        dfs(root)
+        return ans 
+        
