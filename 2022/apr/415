@@ -1,0 +1,30 @@
+https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/submissions/
+
+"""
+# Definition for a Node.
+class Node(object):
+    def __init__(self, val=None, children=None):
+        self.val = val
+        self.children = children
+"""
+
+class Solution(object):
+    def levelOrder(self, root):
+        """
+        :type root: Node
+        :rtype: List[List[int]]
+        """
+        q = collections.deque()
+        q.append((root,0))
+        seq =[]
+        if not root:
+            return seq 
+        while q:
+            current = q.popleft()
+            node , depth = current[0], current[1]
+            if depth >= len(seq):
+                seq.append([])
+            seq[depth].append(node.val)
+            for c in node.children:
+                q.append((c,depth+1))
+        return seq
