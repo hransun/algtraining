@@ -56,3 +56,52 @@ class Codec:
 # ser = Codec()
 # deser = Codec()
 # ans = deser.deserialize(ser.serialize(root))
+
+https://leetcode.com/problems/tree-diameter/submissions/
+
+class Solution(object):
+    def __init__(self,n=0,to = collections.defaultdict(list)):
+        self.n = n
+        self.to = to
+        
+    def treeDiameter(self, edges):
+        """
+        :type edges: List[List[int]]
+        :rtype: int
+        """
+        
+        for edge in edges:
+            x , y = edge[0], edge[1]
+            self.n = max(self.n, max(x,y)) 
+        self.n +=1
+        #print(self.n)
+        # out edge array
+        
+        for edge in edges:
+            x, y  = edge[0], edge[1]
+            self.to[x].append(y)
+            self.to[y].append(x)
+        p = self.findFarthest(0)[0]
+        print(self.findFarthest(p)[1])
+        return self.findFarthest(p)[1]
+    
+    def findFarthest(self,start):
+        q = collections.deque()
+        depth = [-1 for _ in range(self.n)] 
+        #print(len(depth))
+        q.append(start)
+        depth[start] = 0
+        while len(q):
+            x = q.popleft()
+            for y in self.to[x]:
+                #print(y)
+                if depth[y]!= -1:
+                    continue
+                depth[y] = depth[x]+1
+                q.append(y)
+        ans = start
+        for i in range(self.n):
+            if depth[i] > depth[ans]:
+                ans = i
+        return ans,depth[ans]
+        
