@@ -42,5 +42,37 @@ class Solution(object):
                 return edge
         return None
 
+https://leetcode-cn.com/problems/course-schedule/submissions/
+
+class Solution(object):
+    def canFinish(self, numCourses, prerequisites):
+        """
+        :type numCourses: int
+        :type prerequisites: List[List[int]]
+        :rtype: bool
+        """
+        to = [[] for _ in range(numCourses)]
+        inDeg = [ 0 for _ in range(numCourses)]
+
+        for pre in prerequisites:
+            ai = pre[0]
+            bi = pre[1]
+            to[bi].append(ai)
+            inDeg[ai] +=1
         
+        queue = collections.deque()
+        for i in range(numCourses):
+            if inDeg[i] ==0:
+                queue.append(i)
+        
+        lessions = []
+        while queue:
+            x = queue.popleft()
+            lessions.append(x)
+            for y in to[x]:
+                inDeg[y] -=1
+                if inDeg[y] ==0:
+                    queue.append(y)
+        return len(lessions) == numCourses
+                 
         
