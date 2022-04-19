@@ -1,0 +1,46 @@
+https://leetcode-cn.com/problems/redundant-connection/submissions/
+
+class Solution(object):
+    def __init__(self):
+        self.hasCycle= False
+
+    def findRedundantConnection(self, edges):
+        """
+        :type edges: List[List[int]]
+        :rtype: List[int]
+        """
+        n=0
+        for edge in edges:
+            x = edge[0]
+            y = edge[1]
+            n = max(n,max(x,y))
+        
+        to = [[] for _ in range(n+1)]
+        visited = [ False for _ in range(n+1)]
+        #hasCycle = False
+
+        def dfs(x,fa):# fa = father
+            visited[x] = True
+            for y in to[x]:
+                if y==fa:
+                    continue
+                if not visited[y]:
+                    dfs(y,x)
+                else:
+                    print(y,x,self.hasCycle)
+                    self.hasCycle=True
+            visited[x] = False
+
+        for edge in edges:
+            x = edge[0]
+            y = edge[1]
+            to[x].append(y)
+            to[y].append(x)
+            
+            dfs(x,0)
+            if self.hasCycle:
+                return edge
+        return None
+
+        
+        
