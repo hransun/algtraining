@@ -1,0 +1,35 @@
+https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/submissions/
+
+class Solution(object):
+    def __init__(self):
+        self.ans = []
+    def letterCombinations(self, digits):
+        """
+        :type digits: str
+        :rtype: List[str]
+        """
+        def dfs(index,cur):
+            if index == len(digits):
+                self.ans.append("".join(cur))
+                return 
+            for c in alphabet[digits[index]]:
+                cur.append(c)
+                dfs(index+1,cur)
+                cur.pop()
+
+        alphabet = collections.defaultdict(list)
+        alphabet["2"] = "abc"
+        alphabet["3"] = "def"
+        alphabet["4"] = "ghi"
+        alphabet["5"] = "jkl"
+        alphabet["6"] = "mno"
+        alphabet["7"] = "pqrs"
+        alphabet["8"] = "tuv"
+        alphabet["9"] = "wxyz"
+
+        if not digits:
+            return []
+        dfs(0,[])
+        return self.ans
+
+        
