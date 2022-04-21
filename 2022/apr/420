@@ -32,4 +32,57 @@ class Solution(object):
         dfs(0,[])
         return self.ans
 
+https://leetcode-cn.com/problems/n-queens/submissions/
+
+class Solution(object):
+    def __init__(self):
+        self.ans = []
+
+    def solveNQueens(self, n):
+        """
+        :type n: int
+        :rtype: List[List[str]]
+        """
+        used = [ False for _ in range(n)]
+        
+        usedPlus = collections.defaultdict(lambda:False)
+        usedMinus = collections.defaultdict(lambda:False)
+        
+        result = []
+        def dfs(row,p):
+
+            if row == n:
+                self.ans.append(p[:])
+                return 
+            for col in range(n):
+                #print(row,col)
+                if used[col] ==False and usedPlus[row + col]== False and usedMinus[row - col] == False:
+                    p.append(col)
+                    used[col] = True
+                    usedMinus[row - col] = True
+                    usedPlus[row + col] = True
+                    dfs(row+1,p)
+                    used[col]= False
+                    usedMinus[row - col] = False
+                    usedPlus[row + col] = False
+                    p.pop()
+        
+        dfs(0,[])
+        for p in self.ans:
+            #print(p)
+            pattern =[["." for _ in range(n)] for _ in range(n)]
+            
+            for row in range(n):
+                
+                pattern[row][p[row]] = 'Q'
+            #print(pattern)
+            x =[]
+            for p in pattern:
+                x.append("".join(p))
+            result.append(x)
+        return result
+
+
+
+
         
