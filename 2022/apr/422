@@ -1,0 +1,36 @@
+https://leetcode-cn.com/problems/minimum-genetic-mutation/submissions/
+
+class Solution(object):
+    def minMutation(self, start, end, bank):
+        """
+        :type start: str
+        :type end: str
+        :type bank: List[str]
+        :rtype: int
+        """
+        depth = collections.defaultdict(int)
+        hashbank =set()
+        for x in bank:
+            hashbank.add(x)
+        if end not in hashbank:
+            return -1
+        q = collections.deque()
+        q.append(start)
+        gene = ['A','C','G','T']
+        while q:
+            s = q.popleft()
+            
+            for i in range(8):
+                for j in range(4):
+                    if s[i] != gene[j]:
+                        ns = s[:i]+gene[j]+s[i+1:]
+                        if ns not in hashbank:
+                            continue
+                        if ns in depth:
+                            continue
+                        depth[ns] = depth[s] +1
+                        q.append(ns)
+                        if ns == end:
+                            return depth[ns]
+        return -1
+        
