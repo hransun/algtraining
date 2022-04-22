@@ -1,0 +1,55 @@
+https://leetcode-cn.com/problems/number-of-islands/submissions/
+
+class Solution(object):
+    def __init__(self):
+        self.ans = 0
+        self.visited = []
+        
+    def numIslands(self, grid):
+        """
+        :type grid: List[List[str]]
+        :rtype: int
+        """
+        
+        def bfs(x,y,grid):
+            
+            q = collections.deque()
+            dx = [-1,0,0,1]
+            dy = [0,-1,1,0]
+            q.append((x,y))
+            self.visited[x][y] = True
+            
+            while q:
+                    
+                cur_x, cur_y = q.popleft()
+                
+                for i in range(4):
+                    nx = cur_x + dx[i]
+                    ny = cur_y+ dy[i]
+                    #print(nx,ny)
+                    
+                    if nx < 0 or nx >=m or ny<0 or ny>=n:
+                        continue
+                    if grid[nx][ny] != '1':
+                        continue
+                    if self.visited[nx][ny]:
+                        continue
+                    q.append((nx,ny))
+                    
+                    self.visited[nx][ny] = True
+                    
+                    
+
+        m = len(grid)
+        n = len(grid[0])
+        self.visited =[[False for _ in range(n)] for _ in range(m)]
+        
+        
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] =='1' and self.visited[i][j] == False:
+                    
+                    self.ans +=1
+                    
+                    bfs(i,j,grid)
+        return self.ans 
