@@ -33,4 +33,61 @@ class Solution(object):
                         if ns == end:
                             return depth[ns]
         return -1
+
+https://leetcode-cn.com/problems/longest-increasing-path-in-a-matrix/submissions/
+
+class Solution(object):
+    def longestIncreasingPath(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: int
+        """
+        m = len(matrix)
+        n = len(matrix[0])
+        to = collections.defaultdict(list)
+        deg = [ 0 for _ in range(m*n)]
+        dist = [0 for _ in range(m*n)]
+        q = collections.deque()
+        
+        def num(i,j):
+            return i* len(matrix[0]) + j
+
+        #out bound 
+        def addEdge(u, v):
+            # inbound number 
+            deg[v] +=1
+            to[u].append(v)
+        
+        def valid(x,y):
+            if x <0 or y <0 or x >= len(matrix) or y >= len(matrix[0]):
+                return False
+            return True
+
+        dx =(-1,0,0,1)
+        dy = (0,-1,1,0)
+        
+        for i in range(m):
+            for j in range(n):
+                for k in range(4):
+                    ni = i + dx[k]
+                    nj = j + dy[k]
+                    if valid(ni,nj) and matrix[ni][nj] > matrix[i][j]:
+                        
+                        addEdge(num(i,j), num(ni,nj))
+        
+        for i in range(m*n):
+            if deg[i] ==0:
+                q.append(i)
+                dist[i] =1
+        while q:
+            x = q.popleft()
+            #所有outbound 边
+            for y in to[x]:
+                deg[y]-=1
+                dist[y] = max(dist[y],dist[x]+1)
+                if deg[y] ==0:
+                    q.append(y)
+        print(dist)
+        return max(dist)
+
         
