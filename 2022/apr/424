@@ -1,0 +1,37 @@
+https://leetcode-cn.com/problems/merge-k-sorted-lists/submissions/
+
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+
+
+class Solution(object):
+    def mergeKLists(self, lists):
+        """
+        :type lists: List[ListNode]
+        :rtype: ListNode
+        """
+        import heapq
+        #def __lt__(a,b):
+        #    return a.val < b.val
+        #ListNode.__lt__ = __lt__
+
+        if not lists:
+            return None
+        minHeap = []
+        for x in lists:
+            if x:
+                heapq.heappush(minHeap,(x.val,x))
+        
+        dummy = ListNode(-1)
+        tail = dummy
+        while minHeap:
+            _ , y = heapq.heappop(minHeap)
+            tail.next = y
+            if y.next:
+                heapq.heappush(minHeap,(y.next.val,y.next))
+            tail = tail.next 
+        
+        return dummy.next
