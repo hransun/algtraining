@@ -35,3 +35,24 @@ class Solution(object):
             tail = tail.next 
         
         return dummy.next
+
+https://leetcode-cn.com/problems/sliding-window-maximum/submissions/
+
+class Solution(object):
+    def maxSlidingWindow(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: List[int]
+        """
+        ans = []
+        q = []
+        for i in range(len(nums)):
+            heapq.heappush(q,(-nums[i],i))
+            if i >= k-1:
+                while q[0][1] <= i - k:
+                    heapq.heappop(q)
+                ans.append(-q[0][0])
+        return ans 
+
+        
