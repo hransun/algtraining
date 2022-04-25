@@ -1,0 +1,36 @@
+https://leetcode-cn.com/problems/successor-lcci/submissions/
+
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def inorderSuccessor(self, root, p):
+        """
+        :type root: TreeNode
+        :type p: TreeNode
+        :rtype: TreeNode
+        """
+        ans = None
+        cur = root
+        while cur is not None:
+
+            if p.val == cur.val:
+                if cur.right:
+                    ans = cur.right
+                    while ans.left:
+                        ans = ans.left
+                break
+
+            elif p.val > cur.val:
+                cur = cur.right
+
+            else:# p.val < cur.val , should be in cur parents node   
+                if ans is None or ans.val > cur.val:
+                    ans = cur       
+                cur = cur.left
+
+        return ans 
