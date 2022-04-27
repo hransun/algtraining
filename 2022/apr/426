@@ -19,4 +19,49 @@ class Solution(object):
         else:
             return nums[right]
         
+
+https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/submissions/
+
+class Solution(object):
+    def searchRange(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        if not nums: return [-1,-1]
+        left  = 0 
+        right = len(nums) -1
+        ans_1 , ans_2 = -1, -1
+
+        while left  + 1 < right:
+            mid = (left + right) /2
+            if nums[mid] >= target:
+                right = mid
+            else:
+                left = mid
+        if nums[left] == target:
+            ans_1 = left
+        elif nums[right]== target :
+            ans_1 = right
+        else:
+            ans_1 = -1
         
+        left  = 0 
+        right = len(nums) -1
+
+        while left  + 1 < right:
+            mid = (left + right) /2
+            if nums[mid] <= target:
+                left = mid
+            else:
+                right = mid
+        if nums[right] == target:
+            ans_2 = right
+        elif nums[left] == target:
+            ans_2 = left
+        else:
+            ans_2 = -1
+
+
+        return [ans_1,ans_2]
