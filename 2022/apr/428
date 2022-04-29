@@ -1,0 +1,32 @@
+https://leetcode-cn.com/problems/split-array-largest-sum/submissions/
+
+class Solution(object):
+    def splitArray(self, nums, m):
+        """
+        :type nums: List[int]
+        :type m: int
+        :rtype: int
+        """
+        def validate(nums,m,size):
+            cur = 0 
+            count  = 1
+            for num in nums:
+                if cur + num <=size:
+                    cur += num
+                else:
+                    cur = num
+                    count +=1
+            return count
+
+        left , right = 0 , 0
+        for num in nums:
+            left = max(num, left)
+            right += num
+        while left  < right:
+            mid = (left + right) / 2
+            if validate(nums,m,mid) >m :
+                left = mid + 1 
+            else:
+                right = mid
+        return left 
+       
