@@ -212,6 +212,35 @@ ladmin@C02FG23JMD6N 012..极客大学-算法训练营第四期【更】 % tree
 │   ├── 第20课丨3字符串匹配算法.docx
 │   └── 第20课丨3字符串匹配算法.mp4
 
+=====
+
+Python进阶训练营【完结】 % tree --dirsfirst
+.
+├── 资料
+│   └── Python进阶训练营第0期-课件&代码合集.zip
+├── 第一周
+│   ├── 01 Python进阶训练营·课程介绍、学习方法与Python基础回顾.vep
+│   ├── 02 Python进阶训练营·HTTP、HTML基础以及深入掌握urllib和requests库.vep
+│   └── 03 Python进阶训练营·Python变量和函数的底层原理.vep
+├── 第三周
+│   ├── 01 Python进阶训练营·深入掌握Scrapy爬虫框架.vep
+│   ├── 02 Python进阶训练营·多进程.vep
+│   └── 03 Python进阶训练营·多线程.vep
+├── 第二周
+│   ├── 01 Python进阶训练营·闭包和装饰器.vep
+│   └── 02 Python进阶训练营·Python新式类、魔术方法、设计模式、元编程、工厂函数、异常处理.vep
+├── 第四周
+│   ├── 02 Python进阶训练营·协程、Ansible集群管理、异常处理 2020-04-06 18_52.vep
+│   ├── 03 Python进阶训练营·Pandas数据处理.vep
+│   └── Python进阶训练营·第二周作业详解.vep
+├── 5.1 中文分词与词云制作.vep
+├── 5.2 情感分析、smtplib邮件发送服务与OpenCV自动识别验证码.vep
+├── 5.3 Flask 入门.vep
+├── 6.1 Flask开发基础.vep
+├── 6.2 Flask开发进阶.vep
+├── 7.1 课程知识点补充讲解.vep
+└── 7.2 常见疑难问题解答.vep
+
 
 九章Twitter第14 章
 
