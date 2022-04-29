@@ -1,0 +1,55 @@
+https://leetcode-cn.com/problems/sort-an-array/submissions/
+
+class Solution(object):
+    def sortArray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        
+        def partition(arr, l,r):
+            mid = (l+r)/2
+            pivot = arr[mid]
+            while l <=r:
+                while arr[l] < pivot:
+                    l +=1
+                while arr[r] > pivot:
+                    r -=1
+                if l == r:
+                    break
+                if l < r:
+                    arr[l] , arr[r] = arr[r] , arr[l]
+                    l +=1
+                    r -=1
+            return r
+
+        def quicksort(arr, l, r):
+            if l >= r:
+                return 
+            pivot = partition(arr, l , r)
+            quicksort(arr, l , pivot)
+            quicksort(arr, pivot+1 , r)
+        
+        
+        
+        quicksort(nums,0,len(nums)-1)
+        return nums
+
+https://leetcode-cn.com/problems/relative-sort-array/submissions/
+
+class Solution(object):
+    def relativeSortArray(self, arr1, arr2):
+        """
+        :type arr1: List[int]
+        :type arr2: List[int]
+        :rtype: List[int]
+        """
+        arr2orders = collections.defaultdict(int)
+        for  i in range(len(arr2)):
+            arr2orders[arr2[i]] = i
+        
+        arr1.sort(key = lambda x: (0,arr2orders[x]) if x in arr2orders else (1,x))
+        return arr1 
+        
+
+        
