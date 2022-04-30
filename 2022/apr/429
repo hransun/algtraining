@@ -52,4 +52,27 @@ class Solution(object):
         return arr1 
         
 
-        
+https://leetcode-cn.com/problems/merge-intervals/submissions/
+
+class Solution(object):
+    def merge(self, intervals):
+        """
+        :type intervals: List[List[int]]
+        :rtype: List[List[int]]
+        """
+        intervals.sort(key = lambda x: (x[0]))
+        farthest = -1
+        start = -1
+        ans =[]
+        for interval in intervals:
+            left = interval[0]
+            right = interval[1]
+            if left <= farthest:
+                farthest = max(right, farthest)
+            else:
+                if farthest!= -1:
+                    ans.append([start,farthest])
+                start = left
+                farthest = right
+        ans.append([start, farthest])
+        return ans 
