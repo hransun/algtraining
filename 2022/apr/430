@@ -1,0 +1,37 @@
+https://leetcode-cn.com/problems/kth-largest-element-in-an-array/submissions/
+
+class Solution(object):
+    def findKthLargest(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """
+        def quickSort(arr,l,r,index):
+            if l >=r :
+                return arr[r]
+            pivot = partition(arr,l,r)
+            if index <=pivot:
+                return quickSort(nums,l,pivot,index)
+            else:
+                return quickSort(nums,pivot+1,r,index)
+        
+
+        def partition(arr,l,r):
+            pivot = (l+r)/2
+            while l <=r:
+                while arr[l] < arr[pivot]:
+                    l+=1
+                while arr[r] > arr[pivot]:
+                    r-=1
+                if l == r:
+                    break 
+                if l < r:
+                    arr[l], arr[r] = arr[r],arr[l]
+                    l +=1
+                    r -=1
+            return r 
+
+        return quickSort(nums,0,len(nums)-1,len(nums)-k)
+        
+        
