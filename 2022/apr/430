@@ -33,5 +33,58 @@ class Solution(object):
             return r 
 
         return quickSort(nums,0,len(nums)-1,len(nums)-k)
+
+https://leetcode-cn.com/problems/reverse-pairs/submissions/
+
+class Solution(object):
+
+    def __init__(self):
+        self.ans = 0
+
+    def reversePairs(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+       
+
+
+        def mergeSort(arr , l , r ):
+            if l >= r :
+                return 
+            mid = (l + r)/2
+            mergeSort(arr, l, mid)
+            mergeSort(arr,mid+1,r)
+            calculate(arr, l , mid , r)
+            merge(arr, l , mid, r)
+
+        def merge(arr, l , mid, r):
+            temp = [0 for _ in range(r-l+1)]
+            i , j = l, mid +1
+            for k in range(len(temp)):
+                if j > r or (i <= mid and arr[i] < arr[j]):
+                    temp[k] = arr[i]
+                    i +=1
+                else:
+                    temp[k] = arr[j]
+                    j+=1
+            for k in range(len(temp)):
+                arr[l+ k] = temp[k]
         
+        def calculate(arr, l , mid , r):
+            j = mid
+            for i in range(l , mid+1):
+                while j < r and arr[i] > 2* arr[j+1]:
+                    j +=1
+                
+                self.ans += j - mid
+
+        
+       
+        mergeSort(nums, 0 , len(nums)-1)
+        print(nums)
+        return self.ans 
+                
+
+
         
