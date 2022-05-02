@@ -1,0 +1,24 @@
+https://leetcode-cn.com/problems/lemonade-change/submissions/
+
+class Solution(object):
+    def lemonadeChange(self, bills):
+        """
+        :type bills: List[int]
+        :rtype: bool
+        """
+        
+        def exchange(amount):
+            for x in [10, 5 ]:
+                while amount >= x and coins[x] >0:
+                    amount -=x
+                    coins[x] -=1
+            return amount ==0
+        coins = collections.defaultdict(int)
+        coins[5] = coins[10] = coins[20] = 0
+        for bill in bills:
+            coins[bill] +=1
+            if not exchange(bill - 5):
+                return False
+        return True
+
+        
