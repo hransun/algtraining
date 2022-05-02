@@ -1,0 +1,60 @@
+https://leetcode-cn.com/problems/assign-cookies/submissions/
+
+class Solution(object):
+    def findContentChildren(self, g, s):
+        """
+        :type g: List[int]
+        :type s: List[int]
+        :rtype: int
+        """
+        g.sort()
+        s.sort()
+        i = 0
+        ans  = 0
+        for child in g:
+            while  i < len(s) and s[i] < child:
+                i+=1
+            if i < len(s):
+                ans +=1
+                i+=1
+
+        return ans
+            
+https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/submissions/
+
+class Solution(object):
+    def maxProfit(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
+        ans = 0
+        for i in range(len(prices)):
+            if i > 0 and prices[i-1] < prices[i]:
+                ans +=prices[i] - prices[i-1]
+        return ans 
+
+https://leetcode-cn.com/problems/jump-game-ii/submissions/
+
+class Solution(object):
+    def jump(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        now =0 
+        ans =0
+        while now < len(nums)-1:
+            right = now + nums[now]
+            if right >=len(nums)-1:
+                return ans +1
+            nextRight = right 
+            for i in range(now+1,right+1):
+                if i + nums[i] > nextRight:
+                    nextRight= i + nums[i]
+                    next = i 
+            ans +=1
+            now = next 
+
+        return ans   
+        
