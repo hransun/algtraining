@@ -1,0 +1,20 @@
+https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/submissions/
+
+class Solution(object):
+    def maxProfit(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
+        n = len(prices)
+        prices = [0] + prices
+        dp = [ [float('-inf')] * 2 for _ in range(n+1)]
+        dp[0][0] = 0
+        for i in range(n+1):
+            for j in range(2):
+                # 0 = no stock
+                dp[i][0] = max(dp[i][0], dp[i-1][1] + prices[i])
+                dp[i][1] = max(dp[i][1], dp[i-1][0] - prices[i])
+                dp[i][j] = max(dp[i-1][j], dp[i][j])
+        return dp[n][0]
+        
