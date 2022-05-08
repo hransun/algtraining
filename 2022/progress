@@ -243,9 +243,7 @@ Python进阶训练营【完结】 % tree --dirsfirst
  149-Linux内核技术实战课 % tree
 .
 ├
-├── 02丨基础篇（二）丨PageCache是怎样产生和释放的？.html
-├── 02丨基础篇（二）丨PageCache是怎样产生和释放的？.m4a
-├── 02丨基础篇（二）丨PageCache是怎样产生和释放的？.pdf
+
 ├── 03丨案例篇丨如何处理PageCache难以回收产生的load飙高问题？.html
 ├── 03丨案例篇丨如何处理PageCache难以回收产生的load飙高问题？.m4a
 ├── 03丨案例篇丨如何处理PageCache难以回收产生的load飙高问题？.pdf
