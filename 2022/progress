@@ -232,14 +232,6 @@ Python进阶训练营【完结】 % tree --dirsfirst
 =====
  149-Linux内核技术实战课 % tree
 .
-├
-
-├── 03丨案例篇丨如何处理PageCache难以回收产生的load飙高问题？.html
-├── 03丨案例篇丨如何处理PageCache难以回收产生的load飙高问题？.m4a
-├── 03丨案例篇丨如何处理PageCache难以回收产生的load飙高问题？.pdf
-├── 04 案例篇丨如何处理Page Cache容易回收引起的业务性能问题？.html
-├── 04 案例篇丨如何处理Page Cache容易回收引起的业务性能问题？.m4a
-├── 04 案例篇丨如何处理Page Cache容易回收引起的业务性能问题？.pdf
 ├── 05 分析篇丨如何判断问题是否由Page Cache产生的？.html
 ├── 05 分析篇丨如何判断问题是否由Page Cache产生的？.m4a
 ├── 05 分析篇丨如何判断问题是否由Page Cache产生的？.pdf
