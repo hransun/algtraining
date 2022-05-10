@@ -19,3 +19,27 @@ class Solution(object):
         return " ".join(ans)
 
 
+https://leetcode.cn/problems/verifying-an-alien-dictionary/
+
+class Solution(object):
+    def isAlienSorted(self, words, order):
+        """
+        :type words: List[str]
+        :type order: str
+        :rtype: bool
+        """
+        mydict = {c:i for i , c in enumerate(order)}
+        n = len(words)
+        for i in range(n-1):
+            word1 = words[i]
+            word2 = words[i+1]
+            for j in range(min(len(word1),len(word2))):
+                if word1[j] != word2[j]:
+                    if mydict[word1[j]] > mydict[word2[j]]:
+                        return False
+                    break
+            else:
+                if len(word1) > len(word2):
+                    return False
+        return True
+
