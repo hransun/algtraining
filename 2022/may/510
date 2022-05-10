@@ -1,1 +1,21 @@
 Leetcode上的824. Goat Latin 和 953. Verifying an Alien Dictionary
+
+https://leetcode.cn/problems/goat-latin/
+
+class Solution(object):
+    def toGoatLatin(self, sentence):
+        """
+        :type sentence: str
+        :rtype: str
+        """
+        mylist = sentence.split()
+        ans = []
+        for index , word in enumerate(mylist):
+            if word[0].lower() in 'aeiou':
+                word+='ma'
+            else:
+                word = word[1:]+word[0] + 'ma'
+            ans.append(word+'a'*(index+1))
+        return " ".join(ans)
+
+
