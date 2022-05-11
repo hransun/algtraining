@@ -59,4 +59,36 @@ for name in result:
   print(name[0])
    
 
+# Minesweeper
 
+#In the game of Minesweeper you are given a grid of size L x W that has a variable #number of mines, M, in random locations within the grid. Write a function that #generates random mine locations within the grid.
+  
+  
+# Your function gen(L, W, M), given L of 2, W of 3, M of 3 could return the following:
+#
+# +----+----+----+
+# | X  |    |    |
+# |    |    |    |
+# +--------------+
+# |    | X  | X  |
+# |    |    |    |
+# +----+----+----+
+
+import random
+def generate_grid(length, width, mines):
+  visited =set()
+  count =0
+  while count < mines:
+    choosed = random.randint(0,length * width -1)
+    if choosed in visited:
+      continue
+    visited.add(choosed)
+    count +=1
+  print(visited)
+  result = [[0] * width for _ in range(length)]
+  for choosed in visited:
+    result[choosed//length][choosed%width] = 1
+  return result
+
+ans = generate_grid(2,3,3)
+print(ans)
