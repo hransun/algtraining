@@ -19,3 +19,28 @@ class Solution(object):
             i+=1
             j-=1
         return True
+
+https://leetcode.cn/problems/validate-binary-search-tree/submissions/
+
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def isValidBST(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        def dfs(root, max_value, min_value):
+            if not root:
+                return True
+            if root.val > max_value or root.val < min_value:
+                return False
+            if root.val == max_value or root.val == min_value:
+                return False
+            return dfs(root.left,root.val, min_value) and dfs(root.right,max_value,root.val)
+
+        return dfs(root,float('inf'), float('-inf'))
