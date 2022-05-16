@@ -1,0 +1,26 @@
+https://leetcode.cn/problems/find-all-anagrams-in-a-string/
+
+class Solution(object):
+    def findAnagrams(self, s, p):
+        """
+        :type s: str
+        :type p: str
+        :rtype: List[int]
+        """
+        m, n = len(s) , len(p)
+        ans = []
+        if m < n:
+            return []
+        count_s , count_p =[0] * 26, [0] * 26
+        for i in range(n):
+            count_p[ord(p[i]) - ord('a')] +=1
+        for i in range(n):
+            count_s[ord(s[i]) - ord('a')] +=1
+        if count_s == count_p:
+            ans.append(0)
+        for i in range(m - n):
+            count_s[ord(s[i]) - ord('a')] -=1
+            count_s[ord(s[i+n]) - ord('a')] +=1
+            if count_s == count_p:
+                ans.append(i+1)
+        return ans 
