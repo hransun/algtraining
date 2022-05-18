@@ -162,3 +162,27 @@ Onsite:
 2. linux 要熟悉，OS 基础概念要熟悉，常见 troubleshooting 最好要了解。碰到问题解决问题要有逻辑。
 3. 准备常见 behavior question。自己简历要吃透。比较有趣的是，我事先准备了 why fb 和 why pe，结果第二轮 coding 一上来面试官暖场，先问了这俩问题。。（喵喵喵？.jpg）。而 behavior 轮并没问这个，而是全程怼简历orz
 4. 第一轮最后时间问面试官问题 & 聊天，他提到说他喜欢问面试者的一个问题是问一个特别特殊的问题，而他期待得到的标准答案是 I don't know （。作为 PE 经常会遇到自己不擅长的问题 & 领域，这时候就要与擅长的人沟通 & 共同解决问题。
+
+===
+
+Coding 1: battleship，提供查询是否命中的api(i, j)，在N*N的矩阵里找到一个1*3的battleship；开始写了枚举是O(n^2)，面试官嫌效率太低，但是想不到优化成O(nlgn)一类方法，最后经面试官提醒写了改良版的每三行检查一行的策略，但复杂度还是O(n^2)，不知道有没有更好的方法，感觉有点炸裂
+Coding 2: 实现linux下的fortune功能：给出一个文件包含各种字符串，要求设计API可以每次执行程序的时候随机输出其中一个字符串；先写了所有字符串用vector存在内存里随机选取的策略，follow up是文件太大如何处理，我选择了把所有字符串的开头位置预处理存到另一个文件里，每次再把这些起始位置读到内存里，随机选取一个再用fseek在源文件里把信息读完；后来又经面试官提醒，表示可以把开头位置的数据serialize到索引文件里，通过索引文件长度随机选取其中一个索引位置再去源文件fseek，总体很顺利、
+System: 可以说是很炸裂了，从ls *的执行过程问起，讨论terminal console的关系，terminal进程的性质（尤其是没有图形界面下的terminal），聊到bash和不同的shell，提问shell解析命令行的机制，除了ls以外存在cd一类built-in command，为什么会有built-in command；因为是创建子进程，所以聊到了fork相关细节，以及COW机制；感觉一部分得‍‌‌‍‍‌‌‍‌‌‍‌‌‌‍‌‌‍靠面试官提醒才能答出来，也就fork和COW答得最顺畅；最后关于troubleshooting，问到如果一个进程一启动几秒以内就会占掉系统一切内存资源，然后让整个系统崩溃，怎样做可以最快止损。这个问题答得最炸裂，几次提示下来发现和面试官思路不太一样
+Behavioral: 各种聊之前的coding经验，没什么好说的
+感觉应该是要挂，求一波大米和人品吧，希望以后面试顺利些
+
+======
+
+上周五面完的Facebook Production Engineer, 总体感觉和地里的fb面经coding相比，难度不是很大。
+第一轮：Behavior question。聊简历，然后面试官问一些general的behavior question。
+第二轮：system。从ls -l foo*开始，穿插问各种相关问题，因为我的resume里有相关Linux shell的project，针对project里的内容又问了一下。具体题目涉及bg，fg，pipe原理，process。最后十五分钟左右问trouble shooting的问题。
+第三轮：coding。类似merge interval，给两个array，array中是interval，按照start point的increasing order排序，返回一个array，merge两个array中overlap的interval。
+第四轮：coding。一题是partiti‍‌‌‍‍‌‌‍‌‌‍‌‌‌‍‌‌‍on array into two parts with equal sum。一题是dinosaur，这里有点corner case没考虑到，面试官提醒了一下改正了。
+发发面经，希望能是好消息！！！
+
+===
+
+vmstat 输出按列描述，中间问到了进程状态，内存管理机制，中断，syscall，swap，cs，user space和kernel space等等。
+    troubleshoot：
+        1.cat test卡住了怎么办？
+        2.有个server上进程占用内存过高，影响了其他进程怎么办？OMM原理是什么？‍‌‌‍‍‌‌‍‌‌‍‌‌‌‍‌‌‍
