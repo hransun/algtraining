@@ -240,4 +240,18 @@ FB的PE真的好难。。。 只能好运了！
 希望对大家有帮助！
 
 ==
-
+去年又面跪了几家，这两天总算有时间整理一下面经发出来。
+FB的Production Engineer可以理解为其他公司的DevOps+SRE类岗位，主要负责infrastructure相关的开发和运营。我面的应该是E4的岗位。
+电面背靠背两轮，coding是经典的split array和恐龙题，地里搜一搜都有，可以看下面的面经：
+https://www.1point3acres.com/bbs/thread-570819-1-1.html
+System question是比较典型的概念类的问题，比如Linux system boot process，解释vmstat，什么是page，解释swap等等。这个贴子写得不错：
+https://www.1point3acres.com/bbs/thread-535442-1-1.html
+第二天通知onsite，五轮。
+round 1: Network，详细讨论了从地址栏里输入了www.google.com到render page done之间发生了什么，问了DNS背后的原理，常见的DNS record有哪些（这没准备到，当时没好好学过Network）
+round 2: System，讨论了两个case，system high load了怎么办，DB server登不上去应该怎么处理，详细挖了检查异常I/O的指令以及背后的原理，一脸懵逼
+round 3: Coding，国人小哥，非常非常nice，给了3道极为简单的题，以至于我都忘了是什么题，依稀记得一道是reverse Linked List。表示衷心感谢
+round 4: Design，design一个rsync，强行根据design dropbox扯了一个小时，很多可能没答到点上，确实没准备到这么硬核的design题
+round 5: BQ，按照亚麻准备的，侃侃而谈，大佬应该很满意
+过了一周通知挂了。问下来是Network、System和Design做得不好，尤其是Design很差。
+感受：onsite可能运气不太好，不像很多人那遇到经典的概念解释题，更多的是case study以及解释所使用指令背后的原理。其实我为了这个面试也准备了不少，答题的时候也是尽力答了，但可能确实读的书不多，在处理case study时显得不够experienced，以及没想到design这么hardcore。而且第一次virtual onsite，鼠标画图的感觉真的不太好。像许多面经一样，recruiter和我说Network轮不重要，但事实证明还是会占一定比重的，所以有时间也好好准备吧。还有吐槽一下对接onsite的recruiter，说好和我sync up具体的feedback的，但到时间了没给我电话，我是通过另一个recru‍‌‌‍‍‌‌‍‌‌‍‌‌‌‍‌‌‍iter大概知道我挂在哪里。
+以及通过这场面试，知道了systems performance enterprise and the cloud这本书，读完后感觉十分受益，推荐每一个做IaaS的朋友读一读。所以虽然面跪了，但也不觉得太遗憾。move on！
