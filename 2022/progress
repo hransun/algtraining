@@ -188,10 +188,13 @@ ladmin@C02FG23JMD6N 012..极客大学-算法训练营第四期【更】 % tree
 
 Python进阶训练营【完结】 % tree --dirsfirst
 .
-├── 资料
-│   └── Python进阶训练营第0期-课件&代码合集.zip
+
 ├── 第一周
 │   ├── 01 Python进阶训练营·课程介绍、学习方法与Python基础回顾.vep
+ 30 minutes
+
+
+ 
 │   ├── 02 Python进阶训练营·HTTP、HTML基础以及深入掌握urllib和requests库.vep
 │   └── 03 Python进阶训练营·Python变量和函数的底层原理.vep
 ├── 第三周
