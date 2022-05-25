@@ -1,0 +1,26 @@
+https://leetcode.cn/problems/partition-equal-subset-sum/submissions/
+
+class Solution(object):
+    def canPartition(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        n = len(nums)
+        nums = [0] + nums
+        sum =0
+        for num in nums:
+            sum += num
+        if sum % 2 == 1:
+            return False
+        target = sum / 2
+        dp = [[False] * (target+1) for _ in range(n+1)]
+        for i in range(n+1):
+            dp[i][0] = True
+        for i in range(1, n+1):
+            for j in range(1, target +1):
+                if j < nums[i]:
+                    dp[i][j] = dp[i-1][j]
+                else:
+                    dp[i][j] = dp[i-1][j] or dp[i-1][j - nums[i]]
+        return dp[n][target]
