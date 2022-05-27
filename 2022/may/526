@@ -1,0 +1,24 @@
+https://leetcode.cn/problems/max-value-of-equation/submissions/
+
+class Solution(object):
+    def findMaxValueOfEquation(self, points, k):
+        """
+        :type points: List[List[int]]
+        :type k: int
+        :rtype: int
+        """
+        ans = float('-inf')
+        deque = collections.deque()
+        for i in range(len(points)):
+            # distance between point > k 
+            # queue front 
+            while deque  and points[deque[0]][0] <  points[i][0] - k:
+                deque.popleft()
+            if deque:
+                ans = max(ans, points[i][1] + points[i][0] + points[deque[0]][1] - points[deque[0]][0])
+            # queue end 
+            while deque and points[deque[-1]][1] - points[deque[-1]][0] <=points[i][1] - points[i][0]:
+                deque.pop()
+
+            deque.append(i)
+        return  ans 
