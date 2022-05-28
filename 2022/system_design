@@ -1,0 +1,20 @@
+39.九章系统架构设计 System Design 2021 版 % ls -l
+total 0
+drwxr-xr-x  12 ladmin  staff  384 Mar 27 10:44 01 第一章【互动】走进系统设计 & 新鲜事系统
+drwxr-xr-x   3 ladmin  staff   96 Mar 27 10:49 02 第二章【直播】秒杀系统与订票系统设计
+drwxr-xr-x  14 ladmin  staff  448 Mar 27 10:48 03 第三章【互动】从用户系统设计中学习数据库与缓存
+drwxr-xr-x  20 ladmin  staff  640 Mar 27 10:49 04 第四章【互动】网站系统，API设计与短网址
+drwxr-xr-x   3 ladmin  staff   96 Mar 27 10:46 05 第五章【直播】优惠券系统设计
+drwxr-xr-x  14 ladmin  staff  448 Mar 27 10:46 06 第六章【互动】数据库拓展与一致性哈希算法
+drwxr-xr-x  11 ladmin  staff  352 Mar 27 10:47 07 第七章【互动】分布式文件系统 GFS
+drwxr-xr-x   3 ladmin  staff   96 Mar 27 10:47 08 第八章【直播】文档协同编辑系统设计
+drwxr-xr-x  13 ladmin  staff  416 Mar 27 10:50 09 第九章【互动】分布式数据库 Big Table
+drwxr-xr-x  20 ladmin  staff  640 Mar 27 10:50 10 第十章【互动】聊天系统 IM System
+drwxr-xr-x   3 ladmin  staff   96 Mar 27 10:50 11 第十一章【直播】视频流系统设计
+drwxr-xr-x  22 ladmin  staff  704 Mar 27 10:45 12 第十二章【互动】基于地理位置的信息系统
+drwxr-xr-x  10 ladmin  staff  320 Mar 27 10:45 13 第十三章【互动】分布式计算 Map Reduce
+drwxr-xr-x   3 ladmin  staff   96 Mar 27 10:51 14 第十四章【直播】推特搜索系统设计 Twitter Search
+drwxr-xr-x  28 ladmin  staff  896 Mar 27 10:51 15 第十五章【互动】爬虫系统与搜索建议系统
+drwxr-xr-x  16 ladmin  staff  512 Mar 27 10:52 16 第十六章【互动】系统设计的核心必考知识点：数据库索引与事务（增）
+drwxr-xr-x   3 ladmin  staff   96 Mar 27 10:52 17 第十七章【直播】评论系统设计  Comment system
+drwxr-xr-x  27 ladmin  staff  864 Mar 27 10:47 课件资料
