@@ -1,20 +1,209 @@
-39.九章系统架构设计 System Design 2021 版 % ls -l
-total 0
-drwxr-xr-x  12 ladmin  staff  384 Mar 27 10:44 01 第一章【互动】走进系统设计 & 新鲜事系统
-drwxr-xr-x   3 ladmin  staff   96 Mar 27 10:49 02 第二章【直播】秒杀系统与订票系统设计
-drwxr-xr-x  14 ladmin  staff  448 Mar 27 10:48 03 第三章【互动】从用户系统设计中学习数据库与缓存
-drwxr-xr-x  20 ladmin  staff  640 Mar 27 10:49 04 第四章【互动】网站系统，API设计与短网址
-drwxr-xr-x   3 ladmin  staff   96 Mar 27 10:46 05 第五章【直播】优惠券系统设计
-drwxr-xr-x  14 ladmin  staff  448 Mar 27 10:46 06 第六章【互动】数据库拓展与一致性哈希算法
-drwxr-xr-x  11 ladmin  staff  352 Mar 27 10:47 07 第七章【互动】分布式文件系统 GFS
-drwxr-xr-x   3 ladmin  staff   96 Mar 27 10:47 08 第八章【直播】文档协同编辑系统设计
-drwxr-xr-x  13 ladmin  staff  416 Mar 27 10:50 09 第九章【互动】分布式数据库 Big Table
-drwxr-xr-x  20 ladmin  staff  640 Mar 27 10:50 10 第十章【互动】聊天系统 IM System
-drwxr-xr-x   3 ladmin  staff   96 Mar 27 10:50 11 第十一章【直播】视频流系统设计
-drwxr-xr-x  22 ladmin  staff  704 Mar 27 10:45 12 第十二章【互动】基于地理位置的信息系统
-drwxr-xr-x  10 ladmin  staff  320 Mar 27 10:45 13 第十三章【互动】分布式计算 Map Reduce
-drwxr-xr-x   3 ladmin  staff   96 Mar 27 10:51 14 第十四章【直播】推特搜索系统设计 Twitter Search
-drwxr-xr-x  28 ladmin  staff  896 Mar 27 10:51 15 第十五章【互动】爬虫系统与搜索建议系统
-drwxr-xr-x  16 ladmin  staff  512 Mar 27 10:52 16 第十六章【互动】系统设计的核心必考知识点：数据库索引与事务（增）
-drwxr-xr-x   3 ladmin  staff   96 Mar 27 10:52 17 第十七章【直播】评论系统设计  Comment system
-drwxr-xr-x  27 ladmin  staff  864 Mar 27 10:47 课件资料
+39.九章系统架构设计 System Design 2021 版 % tree
+.
+├── 01 第一章【互动】走进系统设计 & 新鲜事系统
+│   
+│   ├── 1.2系统设计 vs 面向对象设计.mp4
+│   ├── 1.3系统设计常见错误，评分标准与4S分析法.mp4
+│   ├── 1.44S分析法之场景与服务 Scenario & Service.mp4
+│   ├── 1.5：4S分析法之存储 Storage.mp4
+│   ├── 1.6：新鲜事存取之 Pull Model.mp4
+│   ├── 1.7：新鲜事存取之 Push Model.mp4
+│   ├── 1.8：4S分析法之拓展 Scale.mp4
+│   ├── 1.9：系统设计面试总结.mp4
+│   └── 班班有话说.mp4
+├── 02 第二章【直播】秒杀系统与订票系统设计
+│   └── 秒杀系统与订票系统设计.mp4
+├── 03 第三章【互动】从用户系统设计中学习数据库与缓存
+│   ├── 3.10【系统设计2020】拓展练习2：NoSQL 存储 User 如何支持多个索引？.mp4
+│   ├── 3.11【系统设计2020】拓展练习3：共同好友.mp4
+│   ├── 3.12【系统设计2020】拓展练习4：LinkedIn 六度关系.mp4
+│   ├── 3.1【系统设计2020】用户系统设计 & QPS.mp4
+│   ├── 3.2【系统设计2020】什么是缓存.mp4
+│   ├── 3.3【系统设计2020】 Cache 如何优化 Database 数据读取.mp4
+│   ├── 3.4【系统设计2020】写多读少如何优化.mp4
+│   ├── 3.5【系统设计2020】如何实现账户登录服务.mp4
+│   ├── 3.6【系统设计2020】好友关系的存储与查询.mp4
+│   ├── 3.7【系统设计2020】以 Cassandra 为例的 NoSQL.mp4
+│   ├── 3.8【系统设计2020】SQL & NoSQL 的选择标准.mp4
+│   └── 3.9【系统设计2020】拓展练习1：NoSQL 存单向好友关系.mp4
+├── 04 第四章【互动】网站系统，API设计与短网址
+│   ├── 4.10【系统设计2020】短网址系统 - 服务 Service.mp4
+│   ├── 4.11【系统设计2020】短网址系统设计 - SQL vs NoSQL.mp4
+│   ├── 4.12【系统设计2020】短网址系统 - 随机生成 vs 进制转换.mp4
+│   ├── 4.13【系统设计2020】短网址系统 - 表单结构与可行解.mp4
+│   ├── 4.14【系统设计2020】短网址系统 - 优化响应速度.mp4
+│   ├── 4.15【系统设计2020】 短网址系统 - 数据拆分 Sharding.mp4
+│   ├── 4.16【系统设计2020】 短网址系统 - 根据地理位置信息优化.mp4
+│   ├── 4.17 【系统设计2020】系统设计的思维方式总结.mp4
+│   ├── 4.18【系统设计2020】 拓展练习：实现自定义短网址 Custom URL.mp4
+│   ├── 4.1【系统设计2020】网站系统，域名.mp4
+│   ├── 4.2【系统设计2020】网站系统中的基本概念.mp4
+│   ├── 4.3【系统设计2020】什么是 API，什么是 RESTful.mp4
+│   ├── 4.4【系统设计2020】RESTful API 设计练习.mp4
+│   ├── 4.5【系统设计2020】设计 News Feed API - Request & Response.mp4
+│   ├── 4.6【系统设计2020】设计 News Feed API - Pagination.mp4
+│   ├── 4.7【系统设计2020】设计 News Feed API - Mentions.mp4
+│   ├── 4.8【系统设计2020】短网址系统 - 场景分析 Scenario.mp4
+│   └── 4.9【系统设计2020】短网址系统 - QPS.mp4
+├── 05 第五章【直播】优惠券系统设计
+│   └── 优惠券系统设计.mp4
+├── 06 第六章【互动】数据库拓展与一致性哈希算法
+│   ├── 6.10【系统设计2020】实战4：News Feed 和 Timeline 如何 Sharding.mp4
+│   ├── 6.11【系统设计2020】实战5：LintCode Submission 如何 Sharding.mp4
+│   ├── 6.1【系统设计2020】如何升级系统？How to Scale System.mp4
+│   ├── 6.2【系统设计2020】数据库的垂直拆分 Vertical Sharding.mp4
+│   ├── 6.3【系统设计2020】一种简单的横向拆分方法.mp4
+│   ├── 6.4【系统设计2020】简单版的一致性哈希算法.mp4
+│   ├── 6.5【系统设计2020】更完美的一致性哈希算法.mp4
+│   ├── 6.6【系统设计2020】数据复制 Replica.mp4
+│   ├── 6.6【系统设计2021】数据复制 Replica - 副本.mp4
+│   ├── 6.7【系统设计2020】实战1：Sharding User Table.mp4
+│   ├── 6.8【系统设计2020】实战2：Friendship Table 如何 Sharding.mp4
+│   └── 6.9【系统设计2020】实战3：Session Table 如何 Sharding.mp4
+├── 07 第七章【互动】分布式文件系统 GFS
+│   ├── 10.1【系统】分布式系统 & GFS简介.mp4
+│   ├── 10.2【系统】GFS 的 Scenario & Service.mp4
+│   ├── 10.3【系统】GFS的Storage 1.mp4
+│   ├── 10.4【系统】GFS的Storage 2.mp4
+│   ├── 10.5【系统】GFS的读取和写入.mp4
+│   ├── 10.6【系统】GFS Scale - Check Sum.mp4
+│   ├── 10.7【系统】GFS Scale - Replica.mp4
+│   ├── 10.8【系统】GFS 实战1.mp4
+│   └── 10.9【系统】GFS 常见问题Q&A.mp4
+├── 08 第八章【直播】文档协同编辑系统设计
+│   └── 文档协同编辑系统设计.mp4
+├── 09 第九章【互动】分布式数据库 Big Table
+│   ├── 7.10【BigTable一个可行的读写过程】视频3.mp4
+│   ├── 7.10【系统设计2020】BigTable读取优化 - Index】视频4.mp4
+│   ├── 7.13【系统设计2020】BigTable读取优化 - BloomFilter】视频5.mp4
+│   ├── 7.15【系统设计2020】BigTable 的Sharding】视频6.mp4
+│   ├── 7.16【系统设计2020】BigTable 的分布式锁】视频7.mp4
+│   ├── 7.16【系统设计2020】K路归并 & 外排序】视频8.mp4
+│   ├── 7.17【系统设计2020】GFS和Big Table的关系】视频9.mp4
+│   ├── 7.18【系统设计2020】B-Tree & B+Tree】视频10.mp4
+│   ├── 7.19【系统设计2020】bloom filter详解】视频11.mp4
+│   ├── 7.7【【系统设计2020】BigTable简介】.mp4
+│   └── 7.9【[8-2]BigTable的基本设计】视频.mp4
+├── 10 第十章【互动】聊天系统 IM System
+│   ├── 9.10【系统设计2020】UserTable 如何存储在 NoSQL 中？.mp4
+│   ├── 9.11【系统设计2020】一个可行解的流程.mp4
+│   ├── 9.12【系统设计2020】消息推送 Push Notification.mp4
+│   ├── 9.13【系统设计2020】服务器推送信息到客户端的技术 Socket.mp4
+│   ├── 9.14【系统设计2020】使用 Channel Service 优化群聊.mp4
+│   ├── 9.15【系统设计2020】拓展：Channel Service Q&A.mp4
+│   ├── 9.16【系统设计2020】拓展：小结聊天系统考点.mp4
+│   ├── 9.17【系统设计2020】拓展问题1：多机登录.mp4
+│   ├── 9.18【系统设计2020】拓展问题2：用户在线状态显示.mp4
+│   ├── 9.1【系统设计2020】聊天系统介绍.mp4
+│   ├── 9.2【系统设计2020】聊天系统的场景设计 Scenario.mp4
+│   ├── 9.3【系统设计2020】设计 Message Table.mp4
+│   ├── 9.4【系统设计2020】设计 Thread Table.mp4
+│   ├── 9.5【系统设计2020】方法1：拆成多张表.mp4
+│   ├── 9.6【系统设计2020】方法2：合成一张表.mp4
+│   ├── 9.7【系统设计2020】如何根据参与者查询 Thread Id.mp4
+│   ├── 9.8【系统设计2020】Message Table 的表单结构.mp4
+│   └── 9.9【系统设计2020】如何在 NoSQL 中存储Thread Table.mp4
+├── 11 第十一章【直播】视频流系统设计
+│   └── 视频流系统设计.mp4
+├── 12 第十二章【互动】基于地理位置的信息系统
+│   ├── 12.10【设计】LBS类问题的难点.mp4
+│   ├── 12.11【系统】如何对二维坐标进行 Range Query.mp4
+│   ├── 12.12【系统】GeoHash 的设计理念.mp4
+│   ├── 12.13【设计】GeoHash 算法详解.mp4
+│   ├── 12.14【系统】在数据库中实现 GeoHash 的范围查询.mp4
+│   ├── 12.15【系统】服务器如何分别处理乘客与司机的请求.mp4
+│   ├── 12.16【系统】打车软件设计的可行解总结.mp4
+│   ├── 12.17【系统】Scale - 拆分数据.mp4
+│   ├── 12.18【系统】城市与GeoFence.mp4
+│   ├── 12.19【系统】如何知道乘客在机场.mp4
+│   ├── 12.1【系统】LBS 类的设计问题.mp4
+│   ├── 12.20【系统】使用 Riak 替换 Redis 作为主要数据库.mp4
+│   ├── 12.2【系统】Uber 的技术栈 - Ringpop.mp4
+│   ├── 12.3【系统】Uber 的技术栈 - TChannel.mp4
+│   ├── 12.4【系统】Uber的技术栈 - Google s3 & Riak.mp4
+│   ├── 12.5【系统】是不是答出 Uber 的技术栈就能通过面试？.mp4
+│   ├── 12.6【系统】Scenario - 设计哪些功能.mp4
+│   ├── 12.7【系统】Scenario - 设计得多牛.mp4
+│   ├── 12.8【系统】Service - Geo & Dispatch.mp4
+│   └── 12.9【系统】Storage 存储 - Trip & Location.mp4
+├── 13 第十三章【互动】分布式计算 Map Reduce
+│   ├── 13.1【系统】MapReduce简介.mp4
+│   ├── 13.2【系统】MapReduce框架流程.mp4
+│   ├── 13.3【系统】MapReduce的使用.mp4
+│   ├── 13.4【系统】MapReduce传输整理的实现.mp4
+│   ├── 13.5【系统】MapReduce应用练习一.mp4
+│   ├── 13.6【系统】MapReduce应用练习二.mp4
+│   ├── 13.7【系统】MapReduce应用练习三.mp4
+│   └── 13.8【系统】MapReduce的设计.mp4
+├── 14 第十四章【直播】推特搜索系统设计 Twitter Search
+│   └── 推特搜索系统设计 Twitter Search.mp4
+├── 15 第十五章【互动】爬虫系统与搜索建议系统
+│   ├── 14.10【系统】简单版的爬虫可行解.mp4
+│   ├── 14.11【系统】Robots 协议.mp4
+│   ├── 14.12【系统】限制网站爬取频率.mp4
+│   ├── 14.13【系统】更 Robust 的爬虫架构.mp4
+│   ├── 14.14【系统】表单内容和伪代码.mp4
+│   ├── 14.15【系统】分地区的爬虫.mp4
+│   ├── 14.16【系统】处理网页的更新与抓取失败.mp4
+│   ├── 14.17【系统】Typeahead vs Google Suggestion.mp4
+│   ├── 14.18【系统】Google Suggestion 场景分析.mp4
+│   ├── 14.19【系统】QueryService & Collection Service.mp4
+│   ├── 14.1【系统】搜索引擎技术概要.mp4
+│   ├── 14.20【系统】Google Suggestion 的存储.mp4
+│   ├── 14.21【系统】用概率的方法优化 CollectionService.mp4
+│   ├── 14.22【系统】优化 Prefix 到 Top 10 Query 的构建速度.mp4
+│   ├── 14.23【系统】用户输入速度很快如何优化.mp4
+│   ├── 14.24【系统】后端 Cache 如何优化 QueryService.mp4
+│   ├── 14.25【系统】前端 Cache 与预加载.mp4
+│   ├── 14.26【系统】如何获得实时热门的 Top 10 Queries.mp4
+│   ├── 14.2【系统】倒排索引 Inverted Index.mp4
+│   ├── 14.3【系统】分词 Word Segmentation.mp4
+│   ├── 14.4【系统】Scenario - 爬虫的模型分析.mp4
+│   ├── 14.5【系统】Scenario - 爬虫的目标.mp4
+│   ├── 14.6【系统】Scenario - 生产者消费者模型.mp4
+│   ├── 14.7【系统】多进程模式的爬虫.mp4
+│   ├── 14.8【系统】网页如何存储.mp4
+│   └── 14.9【系统】BFS中的队列和哈希如何存储.mp4
+├── 16 第十六章【互动】系统设计的核心必考知识点：数据库索引与事务（增）
+│   ├── 16.10【系统】初始事务.mp4
+│   ├── 16.11【系统】事务的特性.mp4
+│   ├── 16.12【系统】并发问题与事务隔离级别.mp4
+│   ├── 16.13【系统】并发控制技术.mp4
+│   ├── 16.14【系统】数据库故障恢复.mp4
+│   ├── 16.1【系统】为什么要了解数据库索引与事务.mp4
+│   ├── 16.2【系统】初始索引.mp4
+│   ├── 16.3【系统】索引可能的存储结构.mp4
+│   ├── 16.4【系统】索引的实现——B+Tree..mp4
+│   ├── 16.5【系统】索引与数据存储引擎.mp4
+│   ├── 16.6【系统】联合索引和单列索引.mp4
+│   ├── 16.7【系统】Innodb 中如何选择主键.mp4
+│   ├── 16.8【系统】索引带来的问题和建立的原则.mp4
+│   └── 16.9【系统】实践题：主键与索引的选择.mp4
+├── 17 第十七章【直播】评论系统设计  Comment system
+│   └── 评论系统设计  Comment system.mp4
+└── 课件资料
+    ├── WM_02【直播】秒杀系统与订票系统v81.pdf
+    ├── WM_05章：优惠券系统设计v3.4.pdf
+    ├── WM_08章：文档协同编辑系统设计v3.4.pdf
+    ├── WM_11章：视频流系统设计v3.4.pdf
+    ├── WM_第10章互动聊天系统_Chat_System__v6.0.2.pdf
+    ├── WM_第12章互动_Location_Based_Service__Design_Uber_v6.0.pdf
+    ├── WM_第13章互动分布式计算_Map_Reduce.pdf
+    ├── WM_第14章：推特搜索系统设计v3.4.pdf
+    ├── WM_第15章互动拓展PageRank.pdf
+    ├── WM_第15章互动搜索引擎相关技术_Crawler__Typeahead_v6.1.3.pdf
+    ├── WM_第16章-互动-数据库索引与事务.pdf
+    ├── WM_第17章：如何设计一个友善的评论区v1.1.pdf
+    ├── WM_第1章互动_Introducing_System_Design__News_Feed_System_v6.0.4.pdf
+    ├── WM_第4章互动Web_System_API_Design__TinyURL.pdf
+    ├── WM_第6章互动._数据库拆分与一致性哈希算法.pdf
+    ├── WM_第6章拓展RateLimiter__Grafana.pdf
+    ├── WM_第7章互动分布式文件系统_GFS.pdf
+    ├── WM_第9章-互动：拓展 跳表 Skip List.pdf
+    ├── WM_第9章互动Bigtable新版.pdf
+    ├── WM_从用户系统设计中学习数据库与缓存.pdf
+    ├── 第11章直播补充资料.zip
+    ├── 第1章拓展课件.zip
+    ├── 第3章拓展课件.zip
+    ├── 第4章拓展课件.zip
+    └── 第8章直播补充资料.zip
