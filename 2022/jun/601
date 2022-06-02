@@ -1,0 +1,30 @@
+https://leetcode.cn/problems/house-robber-iii/submissions/
+
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def __init__(self):
+        self.f = collections.defaultdict(list)
+    def rob(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        def dfs(root):
+            if root is None:
+                return 
+            self.f[root] = [0,0]
+            
+            dfs(root.left)
+            dfs(root.right)
+            self.f[root][0] = max(self.f[root.left][0], self.f[root.left][1]) + max(self.f[root.right][0], self.f[root.right][1])
+            self.f[root][1] = root.val + self.f[root.left][0] + self.f[root.right][0]
+
+        self.f[None] = [0,0]
+        dfs(root)
+        return max(self.f[root][0], self.f[root][1])
+        
