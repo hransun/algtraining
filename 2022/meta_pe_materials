@@ -1,0 +1,141 @@
+Process vs Thread (frequently asked 8%)
+- Processes are independent and contain their own state information. Threads run within a process and share the same state and memory space
+- Processes have to communicate with each other using interprocess communication mechanisms. Threads communicate directly because they share the same variables.
+- Context switching between threads is faster than between processes.
+What is a mutex? Semaphore? Binary semaphore? (frequently asked 4%)
+- mutex is a binary lock, same as binary semaphore. Generic semaphore allows access to more then one thread at time (depending on number of resources)
+What is a small IO?What is a large IO? Numbers for seek times and scan rates?
+- Small IO is where a single(or few) block random IO is done. Main cost is seek time (~10ms)
+- Large IO is where large number of blocks are read sequentially. Seek time is amortized. Main cost is scan rate.
+What is RAID?
+- Redundant Array of Independent Disks (expanding the acronym is not important - candidate should intuitively know what RAID is)
+- Two main ideas: mirroring and striping. Mirroring gives protection against drive failure and striping gives performance. This is the gist
+What is a transaction?
+Candidate does not necessarily need to define ACID (Atomicity, Consistency, Isolation, Durability) but should intuitively know what it means to provide transactional semantics in a concurrent, multi-threaded environment. Should at least describe atomicity and isolation.
+Stack vs Heap (frequently asked 5%)
+Stack is for a thread/program to allocate local program variables. Heap is for dynamic allocation of memory.  Stack memory is allocated at compile time. Heap memory is allocated at runtime.
+以下内容需要积分高于 120 您已经可以浏览
+Difference between UDP and TCP? Follow-up: What layer is HTTP? Is HTTP TCP or UDP based? (frequently asked 5%)
+- UDP and TCP are both transport layer. TCP is reliable and connection based. UDP is connectionless and unreliable.
+- HTTP is application layer. It is normally TCP based since HTTP assumes a reliable transport.
+What is virtual memory? How does it work? (frequently asked 5%)
+- Creates a bigger memory address space than actual RAM. Working set kept is RAM and rest swapped to disk (swap space). Thrashing can occur if working set is larger than RAM.
+What is a memory mapped file? (frequently asked 4%)
+It is a segment of virtual memory that has a byte-for-byte correlation for some portion of a file.  Benefits: Increased IO performance (faster than direct reads and writes). Common uses - process loader in most operating systems.
+What is write-through cache? What is write-back (copy-back) cache? Which is faster?
+- Write-through cache:  Every write to cache is persisted to the actual source (e.g. disk) at time of write.
+- Write-back cache: Writes are not immediately mirrored to the actual source. Cache tracks locations that are dirty and these are persisted upon eviction or lazily.
+- Write-back is faster
+What is paging? What is a page fault?
+- Retrieval of data from secondary storage into main memory. Important part of virtual memory implementation.
+- Page fault is when a program tries to access pages that are not currently not loaded into RAM
+Several questions around Java garbage collection and memory leaks
+- Can Java leak memory?
+- How can it, since Java has an automatic garbage collector?
+- What are some common ways that memory leaks are introduced?
+- How would you recognize and fix a memory leak in one of your programs?
+The goal is to see if they have ever thought about the underpinnings of the JVM\'s memory system, They assume that what you are testing for is just recall of Java garbage collection principles, not understanding or explaining what actually goes into writing a collector.
+Scoring:
+- A great candidate will  
+- Know that Java can leak memory, and explain how inappropriately held references can cause it
+- Can describe how to recognize and debug a memory leak, as well as be able to reference some of the available tools.
+- Take no more than 5 minutes
+- A good candidate will  
+- Know that Java can leak memory, and explain how inappropriately held references can cause it
+- Can describe the symptoms of a memory leak, but may not know how to debug one
+- Take no more than 5 minutes
+- A bad candidate will  
+- May know that Java can leak memory, but may not know how
+- May not know how to recognize a memory leak in an application
+- Take more 5 minutes to complete the question
+- A terrible candidate will  
+- Does not know that, or if, Java can leak memory
+- Does not know how to recognize a memory leak in an application
+.
+Question Description: In Java, what does it mean for a class to be \'thread safe\'? What tools does Java provide to write thread-safe classes? If a class with no thread safety precautions is accessed by multiple threads, what kinds of errors might you see?
+Scoring:
+- A great candidate will  
+- Be able to clearly explain that thread-safe classes guarantee consistency under multithreaded access
+- List a substantial portion of the thread safety mechanisms that Java provides (synchronized, locks, volatile, immutability, anything in the util.concurrent package)
+- Identify that the only error that you are likely to see is data corruption
+- Take no more than 5 minutes
+- A good candidate will  
+- May have some difficulty explaining what a thread-safe class is, but at least mention that it won\'t suffer data issues when accessed by multiple threads
+- List at least one thread safety mechanism in addition to the synchronized keyword
+- May mention ConcurrentModificationException or deadlocks in addition to data corruption
+- Take no more than 5 minutes
+- A bad candidate will  
+- Have difficulty explaining what a thread-safe class is beyond being safe to access with multiple threads
+- Only know about the synchronized keyword as a thread safety mechanism
+- Will not mention the possibility of data corrupti‍‌‌‍‍‌‌‍‌‌‍‌‌‌‍‌‌‍on
+- Take more 5 minutes to complete the question
+- A terrible candidate will  
+- Be unable to describe what makes a class thread-safe. May assert that thread safety means \'all methods are synchronized\'
+- May not know about the synchronized keyword
+- Will be unsure of potential errors. May claim that ConcurrentModificationException will be thrown on any unsafe access in Java
+- Take more than 10 minutes to finish the question
+
+======
+
+https://stackoverflow.com/questions/11333929/efficient-way-to-transfer-files-to-1000s-of-servers
+
+production engineer一共五轮
+coding轮：给一个文件，里面有很多名人名言，如何随机打印出一句。follow up：文件很大放不进memory，但是能放进同一台机器的disk，如何随机打印一句。
+linux os轮：常见的linux os的问题
+architect轮：要升级所有的服务器怎么弄
+networking轮：常见的networki‍‌‌‍‍‌‌‍‌‌‍‌‌‌‍‌‌‍ng问题
+behavior轮：常见的behavior问题
+
+======
+class Position(object):
+    def __init__(self, index):
+        self.index = index
+        self.next = None
+    def __repr__(self):
+        return 'Position <index=%s>' % (self.index)
+quote_pos = [Position(0)]
+with open('s.txt', 'r') as f:
+    pos = 0
+    prev = quote_pos[0]
+    while True:
+        f.seek(pos)
+        char = f.read(1)
+        if not char:
+            break
+        elif char != ',':
+            pos += 1
+        else:
+            p = Position(pos+1)
+            prev.next = p
+            quote_pos.append(p)
+            prev = p
+            pos += 1
+with open('s.txt', 'r') as f:
+    for pos in quote_pos:
+        f.seek(pos.index)
+        if pos.next:
+            quote = f.read(pos.next.index-pos.index-1)
+        else:
+            quote = f.read(pos.index)
+        print(quote.strip())
+with open('s.txt', 'r') as f:
+    pos = 0
+    quote_pos = [0]
+    while True:
+        f.seek(pos)
+        char = f.read(1)
+        if not char:
+            break
+        elif char != ',':
+            pos += 1
+        else:
+            quote_pos.append(pos+1)
+            pos += 1
+    f.seek(0)
+    for i, pos in enumerate(quote_pos):
+        f.seek(pos)
+        if i < len(quote_pos)-1:
+            end_pos = quote_pos[i+1] - pos - 1
+        else:
+            end_pos = quote_pos[i]
+        print(f.read(end_pos).strip())
