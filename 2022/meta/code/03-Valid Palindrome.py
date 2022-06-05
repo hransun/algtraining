@@ -33,3 +33,4 @@ def isPalindrome(s):
 
 if __name__ == '__main__':
     print(isPalindrome("A man, a plan, a canal: Panama"))
+#6/4
