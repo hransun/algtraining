@@ -8,6 +8,7 @@ class TreeNode:
 def isValidBST(self, root: TreeNode):
     stack = []
     previous = float('-inf')
+    # because we need make sure stack and root is not none(out of bound)
     while stack or root:
         while root:
             stack.append(root)
