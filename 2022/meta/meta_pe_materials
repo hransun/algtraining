@@ -139,3 +139,46 @@ with open('s.txt', 'r') as f:
         else:
             end_pos = quote_pos[i]
         print(f.read(end_pos).strip())
+
+=====
+
+If a server is constantly crashing, what can you do?
+server 什么意思？指的是不响应了，还是太慢，是service挂了还是node挂了？
+You mentioned OOM…How to check if a process is killed by OOM?
+dmesg 会有kernel得log， oom是一个exception了。
+Solutions to prevent this from happening
+如果需要大内存就加内存，如果是process不稳定而且只想把这一个process关起来可以用cgroup限制内存。
+Can you explain what /procs folder is?
+虚拟文档，在运行时才有得关于process得资讯，将process得状态以文件得形式表达出来，大部分得monitoring系统就是基于/proc里面得数据来做的。
+Can you explain who updates this /procs?
+kernel
+If a CPU has a high load but low utilization, what can you do?
+什么意思？值得是sys多过多?context switch 过多？还是interrupt过多？查看top/vmstat/htop拿到cpu得结果才知道
+What about NFS?
+远程文件系统，这个是io出问题了。
+You talked  about tracerouter, can you explain how it works?
+traceroute更改了 ttl用以获得响应时间
+===
+
+VO：全程高频。
+第一轮：BQ.
+第二轮：SD。 设计cache, 比如redis，memcacheD这种，其实我觉得自己说的一般，只知道什么时候用cache,设计一个cache真的没想过，就是临场发挥。
+第三轮: coding. easy记不起来了，Medium尔耳器
+第四轮：BQ
+第五轮：coding. easy记不起来了，Medium丝‍‌‌‍‍‌‌‍‌‌‍‌‌‌‍‌‌‍儿留
+
+==
+
+
+分享一下Meta VO，希望对大家有帮助，求米！第一轮, System Design:
+跟我的background相关，设计一个embeded camera上传数据数据的系统，应该大多数人不会面到这题吧
+第二轮：
+两道算法题， 都是leetcode原题，但是我忘了。。。
+第三轮：
+考的system design，类似于设计一个Memcached，主要问题是问你要如何实现cache，用什么数据结构，如何实现get， set之类的function，一顿跟interviewer瞎聊
+第四轮：
+做了一道算法题，基础有点像力抠“散散灸”，
+大概是给你一个JSON的数据结构，问你怎么serialize成一个string，比如“‍‌‌‍‍‌‌‍‌‌‍‌‌‌‍‌‌‍[12,3,5,[7,3,[2]],9,2]”,然后再deserialize回JSON，一个正向一个反向的倒腾
+第五轮：
+
+
