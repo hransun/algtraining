@@ -1,11 +1,5 @@
 39.九章系统架构设计 System Design 2021 版 % tree
-.
-├
-├
 
-│
-├── 05 第五章【直播】优惠券系统设计
-│   └── 优惠券系统设计.mp4
 ├── 06 第六章【互动】数据库拓展与一致性哈希算法
 │   ├── 6.10【系统设计2020】实战4：News Feed 和 Timeline 如何 Sharding.mp4
 │   ├── 6.11【系统设计2020】实战5：LintCode Submission 如何 Sharding.mp4
@@ -140,29 +134,4 @@
 │   └── 16.9【系统】实践题：主键与索引的选择.mp4
 ├── 17 第十七章【直播】评论系统设计  Comment system
 │   └── 评论系统设计  Comment system.mp4
-└── 课件资料
-    ├── WM_02【直播】秒杀系统与订票系统v81.pdf
-    ├── WM_05章：优惠券系统设计v3.4.pdf
-    ├── WM_08章：文档协同编辑系统设计v3.4.pdf
-    ├── WM_11章：视频流系统设计v3.4.pdf
-    ├── WM_第10章互动聊天系统_Chat_System__v6.0.2.pdf
-    ├── WM_第12章互动_Location_Based_Service__Design_Uber_v6.0.pdf
-    ├── WM_第13章互动分布式计算_Map_Reduce.pdf
-    ├── WM_第14章：推特搜索系统设计v3.4.pdf
-    ├── WM_第15章互动拓展PageRank.pdf
-    ├── WM_第15章互动搜索引擎相关技术_Crawler__Typeahead_v6.1.3.pdf
-    ├── WM_第16章-互动-数据库索引与事务.pdf
-    ├── WM_第17章：如何设计一个友善的评论区v1.1.pdf
-    ├── WM_第1章互动_Introducing_System_Design__News_Feed_System_v6.0.4.pdf
-    ├── WM_第4章互动Web_System_API_Design__TinyURL.pdf
-    ├── WM_第6章互动._数据库拆分与一致性哈希算法.pdf
-    ├── WM_第6章拓展RateLimiter__Grafana.pdf
-    ├── WM_第7章互动分布式文件系统_GFS.pdf
-    ├── WM_第9章-互动：拓展 跳表 Skip List.pdf
-    ├── WM_第9章互动Bigtable新版.pdf
-    ├── WM_从用户系统设计中学习数据库与缓存.pdf
-    ├── 第11章直播补充资料.zip
-    ├── 第1章拓展课件.zip
-    ├── 第3章拓展课件.zip
-    ├── 第4章拓展课件.zip
-    └── 第8章直播补充资料.zip
+└── 
