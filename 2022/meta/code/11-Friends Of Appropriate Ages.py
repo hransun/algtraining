@@ -1,6 +1,25 @@
 # Friends Of Appropriate Ages
 
 
+# class Solution(object):
+#     def numFriendRequests(self, ages):
+#         """
+#         :type ages: List[int]
+#         :rtype: int
+#         """
+#         left, right = 0 , 0
+#         ans = 0
+#         ages.sort()
+#         n = len(ages)
+#         for age in ages:
+#             if age < 15:
+#                 continue
+#             while ages[left] <= 0.5 * age +7:
+#                 left +=1
+#             while right +1 < n and ages[right+1] <=age:
+#                 right +=1
+#             ans += right - left
+#         return ans 
 def numFriendRequests(ages):
     ages_count = [0] * 121
     for age in ages:
