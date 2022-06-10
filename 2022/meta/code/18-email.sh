@@ -1,0 +1,1 @@
+echo aa@a.com | sed -E 's/[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[0-9a-zA-Z]{2,5}/fake1@fake\.com/g' 

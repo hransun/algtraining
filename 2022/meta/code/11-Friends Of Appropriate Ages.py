@@ -1,6 +1,6 @@
 # Friends Of Appropriate Ages
 
-
+# for each age find left, right bound and add diff to the ans. 
 # class Solution(object):
 #     def numFriendRequests(self, ages):
 #         """

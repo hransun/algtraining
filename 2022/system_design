@@ -1,17 +1,8 @@
 39.九章系统架构设计 System Design 2021 版 % tree
 
-├── 06 第六章【互动】数据库拓展与一致性哈希算法
-│   ├── 6.10【系统设计2020】实战4：News Feed 和 Timeline 如何 Sharding.mp4
-│   ├── 6.11【系统设计2020】实战5：LintCode Submission 如何 Sharding.mp4
-│   
-│   ├── 6.6【系统设计2021】数据复制 Replica - 副本.mp4
-│   ├── 6.7【系统设计2020】实战1：Sharding User Table.mp4
-│   ├── 6.8【系统设计2020】实战2：Friendship Table 如何 Sharding.mp4
-│   └── 6.9【系统设计2020】实战3：Session Table 如何 Sharding.mp4
+
 ├── 07 第七章【互动】分布式文件系统 GFS
-│   ├── 10.1【系统】分布式系统 & GFS简介.mp4
-│   ├── 10.2【系统】GFS 的 Scenario & Service.mp4
-│   ├── 10.3【系统】GFS的Storage 1.mp4
+│ 
 │   ├── 10.4【系统】GFS的Storage 2.mp4
 │   ├── 10.5【系统】GFS的读取和写入.mp4
 │   ├── 10.6【系统】GFS Scale - Check Sum.mp4
