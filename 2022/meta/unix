@@ -1,1 +1,7 @@
 mmu - > virtual memory addresses to physical addresses.
+
+oom  -> This usually occurs because all available memory, including disk swap space, has been
+allocated
+
+oom killer :  oom_score in /proc/$PID/oom_score
+
