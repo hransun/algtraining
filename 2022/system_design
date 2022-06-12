@@ -2,7 +2,7 @@
 
 
 ├── 09 第九章【互动】分布式数据库 Big Table
-│   ├── 7.10【BigTable一个可行的读写过程】视频3.mp4
+│   
 │   ├── 7.10【系统设计2020】BigTable读取优化 - Index】视频4.mp4
 │   ├── 7.13【系统设计2020】BigTable读取优化 - BloomFilter】视频5.mp4
 │   ├── 7.15【系统设计2020】BigTable 的Sharding】视频6.mp4
@@ -13,7 +13,7 @@
 │   ├── 7.19【系统设计2020】bloom filter详解】视频11.mp4
 
 │   
-│   └── 7.9【[8-2]BigTable的基本设计】视频.mp4
+│   
 ├── 10 第十章【互动】聊天系统 IM System
 │   ├── 9.10【系统设计2020】UserTable 如何存储在 NoSQL 中？.mp4
 │   ├── 9.11【系统设计2020】一个可行解的流程.mp4
