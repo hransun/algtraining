@@ -3,7 +3,7 @@
 
 ├── 09 第九章【互动】分布式数据库 Big Table
 │   
-│   ├── 7.10【系统设计2020】BigTable读取优化 - Index】视频4.mp4
+│   
 │   ├── 7.13【系统设计2020】BigTable读取优化 - BloomFilter】视频5.mp4
 │   ├── 7.15【系统设计2020】BigTable 的Sharding】视频6.mp4
 │   ├── 7.16【系统设计2020】BigTable 的分布式锁】视频7.mp4
