@@ -29,4 +29,5 @@ def findCutTwo(nums):
     return (nums[:left+1], nums[right:]) if sum_left == sum_right else None
 
 if __name__ == "__main__":
+    print(findSplitPoint([2,3,5,0]))
     print(findCutTwo([2, 3, 5, 0]))
