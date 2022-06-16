@@ -20,5 +20,16 @@ def isValidBST(self, root: TreeNode):
         root = root.right
     return True
 
+    # def dfs(root,max,min):
+    #         if root is None:
+    #             return True
+    #         if root.val >=max or root.val <=min:
+    #             return False
+            
+    #         return dfs(root.left,root.val,min) and dfs(root.right,max,root.val)
+        
+    #     return dfs(root,float('inf'), float('-inf'))
+        
+
 
 
