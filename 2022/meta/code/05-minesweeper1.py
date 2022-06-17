@@ -2,6 +2,7 @@ import random
 
 
 class Solution(object):
+    # click is a 坐标
     def updateBoard(self, board, click):
         """
         :type board: List[List[str]]
@@ -16,33 +17,55 @@ class Solution(object):
             return 0 <= r < m and 0 <=c<n
 
         def dfs(r,c):
-            '''If a mine 'M' is revealed, then the game is over. You should change it to 'X'.
-            '''
             if not inBound(r,c)or board[r][c] == 'M':
                 return 
             
-            mines = 0
-            # calc mine count
+            mines =0
             for move in moves:
                 next_r = r + move[0]
                 next_c = c + move[1]
-                if inBound(next_r,next_c) and board[next_r][next_c] == 'M':
+                if inBound(next_r, next_c) and board[next_r][next_c] == 'M':
                     mines +=1
-            """If an empty square 'E' with no adjacent mines is revealed, then change it to a revealed blank 'B' and all of its adjacent unrevealed squares should be revealed recursively.
-"""        
-            if mines == 0:
+            
+            if mines ==0:
                 if board[r][c] == 'E':
                     board[r][c] = 'B'
                 for move in moves:
                     next_r = r + move[0]
                     next_c = c + move[1]
-                    if inBound(next_r, next_c) and board[next_r][next_c] == 'E':
+                    if inBound(next_r,next_c) and board[next_r][next_c] == 'E':
                         dfs(next_r,next_c)
             else:
-                """If an empty square 'E' with at least one adjacent mine is revealed, then change it to a digit ('1' to '8') representing the number of adjacent mines.
-"""
                 if board[r][c] == 'E':
-                    board[r][c] = str(mines)
+                    board[r][c] = mines
+#             '''If a mine 'M' is revealed, then the game is over. You should change it to 'X'.
+#             '''
+#             if not inBound(r,c)or board[r][c] == 'M':
+#                 return 
+            
+#             mines = 0
+#             # calc mine count
+#             for move in moves:
+#                 next_r = r + move[0]
+#                 next_c = c + move[1]
+#                 if inBound(next_r,next_c) and board[next_r][next_c] == 'M':
+#                     mines +=1
+#             """If an empty square 'E' with no adjacent mines is revealed, then change it to a revealed blank 'B' and all of its adjacent unrevealed squares should be revealed recursively.
+# """        
+#             if mines == 0:
+#                 if board[r][c] == 'E':
+#                     board[r][c] = 'B'
+#                 for move in moves:
+#                     next_r = r + move[0]
+#                     next_c = c + move[1]
+#                     if inBound(next_r, next_c) and board[next_r][next_c] == 'E':
+#                         dfs(next_r,next_c)
+#             else:
+#                 """If an empty square 'E' with at least one adjacent mine is revealed, then change it to a digit ('1' to '8') representing the number of adjacent mines.
+# """
+#                 if board[r][c] == 'E':
+#                     board[r][c] = str(mines)
+
         
         row , col = click[0], click[1]
         if board[row][col] == 'M':
@@ -54,27 +77,37 @@ class Solution(object):
 
 
 def generate(m, n, p):
-    import random
-    board = [ ['E'] * n for _ in range(m)]
+    # import random
+    # board = [ ['E'] * n for _ in range(m)]
     
-    visited = set()
+    # visited = set()
     
-    while len(visited)< p:
-        choosed = random.randint(0, m*n-1)
-        if choosed in visited:
-            continue
-        else:
-            visited.add(choosed)
+    # while len(visited)< p:
+    #     choosed = random.randint(0, m*n-1)
+    #     if choosed in visited:
+    #         continue
+    #     else:
+    #         visited.add(choosed)
             
     
-    for mine in visited:
-        print(mine//m,mine%n)
-        board[mine // n][mine % n] = 'M'
+    # for mine in visited:
+    #     print(mine//m,mine%n)
+    #     board[mine // n][mine % n] = 'M'
+    # return board
+    board = [ ['E'] * n for _ in range(m)]
+    visited = set()
+    while len(visited) < p:
+        choosed = random.randint(0, m*n -1)
+        if choosed in visited:
+            continue
+        visited.add(choosed)
+    for i in visited:
+        board[i//n][i%n] = 'M'
     return board
 
 
 if __name__ == '__main__':
-    board =generate(2, 3, 3)
+    board =generate(6, 6, 1)
     print(board)
-    new = Solution().updateBoard(board,(0,1))
+    new = Solution().updateBoard(board,(1,1))
     print(new)
