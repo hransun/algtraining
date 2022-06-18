@@ -17,12 +17,7 @@
 │   ├── 12.20【系统】使用 Riak 替换 Redis 作为主要数据库.mp4
 
 
-│   ├── 12.2【系统】Uber 的技术栈 - Ringpop.mp4
-│   ├── 12.3【系统】Uber 的技术栈 - TChannel.mp4
-│   ├── 12.4【系统】Uber的技术栈 - Google s3 & Riak.mp4
-│   ├── 12.5【系统】是不是答出 Uber 的技术栈就能通过面试？.mp4
-│   ├── 12.6【系统】Scenario - 设计哪些功能.mp4
-│   ├── 12.7【系统】Scenario - 设计得多牛.mp4
+
 │   ├── 12.8【系统】Service - Geo & Dispatch.mp4
 │   └── 12.9【系统】Storage 存储 - Trip & Location.mp4
 ├── 13 第十三章【互动】分布式计算 Map Reduce
