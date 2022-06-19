@@ -17,9 +17,6 @@
 │   ├── 12.20【系统】使用 Riak 替换 Redis 作为主要数据库.mp4
 
 
-
-│   ├── 12.8【系统】Service - Geo & Dispatch.mp4
-│   └── 12.9【系统】Storage 存储 - Trip & Location.mp4
 ├── 13 第十三章【互动】分布式计算 Map Reduce
 │   ├── 13.1【系统】MapReduce简介.mp4
 │   ├── 13.2【系统】MapReduce框架流程.mp4
