@@ -24,7 +24,7 @@
 
 12. find all products of combinations of given prime numbers -> ```product_prime.py```
 
-13. check if two strings are one edit away -> ```one_edit_distance.py```
+13. check if two strings are one edit away -> ```one_edit_distance.py``` leetcode 161
 
 14. find all anagram - 438 -> ```Find All Anagrams.py```
 
