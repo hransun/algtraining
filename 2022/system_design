@@ -1,14 +1,7 @@
 39.九章系统架构设计 System Design 2021 版 % tree
 
 
-├── 13 第十三章【互动】分布式计算 Map Reduce
-│   ├
-│   ├── 13.3【系统】MapReduce的使用.mp4
-│   ├── 13.4【系统】MapReduce传输整理的实现.mp4
-│   ├── 13.5【系统】MapReduce应用练习一.mp4
-│   ├── 13.6【系统】MapReduce应用练习二.mp4
-│   ├── 13.7【系统】MapReduce应用练习三.mp4
-│   └── 13.8【系统】MapReduce的设计.mp4
+├
 ├── 14 第十四章【直播】推特搜索系统设计 Twitter Search
 │   └── 推特搜索系统设计 Twitter Search.mp4
 ├── 15 第十五章【互动】爬虫系统与搜索建议系统

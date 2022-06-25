@@ -11,7 +11,7 @@ def productPrime(nums):
     if not nums:
         return []
     cur = productPrime(nums[1:])
-    return [nums[0]] + cur + [nums[0] * i for i in cur]
+    return [nums[0]] + cur + [ i * nums[0] for i in cur]
 
 
 if __name__ == '__main__':
