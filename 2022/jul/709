@@ -1,0 +1,24 @@
+https://leetcode.cn/problems/reverse-integer/submissions/
+
+class Solution {
+    public int reverse(int x) {
+        if (x== Integer.MIN_VALUE || x == Integer.MAX_VALUE) {
+            return 0;
+        }
+        int sign = x >0 ? 1:-1;
+        x = x <0 ? -x : x;
+        String str = String.valueOf(x);
+        char[] chars = str.toCharArray();
+        int len = chars.length;
+        char[] array = new char[len];
+        for (int i = 0; i < len ; i ++) {
+            array[i] = chars[len-1-i];
+
+        }
+        long value = Long.valueOf(String.valueOf(array));
+        boolean b = value > Integer.MAX_VALUE || value < Integer.MIN_VALUE;
+        int result = b ? 0: (int)value;
+        return result* sign;
+
+    }
+}
