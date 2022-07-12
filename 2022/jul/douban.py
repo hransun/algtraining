@@ -9,4 +9,5 @@ response = requests.get(url,headers=header)
 print(response.text)
 
 from bs4 import BeautifulSoup as bs
-bs(response.text,'html.parser')
+bs_info = bs(response.text,'html.parser')
+print(bs_info.find_all('div',attrs={'class':'pl2'})[0])
