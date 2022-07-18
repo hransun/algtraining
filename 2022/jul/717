@@ -64,3 +64,27 @@ class Solution {
 
     }
 }
+
+class Solution {
+    public String removeOuterParentheses(String s) {
+        StringBuilder result = new StringBuilder();
+        Stack stack = new Stack();
+        int lastOpr = 0;
+        for (int i = 0 ;i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (ch == '(') {
+                stack.push(ch);
+            } else if (ch == ')') {
+                stack.pop();
+            }
+            if (stack.isEmpty()) {
+                result.append(s.substring(lastOpr+1,i));
+                lastOpr = i +1;
+            }
+
+        }
+        return result.toString();
+
+
+    }
+}
