@@ -88,3 +88,25 @@ class Solution {
 
     }
 }
+
+class Solution(object):
+    def removeOuterParentheses(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        result =[]
+        index = -1
+        stack = [None] * len(s)
+        for ch in s:
+            if ch == '(':
+                if index > -1:
+                    result.append(ch)
+                index +=1
+                stack[index]= ch
+            else:
+                index -=1
+                stack[index] = None
+                if index > -1:
+                    result.append(ch)
+        return "".join(result)
