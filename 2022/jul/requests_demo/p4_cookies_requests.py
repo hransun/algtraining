@@ -12,8 +12,8 @@ s = requests.Session()
 login_url = 'https://accounts.douban.com/j/mobile/login/basic'
 form_data = {
 'ck':'',
-'name':'hransun72@hotmail.com',
-'password':'chetah',
+'name':'15055495@qq.com',
+'password':'test123test123',
 'remember':'false',
 'ticket':''
 }
