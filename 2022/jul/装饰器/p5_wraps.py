@@ -28,7 +28,7 @@ def foo(a,b,c):
     return (a+b+c)
     
 print(foo.__name__)
-
+foo(1,2,3)
 
 ########################
 # flask 使用@wraps()的案例

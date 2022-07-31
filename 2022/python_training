@@ -1,15 +1,12 @@
 Python进阶训练营【完结】 % tree --dirsfirst
 .
 
-├── 第三周
+├── 第三周 **
 │   ├── 01 Python进阶训练营·深入掌握Scrapy爬虫框架.vep
 │   ├── 02 Python进阶训练营·多进程.vep
 │   └── 03 Python进阶训练营·多线程.vep
-├── 第二周
-     
-│   ├── 01 Python进阶训练营·闭包和装饰器.vep **** !now
 
-│   └── 02 Python进阶训练营·Python新式类、魔术方法、设计模式、元编程、工厂函数、异常处理.vep
+│   └── 02 Python进阶训练营·Python新式类、魔术方法、设计模式、元编程、工厂函数、异常处理.vep ***
 ├── 第四周
 │   ├── 02 Python进阶训练营·协程、Ansible集群管理、异常处理 2020-04-06 18_52.vep
 │   ├── 03 Python进阶训练营·Pandas数据处理.vep
