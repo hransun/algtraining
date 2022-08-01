@@ -12,7 +12,7 @@ class LeftSubclass(BaseClass):
         print ("Calling method on Left Subclass")
         self.num_left_calls += 1
 
-class RightSubclass(object):
+class RightSubclass():
     num_right_calls = 0
     def call_me(self):
         print("Calling method on Right Subclass")
