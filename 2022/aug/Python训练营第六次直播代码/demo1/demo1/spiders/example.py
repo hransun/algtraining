@@ -14,5 +14,5 @@ class ExampleSpider(scrapy.Spider):
 
     def parse(self, response):
         print(response.url)
-        print(response.text) 
-        new_response = str(response.body, encoding='utf-8')
+        # print(response.text) 
+        # new_response = str(response.body, encoding='utf-8')

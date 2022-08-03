@@ -8,10 +8,10 @@ class Douban2Spider(scrapy.Spider):
     start_urls = ['https://book.douban.com/top250']
 
     # # 7.1 debug
-    # def parse(self, response):
-    #     # pass
-    #     print(response.url)
-    #     print(response.text)
+    def parse(self, response):
+        # pass
+        print(response.url)
+        print(response.text)
 
     # # 7.2 选择器
     # def parse(self, response):
@@ -20,9 +20,9 @@ class Douban2Spider(scrapy.Spider):
     #         title = book.xpath('./a/text()')
     #         link = book.xpath('./a/@href')
 
-    #         # debug
-    #         # print(title)
-    #         # print(link)
+    # #         # debug
+    #         print(title)
+    #         print(link)
     #         # print('-----------')
     #         # print(title.extract())
     #         # print(link.extract())
@@ -55,4 +55,4 @@ class Douban2Spider(scrapy.Spider):
         else:
             print('login successful')
             print(response.status)
-            # yield scrapy.Request(url=link, meta={'item': item}, callback=self.parse2)
+            yield scrapy.Request(url=link, meta={'item': item}, callback=self.parse)
