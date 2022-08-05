@@ -2,8 +2,8 @@ Python进阶训练营【完结】 % tree --dirsfirst
 .
 
 ├── 第三周 **
-│   ├── 01 Python进阶训练营·深入掌握Scrapy爬虫框架.vep ***
-│   ├── 02 Python进阶训练营·多进程.vep
+│   ├── 
+│   ├── 02 Python进阶训练营·多进程.vep **
 │   └── 03 Python进阶训练营·多线程.vep
 
 ├── 第四周
