@@ -1,0 +1,84 @@
+
+'''
+题目来源:Leetcode 1206:https://leetcode-cn.com/problems/design-skiplist/
+'''
+import math
+import random
+
+class Node:
+    def __init__(self,val,right,down):
+        self.val = val
+        self.right = right
+        self.down = down
+
+class Skiplist:
+    _HEAD_VALUE = -1
+    head = None
+    
+    def __init__(self):
+        self.head = Node(self._HEAD_VALUE,None,None)
+        self.levels = 1
+        self.length = 1
+
+
+    def search(self, target: int) -> bool:
+        return self.get(target,self.head) is not None
+
+    def get(self,target,fromm):
+        n = fromm
+        while n is not None:
+            while n.right is not None and n.right.val < target:
+                n = n.right
+            right = n.right
+            if right is not None and right.val == target:
+                return n
+            n = n.down
+        return None
+        
+
+
+    def add(self, num: int) -> None:
+        node = self.head
+        nodes = []
+        while node is not None:
+            while node.right is not None and node.right.val < num:
+                node = node.right
+            nodes.append(node)
+            node = node.down
+        
+        node = nodes[-1]
+        newNode = Node(num,node.right, None)
+        node.right = newNode
+        self.length += 1
+        self.addIndicesByCoinFlip(newNode,nodes,len(nodes)-1)
+
+    def addIndicesByCoinFlip(self,target,nodes,indeces):
+        if self.length < 8:
+            return 
+        downNode = target
+        while coin := random.randint(0,1) ==1 \
+        and (self.levels -1 ) < int(math.log(self.length,2)):
+            if indeces >0:
+                indeces -=1
+                prev = nodes[indeces]
+                newIndex = Node(target.val,prev.right,downNode)
+                prev.right = newIndex
+                downNode = newIndex
+            else:
+                newIndex = Node(target.val,None,downNode)
+                newHead = Node(self._HEAD_VALUE,newIndex,self.head)
+                self.head = newHead
+                self.levels += 1
+
+
+
+    def erase(self, num: int) -> bool:
+        exist = False
+        node = self.get(num,self.head)
+        while node is not None:
+            r = node.right
+            node.right = r.right
+            r.right = None
+            exist = True
+            node = self.get(num,node.down)
+        return exist
