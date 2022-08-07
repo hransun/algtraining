@@ -1,0 +1,11 @@
+https://leetcode.cn/problems/remove-duplicates-from-sorted-array/submissions/
+
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        target = 0
+        for i in range(1, len(nums)):
+            if nums[i] != nums[target]:
+                target +=1
+                if target != i:
+                    nums[target] = nums[i]
+        return target +1
