@@ -23,27 +23,31 @@
 # Output: 4
 
 def solution(input):
-    max_fruit=0
     
-    visited = set()
-    def helper(input,max_fruit):
+    
+    
+    def helper(input):
+        visited = set()
         result = 0
         for fruit in input:
-            if fruit not in visited and len(visited)<3:
+            if fruit not in visited and len(visited)<2:
                 result +=1
                 visited.add(fruit)
             elif fruit in visited:
                 result+=1
             else:
-                max_fruit = max(result,max_fruit)
-                print(max_fruit)
                 break
+        #print(result)
+        return result
     
+    res = 0
     for i in range(len(input)):
-        helper(input[i:],0)
-    return max_fruit
+        res = max(res,helper(input[i:]))
+    return res
         
         
     
                 
 print(solution([1,2,1]))
+print(solution([0,1,2,2]))
+print(solution([1,2,3,2,2]))
