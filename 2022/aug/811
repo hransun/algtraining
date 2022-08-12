@@ -1,0 +1,35 @@
+https://leetcode.cn/problems/reverse-words-in-a-string/
+
+class Solution {
+    public String reverseWords(String s) {
+        int len;
+        if(s == null || (len = s.length()) == 0) {
+            return "";
+        }
+        char[] chars = new char[len];
+        int first = -1, last = -1, index = 0;
+        for (int i = len -1;i >= 0;i--) {
+            char c = s.charAt(i);
+            if (c != ' ') {
+                if (last == -1) last = i;
+                if ( i == 0) first = i;
+            } else {
+                if (last != -1) first = i +1;
+            }
+
+            if (first >=0 && last >=0) {
+                if (index > 0) {
+                    chars[index++] = ' ';
+                }
+                while (first <= last) {
+                    chars[index++] = s.charAt(first);
+                    first++;
+                }
+                first = last = -1;
+            }
+
+        }
+        return String.valueOf(chars,0,index);
+
+    }
+}
