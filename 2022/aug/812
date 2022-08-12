@@ -1,0 +1,13 @@
+https://leetcode.cn/problems/reverse-words-in-a-string/submissions/
+
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        if s is None or len(s) == 0:
+            return ""
+        strs = s.split()
+        strArr = []
+        for ss in strs:
+            if not ss.isspace() and len(ss) > 0:
+                strArr.append(ss)
+        strArr.reverse()
+        return " ".join(strArr)
