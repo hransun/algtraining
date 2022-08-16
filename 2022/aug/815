@@ -36,3 +36,33 @@ class Solution:
             pi = self.partition(arr,low,high)
             self.quickSort(arr,low,pi-1)
             self.quickSort(arr,pi+1,high)
+
+
+https://leetcode.cn/problems/sorted-matrix-search-lcci/submissions/
+
+
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int m = matrix.length;
+        if (m ==0) return false;
+        int n = matrix[0].length;
+        if  (n==0) return false;
+        return searchSubMatrix(matrix,target,0,0,m-1,n-1);
+
+    }
+
+    private boolean searchSubMatrix(int[][] matrix, int target,int startRow,int startColumn,int endRow,int endColumn) {
+        if (startRow > endRow || startColumn > endColumn) return false;
+        if (matrix[startRow][startColumn] > target) return false;
+        int dianonal_length = Math.min(endRow - startRow +1, endColumn - startColumn +1);
+        for (int i = 0;i < dianonal_length; i++) {
+            if (matrix[startRow+i][startColumn + i] == target) {
+                return true;
+            }
+            if (i == dianonal_length -1 || matrix[startRow + i+1][startColumn +i +1] > target) {
+                return searchSubMatrix(matrix,target,startRow,startColumn + i+1,startRow+i,endColumn) || searchSubMatrix(matrix,target,startRow+i+1,startColumn,endRow,startColumn+i);
+            }
+        }
+        return false;
+    }
+}
