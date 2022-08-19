@@ -1,0 +1,26 @@
+https://leetcode.cn/problems/median-of-two-sorted-arrays/submissions/
+
+class Solution:
+    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+        if len(nums1) > len(nums2):
+            return self.findMedianSortedArrays(nums2,nums1)
+        infinity = 2**40
+        m, n = len(nums1), len(nums2)
+        left, right , ansi = 0 , m, -1
+        maxLeft, minRight = 0 , 0
+        while left <= right:
+            # i , j is the cut point of two arrays 
+            i = (left + right) // 2
+            j = (m + n + 1) // 2 - i 
+            nums_im1 = (-infinity if i ==0 else nums1[i-1])
+            nums_i = (infinity if i == m else nums1[i])
+            nums_jm1 = (-infinity if j == 0 else nums2[j-1])
+            nums_j = (infinity if j == n else nums2[j])
+
+            if nums_im1 <= nums_j:
+                ansi = i
+                maxLeft, minRight = max(nums_im1, nums_jm1), min(nums_i, nums_j)
+                left = i+1
+            else:
+                right = i -1
+        return (maxLeft + minRight) / 2 if (m+n) % 2 == 0 else maxLeft
