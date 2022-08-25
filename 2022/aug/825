@@ -1,0 +1,14 @@
+https://leetcode.cn/problems/sort-array-by-parity-ii/submissions/
+
+class Solution:
+    def sortArrayByParityII(self, nums: List[int]) -> List[int]:
+        i , j = 0 , 1
+        result = [0 for _ in range(len(nums))]
+        for num in nums:
+            if num % 2 ==0:
+                result[i] = num
+                i +=2
+            else:
+                result[j] = num
+                j +=2
+        return result 
