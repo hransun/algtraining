@@ -69,3 +69,17 @@ class Solution {
 
     }
 }
+
+https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/
+
+class Solution {
+    public int maxProfit(int[] prices) {
+        int result =0;
+        int n = prices.length;
+        for (int i = 1;i < n;i++) {
+            result += Math.max(0, prices[i] - prices[i-1]);
+        }
+        return result;
+
+    }
+}
