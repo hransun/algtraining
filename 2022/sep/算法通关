@@ -1,0 +1,12 @@
+http://leetcode-solution.cn/book
+
+https://leetcode.cn/problems/palindrome-number/submissions/
+
+class Solution:
+    def isPalindrome(self, x: int) -> bool:
+        res =0
+        copy = x
+        while x >0:
+            res = res * 10 + x % 10
+            x = x //10
+        return copy == res

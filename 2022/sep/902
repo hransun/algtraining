@@ -13,3 +13,49 @@ class Solution {
         return ans+ balance;
     }
 }
+
+
+https://leetcode.cn/problems/string-without-aaa-or-bbb/
+
+class Solution {
+    public String strWithout3a3b(int a, int b) {
+        if (a <=0 && b <=0) return "";
+        String more = "";
+        String less = "";
+        int left =0;
+        int x =0;
+        if (a > b) {
+            more = "a";
+            less = "b";
+            left = a - b;
+            x = b;
+        } else {
+            more = "b";
+            less = "a";
+            left = b -a;
+            x = a;
+        }
+        StringBuilder sb = new StringBuilder();
+        if (a <=0 || b<=0) {
+            for (int i=0;i < (left +x);i++) {
+                sb.append(more);
+            }
+            return sb.toString();
+        }
+
+        for (int i =0;i < x; i++) {
+            sb.append(more);
+            if (left >0) {
+                sb.append(more);
+                left--;
+            }
+            sb.append(less);
+        }
+        if (left >0) {
+            for (int i =0;i < left;i++) {
+                sb.append(more);
+            }
+        }
+        return sb.toString();
+    }
+}
