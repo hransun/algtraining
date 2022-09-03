@@ -1,29 +1,5 @@
 mac net player. 
 
-├── 00【课件资料】九章算法面向对象设计 OOD
-│   ├── WM_1.面向对象设计入门.pdf
-│   ├── WM_2.管理类面向对象设计.pdf
-│   ├── WM_3.预定类面向对象设计.pdf
-│   ├── WM_4-实物类面向对象设计__1.pdf
-│   └── WM_5-游戏类面向对象设计.pdf
-├── 01 第一章【互动】面向对象设计入门 Introduction to Object Oriented Design
-│  
-│   
-│   ├── 1-6 5C解题法——Clarify.vep
-
-
-│   ├── 1-7 5C解题法——Core object.vep
-│   ├── 1-7-1 UML类图符号.vep
-│   ├── 1-8 5C解题法——Cases.vep
-│   ├── 1-9 5C解题法——Class.vep
-│   ├── OOD课前老师有话说.vep
-│   ├── [面向对象]班班有话说~.vep
-│   ├── 三大特性-多态.vep
-│   ├── 三大特性-封装.vep
-│   ├── 三大特性-继承.vep
-│   ├── 异常处理机制.vep
-│   ├── 枚举的基础知识.vep
-│   └── 面向对象三大特性.vep
 ├── 02 第二章【互动】管理类面向对象设计 OOD for Management System
 │   ├── 2-1 管理类题型介绍及题解.vep
 │   ├── 2-2 Parking Lot Clarify.vep
