@@ -31,4 +31,21 @@ class Solution:
             e2 = extend(i, i +1, s)
             if max(len(e1),len(e2)) > len(res):
                 res = e1 if len(e1) > len(e2) else e2
-        return res 
+        return res
+
+https://leetcode.cn/problems/longest-palindromic-subsequence/submissions/
+
+class Solution:
+    def longestPalindromeSubseq(self, s: str) -> int:
+        n = len(s)
+        dp = [[0] * n for _ in range(n)]
+
+        for i in reversed(range(n)):
+            for j in range(i,n):
+                if i == j:
+                    dp[i][j] = 1
+                elif s[i] == s[j]:
+                    dp[i][j] = dp[i+1][j-1] + 2
+                else:
+                    dp[i][j] = max(dp[i+1][j], dp[i][j-1])
+        return dp[0][n-1]
