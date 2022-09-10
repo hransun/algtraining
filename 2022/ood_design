@@ -1,25 +1,6 @@
 mac net player. 
 
-├── 02 第二章【互动】管理类面向对象设计 OOD for Management System
-│   ├── 2-1 管理类题型介绍及题解.vep
-│   ├── 2-2 Parking Lot Clarify.vep
-│   ├── 2-3 Parking Lot Core Object.vep
-│   ├── 2-4 Parking lot case.vep
-│   ├── 2-5 Parking Lot Class.vep
-│   ├── 2-6 Parking Lot Correctness.vep
-│   ├── 2-7 Singleton Design Pattern.vep
-│   ├── Parking Lot In Action.vep
-│   └── 迪米特法则.vep
-├── 03 第三章【互动】预定类面向对象设计 OOD for Reservation System
-│   ├── 3-1 Restaurant 5C解法.vep
-│   ├── 3-2 Restaurant Classes.vep
-│   ├── 3-3 预定类解题思路.vep
-│   ├── 3-4 Restaurant Reservation设计思路.vep
-│   ├── 3-5 Restaurant  Reservation Class.vep
-│   ├── 3-6 Hotel 5C解题法.vep
-│   ├── 3-7 Hotel Reservation Classes.vep
-│   ├── 3-8 LRU Cache.vep
-│   └── Hotel Reservation in Action.vep
+
 ├── 04 第四章【互动】实物类面向对象设计 OOD for Real Life Object
 │   ├── 4-1 实物类题型介绍.vep
 │   ├── 4-2 Vending Machine Clarify & Core Object.vep
