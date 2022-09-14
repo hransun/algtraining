@@ -58,3 +58,45 @@ class Solution {
 
     }
 }
+
+
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        inorder(root,res);
+        return res;
+
+
+    }
+    public void inorder(TreeNode root,List<Integer> res) {
+        if (root == null) {
+            return;
+        }
+        inorder(root.left,res);
+        res.add(root.val);
+        inorder(root.right,res);
+    }
+}
+
+
+# moris iteration
+class Solution:
+    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        res = []
+        current = root
+        while  current:
+            if not  current.left:
+                res.append(current.val)
+                current = current.right
+            else:
+                pre = current.left
+                while pre.right and  pre.right != current:
+                    pre = pre.right
+                if not  pre.right:
+                    pre.right = current
+                    current = current.left
+                else:
+                    pre.right = None
+                    res.append(current.val)
+                    current = current.right
+        return res
