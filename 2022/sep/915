@@ -1,0 +1,44 @@
+https://leetcode.cn/problems/maximum-sum-bst-in-binary-tree/
+
+class Solution {
+    int res  = Integer.MIN_VALUE;
+    public int maxSumBST(TreeNode root) {
+        if (root == null) {
+            res = res >0 ? res: 0;
+            return res;
+        }
+        int[] state = isValidBST(root);
+        if (state[0] == 1) {
+            res = res > state[2] ? res:  state[2];
+        }
+        maxSumBST(root.left);
+        maxSumBST(root.right);
+        return res;
+
+
+    }
+
+    public int[] isValidBST(TreeNode root) {
+        int[] state = new int[3];
+        state[0]= 0; // is bst
+        state[1] = Integer.MIN_VALUE; // last element
+        state[2] = 0; // sum of
+        helper(root,state);
+        return state;
+    }
+
+    public void helper(TreeNode root,int[] state) {
+        if  (root == null) {
+            state[0] = 1;
+            return;
+        }
+        helper(root.left,state);
+        if (root.val <= state[1] || state[0] ==0) {
+            state[0] =0;
+            return;
+        }
+        state[1] = root.val;
+        state[2] += root.val;
+        helper(root.right,state);
+    }
+}
