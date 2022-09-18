@@ -60,3 +60,37 @@ class MagicDictionary {
     }
 
 }
+
+
+class MagicDictionary(object):
+
+    def __init__(self):
+        self.hashdict = collections.defaultdict(int)
+        self.dictionary = {}
+
+
+    def buildDict(self, dictionary):
+        """
+        :type dictionary: List[str]
+        :rtype: None
+        """
+        self.dictionary = dictionary
+        for d in dictionary:
+            for j in  range(len(d)):
+                self.hashdict[d[:j]+'_'+d[j+1:]] +=1
+
+
+
+    def search(self, searchWord):
+        """
+        :type searchWord: str
+        :rtype: bool
+        """
+        for j in  range(len(searchWord)):
+            if searchWord  in self.dictionary:
+                if  (searchWord[:j]+'_'+searchWord[j+1:]) in self.hashdict and self.hashdict[searchWord[:j]+'_'+searchWord[j+1:]]>1:
+                    return True
+            if  searchWord   not  in self.dictionary:
+                if  (searchWord[:j]+'_'+searchWord[j+1:]) in self.hashdict and self.hashdict[searchWord[:j]+'_'+searchWord[j+1:]]>0:
+                    return True
+        return False
