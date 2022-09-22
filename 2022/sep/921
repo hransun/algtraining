@@ -1,0 +1,42 @@
+https://leetcode.com/problems/find-k-pairs-with-smallest-sums/submissions/
+
+class Solution {
+    class node {
+        int  x,  y;
+        public node(int x,  int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+    class mySort implements Comparator<node> {
+        @Override
+        public int compare(node o1, node o2) {
+            return o1.x + o1.y - o2.x - o2.y;
+        }
+    }
+    public List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
+        if  (nums1.length == 0 || nums2.length == 0) {
+            return new ArrayList<List<Integer>>();
+        }
+        List<Integer> tmp = new ArrayList<>();
+        List<List<Integer>> ans = new ArrayList<>();
+        node[] arr = new node[nums1.length * nums2.length];
+
+        int len = 0;
+        for (int i = 0;i < nums1.length;i++) {
+            for (int j =0;j < nums2.length;j++) {
+                arr[len++] = new node(nums1[i], nums2[j]);
+            }
+        }
+        Arrays.sort(arr,new mySort());
+        for (int i =0;i < Math.min(k, arr.length);i++) {
+            tmp.add(arr[i].x);
+            tmp.add(arr[i].y);
+            ans.add(new ArrayList<>(tmp));
+            tmp.clear();
+        }
+        return  ans;
+        
+    }
+}
