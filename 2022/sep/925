@@ -1,0 +1,16 @@
+https://leetcode.com/problems/top-k-frequent-words/
+
+class Solution {
+    public List<String> topKFrequent(String[] words, int k) {
+        Map<String,Integer> countFreq =  new HashMap<>();
+        for (String word: words) {
+            countFreq.put(word,countFreq.getOrDefault(word,0) +1);
+        }
+        List<String> result = new ArrayList<>(countFreq.keySet());
+        Collections.sort(result,(word1,word2)->
+                countFreq.get(word1).equals(countFreq.get(word2)) ? word1.compareTo(word2):
+                countFreq.get(word2)- countFreq.get(word1));
+        return  result.subList(0,k);
+        
+    }
+}
