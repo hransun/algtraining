@@ -26,4 +26,74 @@ class Solution(object):
         heap = [(-freq,word) for  word,  freq in  count.items()]
         heapq.heapify(heap)
         return [heapq.heappop(heap)[1] for _ in range(k)]
+
+
+class Node:
+    def __init__(self,end = False):
+        self.children = dict()
+        self.end = end
+        self.word =''
+
+class Trie:
+    def __init__(self):
+        self.head = Node()
+    
+    def addWord(self,word):
+        node = self.head
+        for c in  word:
+            if c not in node.children:
+                node.children[c] = Node()
+            node = node.children[c]
+        node.end = True
+        node.word = word
+    
+    def  getSortedWord(self):
+        lis = []
+        def dfs(node):
+            if node.end:
+                lis.append(node.word)
+            for i in  range(26):
+                c = chr(i+97)
+                if c in  node.children:
+                    dfs(node.children[c])
+        dfs(self.head)
+        return  lis
+                
+class Solution(object):
+    def topKFrequent(self, words, k):
+        """
+        :type words: List[str]
+        :type k: int
+        :rtype: List[str]
+        """
+        frequents = collections.defaultdict(set)
+        frequents_reverse = dict()
+        
+        max_frequent = 0
+        for word in words:
+            if word not  in frequents_reverse:
+                frequents_reverse[word] =0
+                frequents[0].add(word)
+            cnt = frequents_reverse[word]
+            frequents[cnt].remove(word)
+            frequents[cnt+1].add(word)
+            frequents_reverse[word] = cnt+1
+            max_frequent = max(max_frequent,cnt+1)
+        ans = []
+        frequents_lis = []
+        l = 0
+        for i in range(max_frequent+1)[::-1]:
+            trie =Trie()
+            for  word in  frequents[i]:
+                trie.addWord(word)
+            ll = trie.getSortedWord()
+            if  len(ll) < k:
+                ans = ans + ll
+                k -= len(ll)
+            else:
+                ans = ans + ll[:k]
+                k = 0
+                return  ans 
+        return ans 
+                
         
