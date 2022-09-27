@@ -26,3 +26,19 @@ class Solution(object):
         :rtype: bool
         """
         return sorted(s) == sorted(t)
+
+
+https://leetcode.com/problems/group-anagrams/submissions/
+
+class Solution(object):
+    def groupAnagrams(self, strs):
+        """
+        :type strs: List[str]
+        :rtype: List[List[str]]
+        """
+        ans = collections.defaultdict(list)
+        for s in strs:
+            key = tuple(sorted(s))
+            ans[key].append(s)
+        return ans.values()
+        
