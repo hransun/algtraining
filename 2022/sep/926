@@ -1,0 +1,28 @@
+https://leetcode.com/problems/valid-anagram/submissions/
+
+class Solution(object):
+    def isAnagram(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: bool
+        """
+        counter = [0 ] * 26
+        for c in s:
+            counter[ord(c) - ord('a')] +=1
+        for c in t:
+            counter[ord(c) - ord('a')]-=1
+        for x in  counter:
+            if x !=0:
+                return False
+        return True
+            
+
+class Solution(object):
+    def isAnagram(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: bool
+        """
+        return sorted(s) == sorted(t)
