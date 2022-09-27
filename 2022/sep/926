@@ -41,4 +41,21 @@ class Solution(object):
             key = tuple(sorted(s))
             ans[key].append(s)
         return ans.values()
+
+https://leetcode.com/problems/two-sum/submissions/
+
+class Solution(object):
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        cache = collections.defaultdict(int)
+        for idx,  num in enumerate(nums):
+            if (target - num) in cache:
+                return [cache[target-num],idx]
+            cache[num] = idx
+        
+
         
