@@ -1,0 +1,53 @@
+https://leetcode.com/problems/minimum-number-of-increments-on-subarrays-to-form-a-target-array/
+
+class Solution {
+    class SegTree {
+        int[] value, nums;
+        int n;
+        SegTree(int n , int[] nums) {
+            value = new int[4*n];
+            this.n = n;
+            this.nums = nums;
+            build(1,0, n-1);
+        }
+
+        public void build(int pos,int left, int right) {
+            if (right == left) {
+                value[pos] = left;
+                return;
+            }
+            int mid = (left + right) / 2;
+            build(2 * pos,left,mid);
+            build(2 * pos +1,mid+1,right);
+            value[pos] = nums[value[2* pos]] > nums[value[2* pos +1]] ?value[2*pos +1] :value[2*pos];
+        }
+
+        // query   min index in a range
+        int query(int pos, int qleft, int qright, int left, int right) {
+            if (left > right) {
+                return -1;
+            }
+            if (qright == right && qleft == left) return value[pos];
+            int mid = (qleft + qright) / 2;
+            int leftIndex = query(2* pos , qleft,mid ,  left,  Math.min(mid,right));
+            int  rightIndex =query(2* pos+1,mid +1 ,qright,Math.max(left,mid+1),right);
+            if (leftIndex == -1) return rightIndex;
+            if (rightIndex == -1) return leftIndex;
+            return  nums[leftIndex] > nums[rightIndex] ? rightIndex : leftIndex;
+        }
+
+        int rec(int od , int l , int   r) {
+            if (l > r )  return 0;
+            int  m = query(1,0,n-1,l,r);
+            return nums[m] - od + rec(nums[m], l , m-1) +  rec(nums[m],m+1,r);
+
+        }
+    }
+    public int minNumberOperations(int[] target) {
+        int n = target.length;
+        SegTree st = new SegTree(n, target);
+        return st.rec(0, 0 ,n-1);
+
+        
+    }
+}
