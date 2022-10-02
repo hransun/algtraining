@@ -17,3 +17,53 @@ class Solution {
         return node.val + Math.max(leftGain,rightGain);
     }
 }
+
+https://leetcode.com/problems/serialize-and-deserialize-binary-tree/
+
+public class Codec {
+    private int index = 0;
+
+    // Encodes a tree to a single string.
+    public String serialize(TreeNode root) {
+        return serialize(root,new StringBuilder()).substring(1);
+    }
+
+    private StringBuilder serialize(TreeNode node,StringBuilder builder) {
+        builder.append(' ');
+
+        if  (node!=null) {
+            builder.append(node.val);
+            serialize(node.left, builder);
+            serialize(node.right, builder);
+        } else {
+            builder.append("#");
+        }
+        return builder;
+    }
+
+    // Decodes your encoded data to tree.
+    public TreeNode deserialize(String data) {
+        return deserialize(data.toCharArray());
+    }
+
+    public TreeNode deserialize(char[] data) {
+        if (data[index] == '#') {
+            index += 2;
+            return null;
+        }
+        int flag = 1;
+        int value = 0;
+        if  (data[index] == '-') {
+            flag = -1;
+            ++index ;
+        }
+        while (data[index] != ' ') {
+            value = value * 10 + data[index++] - '0';
+        }
+        ++index;
+        TreeNode node = new TreeNode(flag * value);
+        node.left = deserialize(data);
+        node.right = deserialize(data);
+        return node;
+    }
+}
