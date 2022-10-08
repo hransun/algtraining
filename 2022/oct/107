@@ -78,3 +78,34 @@ class WordFilter {
         return -1 ;
     }
 }
+
+https://leetcode.com/problems/merge-k-sorted-lists/submissions/
+
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        if  (null == lists || lists.length == 0) {
+            return null;
+        }
+        PriorityQueue<ListNode> queue = new PriorityQueue<ListNode>(
+                ((o1, o2) -> o1.val - o2.val)
+        );
+        for (int i = 0;i < lists.length;i++) {
+            ListNode node = lists[i];
+            while (node != null) {
+                queue.add(node);
+                node = node.next;
+            }
+
+        }
+        ListNode head = new ListNode();
+        ListNode tail = head;
+        while (!queue.isEmpty()) {
+            ListNode poll = queue.poll();
+            tail.next = poll;
+            tail =  poll;
+        }
+        tail.next = null;// avoid loop end of tail   should be null
+        return head.next;
+        
+    }
+}
