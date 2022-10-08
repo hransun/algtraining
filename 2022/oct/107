@@ -1,0 +1,80 @@
+https://leetcode.com/problems/prefix-and-suffix-search/
+
+class WordFilter {
+    private class Trie {
+        Trie[] next = new Trie[26];
+        ArrayList<Integer> weights = new ArrayList<>();
+
+        Trie(int weight) {
+            weights.add(weight);
+        }
+    }
+
+    Trie[]  topForward = new Trie[26];
+    Trie[]  topBackward = new Trie[26];
+
+    public WordFilter(String[] words) {
+        int c ;
+        Trie[] current;
+        for (int k = 0;k < words.length;k++) {
+            String word = words[k];
+            current = topForward;
+            for (int i =0;i < word.length();i++) {
+                c = word.charAt(i) - 'a';
+                if (current[c] == null) {
+                    current[c] =  new Trie(k);// kth word
+                } else {
+                    current[c].weights.add(k);
+                }
+                current = current[c].next;
+            }
+            current = topBackward;
+            for (int i = word.length()-1;i >=0;i--) {
+                c = word.charAt(i) - 'a';
+                if (current[c] == null) {
+                    current[c] =  new Trie(k) ;// kth word
+                } else {
+                    current[c].weights.add(k);
+                }
+                current = current[c].next;
+            }
+
+        }
+    }
+
+    private static final ArrayList<Integer> EMPTY = new ArrayList<>();
+    public int f(String pref, String suff) {
+        int c ;
+        ArrayList<Integer> prefixWeight = EMPTY,suffixWeight = EMPTY;
+        Trie[] current = topForward;
+        for (int i = 0;i < pref.length();i++) {
+            c = pref.charAt(i) - 'a';
+            if  (current[c] == null) {
+                return -1;
+            } else {
+                prefixWeight = current[c].weights;
+                current = current[c].next;
+            }
+        }
+        current = topBackward;
+        for (int i = suff.length()-1;i >=0;i--) {
+            c = suff.charAt(i) - 'a';
+            if (current[c] == null) {
+                return -1;
+            } else {
+                suffixWeight = current[c].weights;
+                current = current[c].next;
+            }
+        }
+        int preIndex = prefixWeight.size() -1, sufIndex = suffixWeight.size()-1, p, s ;
+        // both prefix and suffix p == s
+        while (preIndex >=0 && sufIndex >=0) {
+            p = prefixWeight.get(preIndex);
+            s = suffixWeight.get(sufIndex);
+            if (p < s) sufIndex--;
+            else if (p > s)  preIndex--;
+            else return p;
+        }
+        return -1 ;
+    }
+}
