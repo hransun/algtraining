@@ -1,0 +1,26 @@
+https://leetcode.cn/problems/route-between-nodes-lcci/submissions/
+
+class Solution(object):
+    def findWhetherExistsPath(self, n, graph, start, target):
+        """
+        :type n: int
+        :type graph: List[List[int]]
+        :type start: int
+        :type target: int
+        :rtype: bool
+        """
+        adj = collections.defaultdict(set)
+        for u, v in  graph:
+            adj[u].add(v)
+        visited = set()
+
+        def dfs(i):
+            if i == target:
+                return True
+            for j in adj[i]:
+                if j not in  visited:
+                    if dfs(j):
+                        return True 
+            return False
+
+        return dfs(start)
