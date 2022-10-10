@@ -24,3 +24,66 @@ class Solution(object):
             return False
 
         return dfs(start)
+
+https://leetcode.cn/problems/step-by-step-directions-from-a-binary-tree-node-to-another/submissions/
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def getDirections(self, root, startValue, destValue):
+        """
+        :type root: Optional[TreeNode]
+        :type startValue: int
+        :type destValue: int
+        :rtype: str
+        """
+        fa = {}
+        s = None
+        t = None
+
+        # get point from child to fa
+        def dfs(cur):
+            nonlocal s, t
+            if cur.val == startValue:
+                s = cur
+            if cur.val == destValue:
+                t = cur
+            if cur.left:
+                fa[cur.left] = cur
+                dfs(cur.left)
+            if cur.right:
+                fa[cur.right] = cur
+                dfs(cur.right)
+
+        #path from root to a node
+        def path(cur):
+            res =[]
+            while cur != root:
+                par = fa[cur]
+                if cur == par.left:
+                    res.append('L')
+                else:
+                    res.append('R')
+                cur = par
+            return res[::-1]
+        
+        dfs(root)
+        path1 = path(s)
+        path2 = path(t)
+        l1, l2 = len(path1), len(path2)
+        i = 0
+        #remove path1, path2 common prefix as path is from root to the dest or source
+        while i < min(l1,l2):
+            if path1[i] == path2[i]:
+                i +=1
+            else:
+                break
+        
+        finalpath = 'U' * (l1 - i) + ''.join(path2[i:])
+        return finalpath
+
+
