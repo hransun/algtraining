@@ -1,0 +1,39 @@
+https://leetcode.com/problems/network-delay-time/
+
+import java.util.ArrayList;
+
+//leetcode submit region begin(Prohibit modification and deletion)
+class Solution {
+    public int[] dist;
+    public int networkDelayTime(int[][] times, int n, int k) {
+        ArrayList<ArrayList<int[]>> adj = new ArrayList<>(n+1);
+        for (int i =0;i <= n ;i++) {
+            adj.add(new ArrayList<int[]>());
+        }
+        for (int i =0;i < times.length;i++) {
+            adj.get(times[i][0]).add(new int[] {times[i][1],times[i][2]});
+        }
+        dist = new int[n+1];
+        for (int node =1;node <= n;node++) {
+            dist[node] = Integer.MAX_VALUE;
+        }
+        dfs(adj,k,0);
+        int ans =0;
+        for (int node =1;node <= n;node++) {
+            if (dist[node]== Integer.MAX_VALUE) return -1;
+            ans = Math.max(ans,dist[node]);
+        }
+        return ans;
+        
+    }
+
+    public void dfs(ArrayList<ArrayList<int[]>> adj, int  node,   int elapsed) {
+        if (elapsed >= dist[node]) return;
+        dist[node] = elapsed;
+        for (int j = 0;j < adj.get(node).size();j++) {
+            int[]  vert = adj.get(node).get(j);
+            dfs(adj,vert[0],elapsed + vert[1]);
+        }
+    }
+}
+//leetcode submit region end(Prohibit modification and deletion)
