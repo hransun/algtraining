@@ -1,0 +1,79 @@
+https://leetcode.com/problems/find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree/
+
+class Solution {
+    private int[] parent;
+    private int[][] edgesCopy;
+
+    public void init(int n) {
+        if (parent == null) {
+            parent = new int[n];
+        }
+        for (int i =0;i < n;++i) {
+            parent[i] = i;
+        }
+    }
+
+    public int find(int i) {
+        while (i != parent[i]) {
+            i = parent[i];
+            parent[i] = parent[parent[i]];
+        }
+        return parent[i];
+    }
+
+    public boolean union(int x , int y) {
+        int rootX = find(x);
+        int rootY = find(y);
+        if (rootX != rootY) {
+            parent[rootX] = rootY;
+            return true;
+        }
+        return false;
+    }
+
+    public int kruskal(int[][] edges, int  n , int index,boolean giveOrTake) {
+        init(n);
+
+        int mstWeightSum = 0, mstEdgeCount = 0;
+        if (!giveOrTake && index >=0) {
+            parent[edgesCopy[index][1]] = edgesCopy[index][0];
+            mstWeightSum += edgesCopy[index][2];
+            mstEdgeCount++;
+
+        }
+        for (int i =0;i < edges.length && mstEdgeCount < n-1; i++) {
+            if (giveOrTake && edges[i] == edgesCopy[index]) {
+                continue;
+            }
+            if (union(edges[i][0],edges[i][1])) {
+                mstEdgeCount++;
+                mstWeightSum += edges[i][2];
+            }
+        }
+        if (mstEdgeCount == n-1) {
+            return mstWeightSum;
+        }
+        return Integer.MAX_VALUE;
+
+    }
+    public List<List<Integer>> findCriticalAndPseudoCriticalEdges(int n, int[][] edges) {
+        edgesCopy = edges.clone();
+        Arrays.sort(edges,(i1,i2)->i1[2] - i2[2]);
+        int minSum = kruskal(edges,n,-1, false);
+        List<List<Integer>> result = new LinkedList<>();
+        List<Integer> keyEdge = new ArrayList<>();
+        List<Integer> pseudoEdge = new ArrayList<>();
+        result.add(keyEdge);
+        result.add(pseudoEdge);
+        for (int i =0;i < edgesCopy.length;i++) {
+            if (kruskal(edges,n,i,true)> minSum) {
+                keyEdge.add(i);
+            } else if  (kruskal(edges,n,i,false)== minSum) {
+                pseudoEdge.add(i);
+            }
+        }
+        return result;
+
+        
+    }
+}
