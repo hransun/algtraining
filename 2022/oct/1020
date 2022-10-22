@@ -77,3 +77,100 @@ class Solution {
         
     }
 }
+
+class Solution {
+
+    int[][] matrix;
+    public void initMatrix(int[][] edges, int n) {
+        matrix = new int[n][n];
+        for (int i =0;i < edges.length;i++) {
+            int[] edge = edges[i];
+
+            if (matrix[edge[0]]== null) {
+                matrix[edge[0]] = new int[n];
+            }
+            if  (matrix[edge[1]] == null) {
+                matrix[edge[1]] = new int[n];
+            }
+            matrix[edge[0]][edge[1]] = edge[2];
+            matrix[edge[1]][edge[0]] = edge[2];
+        }
+
+    }
+
+    public int prim(int[][] edges, int n, int index, boolean giveOrTake) {
+// mst权值和，边数量
+        int mstWeightSum = 0, mstEdgeCount = 0; // 集合A，临时存放顶点
+        boolean[] visited = new boolean[n];
+        /* 伪关键边 */
+        if (!giveOrTake && index >= 0) {
+            visited[edges[index][0]] = true;
+            visited[edges[index][1]] = true;
+            mstWeightSum += edges[index][2];
+            mstEdgeCount = 2;
+        }else{// 默认
+            visited[0] = true; // 0节点加入A
+             mstEdgeCount++;
+        }
+// 当集合 A 中的顶点个数达到 n个，操作结束
+while (mstEdgeCount < n) {
+        /* 选择这些顶点权值最小的边加入MST */
+        int x = -1, y = -1; // 最小权值边的两个顶点
+        int minWeight = Integer.MAX_VALUE;
+// 遍历集合 A 中所有顶点，找到最小权值的边
+     for(int i=0;i<n;i++) {// 所有顶点
+         if (visited[i]) { // 只需要已被标记的元素
+             int[] adj = matrix[i];
+// 遍历所有 可能的 邻接点
+             for (int j = 0; j < n; j++) { // 0表示没有边
+                 if (adj[j] == 0) continue; // 从 i 到 j 的边已经被加入mst
+                 if (visited[j]) continue; /* 关键边处理 */
+                 if (giveOrTake) {
+                     int a = edges[index][0]; // 关键边的顶点
+                     int b = edges[index][1]; // 关键边的顶点
+// 两端顶点相同则为关键边
+                     if ((a == i && b == j) || (a == j && b == i))
+                         continue; // 跳过
+                 }
+                 /* 记录较小权值 */
+                 if (adj[j] < minWeight) {
+                     minWeight = adj[j]; // 记录最小权重
+                     x = i; // 记录边的两个顶点
+                     y = j;
+                 }
+             }
+         }
+     }
+// 可能会发生去掉关键边之后，不连通的情况
+            if (x != -1 && y != -1) {
+            visited[x] = true;
+            visited[y] = true;
+            mstEdgeCount++;
+            mstWeightSum += minWeight; // 累计权重
+                 } else { // 跳过的边，是连接了两个岛屿的关键边
+            return Integer.MAX_VALUE;
+        }
+    }
+    return mstWeightSum;
+}
+    public List<List<Integer>> findCriticalAndPseudoCriticalEdges(int n, int[][] edges) {
+        initMatrix(edges,n);
+        int minSum = prim(edges,n,-1, false);
+        System.out.print(minSum);
+        List<List<Integer>> result = new LinkedList<>();
+        List<Integer> keyEdge = new ArrayList<>();
+        List<Integer> pseudoEdge = new ArrayList<>();
+        result.add(keyEdge);
+        result.add(pseudoEdge);
+        for (int i =0;i < edges.length;i++) {
+            if (prim(edges,n,i,true)> minSum) {
+                keyEdge.add(i);
+            } else if  (prim(edges,n,i,false)== minSum) {
+                pseudoEdge.add(i);
+            }
+        }
+        return result;
+
+        
+    }
+}
