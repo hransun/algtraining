@@ -21,3 +21,26 @@ class Solution {
         
     }
 }
+
+class Solution {
+    public int minSwapsCouples(int[] row) {
+        int[] sites = new int[row.length];
+        for (int i = 0;i < row.length;i++) {
+            sites[row[i]] = i;
+        }
+        int times = 0;
+        for (int i =0;i < row.length; i += 2) {
+            int x = row[i];
+            int c = x^ 1; // c  = x -1   or x +1 depends on c % 2 == 0
+            if (row[i+1] == c) continue;
+            int bIndex  = sites[c];
+            row[bIndex] = row[i+1];
+            row[i+1] = c;
+            sites[row[bIndex]] = bIndex;
+
+            times += 1;
+        }
+        return times;
+        
+    }
+}
