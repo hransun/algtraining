@@ -1,0 +1,70 @@
+https://leetcode.com/problems/n-queens/
+
+class Solution {
+    public List<List<String>> solveNQueens(int n) {
+        char[][] chess = new char[n][n];
+        for  (int i =0;i < n;i++) {
+            for (int j =0;j < n;j++) {
+                chess[i][j] = '.';
+            }
+        }
+        List<List<String>> res = new ArrayList<>();
+        solve(res,chess,0);
+        return  res;
+        
+    }
+
+    private void  solve(List<List<String>> res,char[][] chess,int  row) {
+        if (row == chess.length) {
+            res.add(construct(chess));
+            return;
+        }
+        for (int col =0;col < chess.length;col++) {
+            if (valid(chess,row,col)) {
+                char[][] temp = copy(chess);
+                temp[row][col] = 'Q';
+                solve(res,temp,row+1);
+            }
+        }
+    }
+
+    private boolean valid(char[][] chess,int row,int col) {
+        // current col
+        for (int i =0;i < row;i++) {
+            if  (chess[i][col] == 'Q') {
+                return false;
+            }
+        }
+        // top right
+        for (int i =row,j = col;i >=0 && j < chess.length ;i--,j++) {
+            if (chess[i][j] == 'Q') {
+                return false;
+            }
+        }
+        // top left
+        for (int i =row,j = col;i >=0 && j >=0  ;i--,j--) {
+            if (chess[i][j] == 'Q') {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private char[][] copy(char[][] chess) {
+        char[][] temp = new char[chess.length][chess[0].length];
+        for (int i =0;i < chess.length;i++) {
+            for (int j =0;j < chess[0].length;j++) {
+                temp[i][j] = chess[i][j];
+            }
+        }
+        return temp;
+    }
+
+    private List<String> construct(char[][] chess) {
+        List<String> path = new ArrayList<>();
+        for (int i =0;i < chess.length;i++) {
+            path.add(new String(chess[i]));
+        }
+        return path;
+    }
+}
