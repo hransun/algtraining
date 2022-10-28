@@ -41,7 +41,7 @@ class Solution {
         while (!node_queue.isEmpty()) {
             int cur_vert = node_queue.poll();
             for (int j = 0;j < adj.get(cur_vert).size();j++) {
-                int  vert = adj.get(cur_vert).get(j);
+                int  vert = adj.get(cur_vert).get(j);// get nei
                 if (!visited[vert]) {
                     visited[vert] = true;
                     if (vert == target) return true;
