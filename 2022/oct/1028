@@ -75,3 +75,64 @@ class WordDictionary {
         return true;
     }
 }
+
+
+class WordDictionary {
+    class TrieNode {
+        TrieNode[] children;
+        boolean isWord;
+        public TrieNode() {
+            children = new TrieNode[26];
+            isWord = false;
+            for (int i = 0;i < 26; i++) {
+                children[i] = null;
+            }
+        }
+    }
+    TrieNode root;
+
+    public WordDictionary() {
+        root = new TrieNode();
+    }
+    
+    public void addWord(String word) {
+        char[] array = word.toCharArray();
+        TrieNode cur = root;
+        for (int i=0;i < array.length;++i) {
+            if (cur.children[array[i] - 'a'] == null) {
+                cur.children[array[i] - 'a'] = new TrieNode();
+            }
+            cur = cur.children[array[i] - 'a'];
+        }
+        cur.isWord = true;
+
+    }
+    
+    public boolean search(String word) {
+        return searchHelp(word,root);
+
+    }
+    private boolean searchHelp(String word, TrieNode root) {
+        char[] array = word.toCharArray();
+        TrieNode cur = root;
+        for (int i = 0;i < array.length;++i) {
+            if (array[i] == '.') {
+                for (int j = 0;j < 26;++j) {
+                    if (cur.children[j] != null) {
+                        if (searchHelp(word.substring(i+1),cur.children[j])) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+            if (cur.children[array[i]- 'a']== null) {
+                return false;
+            }
+            cur = cur.children[array[i] - 'a'];
+        }
+        return cur.isWord;
+    }
+
+
+}
