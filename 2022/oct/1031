@@ -84,3 +84,52 @@ class Solution {
         return false;
     }
 }
+
+class Solution {
+    public boolean makesquare(int[] matchsticks) {
+        int[] nums = matchsticks;
+        if (nums.length < 4) {
+            return false;
+        }
+        int sum = 0;
+        for (int i = 0;i < nums.length;++i) {
+            sum += nums[i];
+        }
+        if (sum % 4 != 0) {
+            return false;
+        }
+        int target = sum / 4;
+        ArrayList<Integer> validSubset = new ArrayList<>();
+        ArrayList<Integer> validHalfSubset = new ArrayList<>();
+        int all = 1 << nums.length;
+        for (int i = 1;i < all;i++) {
+            int  bucketSum = 0;
+            for (int j = 0;j < nums.length;j++) {
+                if ((i & (1<<j)) != 0) {
+                    bucketSum += nums[j];
+                }
+            }
+            if (bucketSum == target) {
+                validSubset.add(i);
+            }
+        }
+        for (int i = 0;i < validSubset.size();i++) {
+            for (int j = i+1;j < validSubset.size();j++){
+                if ((validSubset.get(i) & validSubset.get(j)) == 0)  {
+                    validHalfSubset.add(validSubset.get(i) |
+                            validSubset.get(j));
+                }
+            }
+        }
+
+        for (int i = 0;i < validHalfSubset.size();i++) {
+            for (int j = i+1;j < validHalfSubset.size();j++) {
+                if  ((validHalfSubset.get(i) & validHalfSubset.get(j)) == 0) {
+                    return true;
+                }
+            }
+        }
+        return false;
+
+    }
+}
