@@ -23,3 +23,22 @@ class Solution {
         return res>=3? res: 0;
     }
 }
+
+class Solution(object):
+    def lenLongestFibSubseq(self, arr):
+        """
+        :type arr: List[int]
+        :rtype: int
+        """
+        A = arr
+        index = {x:i for i, x in enumerate(A)}
+        longest = collections.defaultdict(lambda:2)
+        
+        ans = 0
+        for k , z  in enumerate(A):
+            for j in range(k):
+                i = index.get(z - A[j],None)
+                if i is not None and i < j:
+                    candidate = longest[j,k] = longest[i,j] +1
+                    ans = max(ans,candidate)
+        return ans
