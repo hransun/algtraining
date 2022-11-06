@@ -1,0 +1,110 @@
+https://leetcode.cn/problems/binary-tree-cameras/
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public int minCameraCover(TreeNode root) {
+
+                return search(root,1);
+    }
+    private int search(TreeNode root,int interval) {
+        if (root == null) return 0;
+        //  root.val means this node is put camera or not
+        if (interval == 1 && root.left == null  &&  root.right == null) {
+            root.val =1;
+            return 1;
+        }
+        if (interval ==1 && root.left != null && root.right != null) {
+            root.val = 1;
+            int x = search(root.left,0) + search(root.right,0) + 1;
+            root.val = 0;
+            int y = search(root.left,interval) + search(root.right,interval+1);
+            int z = search(root.left,interval+1) + search(root.right,interval);
+            if (x < Math.min(y,z)) {
+                root.val = 1;
+                return x;
+            } else {
+                return Math.min(y,z);
+            }
+
+
+        }
+        if (interval == 2) {
+            root.val = 1;
+            return search(root.left,0) + search(root.right,0) +1;
+        } else {
+            root.val = 1;
+            int x = search(root.left,0) + search(root.right,0) +1;
+            root.val = 0;
+            int y = search(root.left,interval+1) +  search(root.right,interval+1);
+            if (x < y) {
+                root.val = 1;
+                return x;
+            } else {
+                return y;
+            }
+        }
+    }
+}
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    private final int NOT_COVERED = 0;
+    private final int HAS_CAMERA = 1;
+    private final int COVERED = 2;
+    int res = 0;
+    public int minCameraCover(TreeNode root) {
+        //coner case
+        if (root == null) {
+            return 0;
+        }
+        if (dfs(root) == NOT_COVERED) {
+            res++;
+        }
+        // return value
+        return  res;
+    }
+    //   return 0, 1, 2
+    public int dfs(TreeNode root) {
+        //post-order
+        if  (root==null) return  COVERED;
+        int  left = dfs(root.left);
+        int right = dfs(root.right);
+        // check if not covered
+        if  (left == NOT_COVERED || right == NOT_COVERED) {
+            res++;
+            return HAS_CAMERA;
+        }
+        // check if has camera
+        return  left == HAS_CAMERA || right == HAS_CAMERA ? COVERED:NOT_COVERED;
+    }
+
+}
