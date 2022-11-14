@@ -1,0 +1,41 @@
+https://leetcode.cn/problems/maximum-length-of-a-concatenated-string-with-unique-characters/
+
+class Solution {
+    public int maxLength(List<String> arr) {
+        int[] bitMap = new int[arr.size()];
+        int[] lens = new int[arr.size()];
+        int idx = 0;
+        for (String s: arr) {
+            bitMap[idx] = getBitMask(s); // string to a bitmap number
+            lens[idx] = s.length();
+            idx++;
+        }
+        return dfs(bitMap,lens,0,0);
+
+    }
+
+    public int dfs(int[] bitMap,int[] lens,int start, int num) {
+        if (start >= bitMap.length) {
+            return 0;
+        }
+        int ans = 0;
+        for (int i = start; i < bitMap.length;i++) {
+            if (bitMap[i] != -1 && ((bitMap[i] & num) ==0)) {// no repeat char
+                ans =  Math.max(ans,dfs(bitMap,lens,i+1,num | bitMap[i]) + lens[i]);
+            }
+        }
+        return ans;
+    }
+    // each string has a bitmap number
+    public int getBitMask(String s) {
+        int bitMask = 0;
+        for (char c: s.toCharArray()) {
+            int bit = 1 << (c - 'a');
+            if ((bitMask & bit) != 0) {// repeat char
+                return -1;
+            }
+            bitMask |= bit;
+        }
+        return bitMask;
+    }
+}
