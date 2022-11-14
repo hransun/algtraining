@@ -39,3 +39,64 @@ class Solution {
         return bitMask;
     }
 }
+
+https://leetcode.cn/problems/stickers-to-spell-word/
+
+class Solution {
+    public int minStickers(String[] stickers, String target) {
+        int targetLength = target.length();
+        int stickersLength = stickers.length;
+        int dpLen = 1 << targetLength;
+        int[] dp = new int[dpLen]; // 2^m dp[i] i: target  bitmap ,each char is concateed or not
+        // dp[i] means  min # of stick
+
+        final  char[] targetChars =  target.toCharArray();
+        int[][] countOfAlphabet =  new int[stickersLength][26]; // each stick char #
+        Set<Integer>[]  alphabetLocationSets = new Set[26];
+        for (int i = 0;i < alphabetLocationSets.length;i++) {
+            alphabetLocationSets[i] = new HashSet<>();
+        }
+
+        for (int i =0;i < stickersLength;i++) {
+            String sticker = stickers[i];
+            final  char[]  chars = sticker.toCharArray();
+            for (char aChar: chars) {
+                countOfAlphabet[i][aChar-'a']++;
+                alphabetLocationSets[aChar-'a'].add(i);
+            }
+        }
+
+        for (char c : targetChars) {
+            if (alphabetLocationSets[c - 'a'].size()==0) {
+                // char not in any sticker
+                return -1;
+            }
+        }
+        // loop dp array
+        for (int i =0;i < dpLen-1;i++) {
+            if (i !=0 && dp[i] == 0) continue;
+            int  start = 0;
+            for (;start < targetLength;start++) {
+                // find the first match letter to concated   i -> string
+                if (((1<<start) & i) == 0) {
+                    break;
+                }
+            }
+            final Set<Integer> set = alphabetLocationSets[targetChars[start] - 'a'];
+            for (Integer idx: set) {
+                int next = i; // bitmap
+                final int[] arr = Arrays.copyOf(countOfAlphabet[idx],26);
+                for (int  startIndex = start;startIndex < targetLength;startIndex++) {
+                    final  char ch =targetChars[startIndex];
+                    if (((1<<startIndex) & next) == 0 && arr[ch - 'a']>0) {
+                        arr[ch -'a']--;
+                        next |= (1<< startIndex);
+                    }
+                }
+                dp[next] = dp[next] ==0 ? dp[i] +1 : Math.min(dp[next],dp[i]+1);
+
+            }
+        }
+        return dp[dpLen-1];
+    }
+}
