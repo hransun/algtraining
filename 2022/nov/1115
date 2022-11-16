@@ -1,0 +1,78 @@
+https://leetcode.cn/problems/sudoku-solver/
+
+class Solution {
+    private int[] line = new int[9];
+    private int[] column = new int[9];
+    private int[][] block = new int[3][3];
+    private boolean valid = false;
+    // blank spaces
+    private List<int[]> spaces = new ArrayList<>();
+
+    public void flip(int i , int j ,  int digit){
+        line[i] ^= (1<<digit);
+        column[j] ^= (1<<digit);
+        block[i/3][j/3] ^= (1<<digit);
+
+    }
+    public void solveSudoku(char[][] board) {
+        for (int i =0;i < 9;i++) {
+            for (int j =0;j < 9;j++) {
+                if (board[i][j]!= '.') {
+                    int  digit = board[i][j] - '0' -1;
+                    // convert digit to bitmap
+                    flip(i,j,digit);
+                }
+            }
+        }
+        // start pre fill, only miss one number
+        boolean  modified = false;
+        do {
+            modified = false;
+            for (int i = 0;i < 9;i++) {
+                for (int j = 0;j < 9;j++) {
+                    if (board[i][j] ==  '.') {
+                        // mask is the number not  in row, col , and  3-3 block , mod 9 2^9
+                        int  mask = ~(line[i] | column[j] | block[i/3][j/3]) & 0x1ff;
+                        if ((mask & (mask-1) )== 0) {
+                            int  digit = Integer.bitCount(mask -1);
+                            flip(i,j,digit);
+                            board[i][j] = (char)(digit+'0'+1);
+                            modified = true;
+                        }
+                    }
+                }
+            }
+
+        }
+        while (modified);
+        // end of pre fill
+        // find open spot
+        for (int i = 0;i <9 ;i++) {
+            for (int j =0;j < 9;j++) {
+                if (board[i][j] == '.') {
+                    spaces.add(new int[]{i,j});
+                }
+            }
+        }
+        dfs(board,0);
+
+    }
+    public  void dfs(char[][] board , int pos)   {
+        if (pos == spaces.size()) {
+            valid = true;
+            return;
+        }
+        int[] space = spaces.get(pos);
+        int i = space[0], j = space[1];
+        int  mask = ~(line[i] | column[j] | block[i/3][j/3]) & 0x1ff;
+        for  (;mask != 0 && !valid;mask &= (mask-1)) {
+            // find lowest number which can be put in sudoku
+            int digitMask = mask & (-mask);
+            int  digit = Integer.bitCount(digitMask -1);
+            flip(i,j,digit);
+            board[i][j] = (char)(digit+'0'+1);
+            dfs(board,pos+1);
+            flip(i,j,digit);
+        }
+    }
+}
