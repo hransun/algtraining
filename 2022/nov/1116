@@ -1,0 +1,20 @@
+https://leetcode.cn/problems/reducing-dishes/
+
+class Solution {
+    public int maxSatisfaction(int[] satisfaction) {
+        Arrays.sort(satisfaction);
+        int preSatisfactionSum = 0;
+        int result = 0;
+        for (int i = satisfaction.length-1;i >=0;i--) {
+            int  currentSatisfaction =  satisfaction[i];
+            if (currentSatisfaction + preSatisfactionSum >0) {
+                preSatisfactionSum += currentSatisfaction;
+                result += preSatisfactionSum;
+            } else {
+                break;
+            }
+        }
+        return result;
+
+    }
+}
