@@ -60,3 +60,34 @@ class BITree {
         return x & (-x);
     }
 }
+
+https://leetcode.cn/problems/profitable-schemes/
+
+class Solution {
+    // G total men,  at least P profits
+    public int profitableSchemes(int G, int P, int[] groups, int[] profits) {
+        int Mod = 1_000_000_007;
+        int N = groups.length;
+        int[][] counts = new int[G+1][P+1];
+        for (int g =0;g <=G;g++) {
+            counts[g][0] = 1;
+        }
+        for (int n = 0;n < N;n++) {
+            //loop each criminal group
+            int  group = groups[n], profit = profits[n];
+            for (int g = G;g>=group;g--) {
+                long count = counts[g][P];
+                for (int p =  Math.max(0,P-profit);p<= P;p++) {
+                    count += counts[g-group][p];
+                }
+                counts[g][P] = (int)(count % Mod);
+                for (int p = P-1;p >=profit;p--) {
+                    counts[g][p] = (counts[g][p] +  counts[g-group][p-profit]) % Mod;
+                }
+
+            }
+        }
+        return counts[G][P];
+
+    }
+}
