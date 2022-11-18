@@ -1,0 +1,62 @@
+https://leetcode.cn/problems/number-of-longest-increasing-subsequence/
+
+class Solution {
+    public int findNumberOfLIS(int[] nums) {
+        int N = nums.length;
+        int[] sort = nums.clone();
+        Arrays.sort(sort);
+        Map<Integer,Integer> map = new HashMap<>();
+        for (int i = 0;i < N;i++) {
+            map.put(sort[i], i+1);
+        }
+        BITree tree = new BITree(N);
+        for (int num: nums) {
+            int id = map.get(num); // id is the index of original array
+            int[] q  = tree.getSum(id-1) ;// before id lis and counter
+            tree.update(id,q[0]+1,q[1]) ;//  length and counter
+        }
+        return tree.getSum(N)[1];
+
+    }
+}
+
+class BITree {
+    int[] sums;
+    int[]  lens;
+    public BITree(int n) {
+        sums= new int[n+1];
+        lens = new int[n+1];
+    }
+
+    // x is  length of LIS, c is  counter
+    public void update(int id , int x , int c) {
+        for (int i = id;i < sums.length;i +=lowbit(i)) {
+            // lens[i] is original LIS  , x is current
+            if (lens[i]==x) {
+                sums[i] += c;
+            }
+            else if (lens[i] <  x) {
+                lens[i] = x;
+                sums[i] = c;
+            }
+        }
+    }
+
+    public  int[] getSum(int id) {
+        int x = 0; // LIS length
+        int c = 1; // counter
+        for (int i = id;i >=1;i-=lowbit(i)) {
+            if  (lens[i] > x) {
+                c = sums[i];
+                x = lens[i];
+            }  else if (lens[i] == x) {
+                c += sums[i];
+            }
+        }
+        return  new int[] {x,c};
+    }
+
+    public int  lowbit(int x) {
+        return x & (-x);
+    }
+}
