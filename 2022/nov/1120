@@ -36,3 +36,99 @@ class Solution {
         return pos;
     }
 }
+
+class Solution {
+    public void quickSort(int arr[],int[] index,
+                          int low,int high) {
+        int i = low;
+        int j = high;
+        //pivot
+        int temp = arr[i];
+        int tempIndex = index[i];
+        while (i < j) {
+            while (i < j && arr[j] >= temp) {
+                // stable index should be on right
+                if (arr[j] == temp && index[j] <  tempIndex) break;
+                j--;
+            }
+            if (i < j) {
+                index[i] =  index[j];
+                arr[i++] = arr[j]; // move small one to the left
+            }
+            while (i < j && arr[i] <= temp) {
+                if (arr[i] == temp && index[i] > tempIndex) break;
+                i++;
+            }
+            if (i < j) {
+                // switch big one to the right side
+                index[j] =index[i] ;
+                arr[j--] = arr[i];
+            }
+
+        }
+        arr[i] = temp;
+        index[i] = tempIndex;
+        // quick sort left
+        if (low < i-1) quickSort(arr,index,low,i-1);
+        // quick sort right
+        if (high > i+1 ) quickSort(arr,index,i+1,high);
+
+    }
+    public int oddEvenJumps(int[] A) {
+        int length = A.length,count = 1;
+        boolean[][] opt = new boolean[A.length][2];
+        int[][] pos = new int[length][2];
+        int[] newA = Arrays.copyOf(A,length),index= new int[length];
+        for (int i = 0; i < length; i++) {
+            index[i] = i;
+        }
+        // sort newA
+        quickSort(newA,index,0,length-1);
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 0; i < length; i++) {
+            // want to get increase stack, new value should less than top, otherwise pop
+            // looking for index bigger also value is bigger
+            while(!stack.isEmpty() && index[i] > stack.peek()) {
+                int cur = stack.pop();
+                // odd jump next position
+                pos[cur][0] = index[i];
+            }
+            stack.push(index[i]);
+        }
+
+        // prepare for even jump, decrease order
+        for (int i = 0; i < length; i++) {
+            newA[i] = A[i] * -1;
+            index[i] = i;
+        }
+        quickSort(newA,index,0,length-1);
+        for (int i = 0; i < length; i++) {
+            // want to get increase stack, new value should less than top, otherwise pop
+            // looking for index bigger also value is bigger
+            while(!stack.isEmpty() && index[i] > stack.peek()) {
+                int cur = stack.pop();
+                // odd jump next position
+                pos[cur][1] = index[i];
+            }
+            stack.push(index[i]);
+        }
+        //  dp
+        // last pos always can jump to
+        opt[length-1][0] = opt[length-1][1] = true;
+        for (int i = length-2; i >=0 ; i--) {
+            // get next pos from pos array
+            int nextPos =pos[i][0];
+            // set dp array[] [0] odd jump is ok or not
+            if (nextPos== length-1) opt[i][0] = true;
+            else if  (nextPos != -1) opt[i][0] = opt[nextPos][1];
+            if (opt[i][0]) count++;
+            nextPos = pos[i][1];
+            if (nextPos== length-1) opt[i][1] = true;
+            else if (nextPos!=-1)  opt[i][1] =  opt[nextPos][0];
+        }
+        return count;
+
+
+    }
+
+}
