@@ -132,3 +132,29 @@ class Solution {
     }
 
 }
+
+class Solution {
+    public int oddEvenJumps(int[] A) {
+        int length = A.length;
+        int count = 1;
+        boolean[] odd = new boolean[length];
+        boolean[] even = new boolean[length];
+        odd[length-1] = even[length-1] = true;
+        TreeMap<Integer,Integer> treemap = new TreeMap<>();
+        treemap.put(A[length-1],length-1);
+        for (int i = length-2;i >=0;i--) {
+            int v = A[i];
+            Map.Entry<Integer,Integer> higher = treemap.ceilingEntry(v);
+            if (higher != null) {
+                odd[i] = even[higher.getValue()];
+            }
+            Map.Entry<Integer,Integer> lower = treemap.floorEntry(v);
+            if  (lower != null) {
+                even[i] = odd[lower.getValue()];
+            }
+            if  (odd[i]) count++;
+            treemap.put(v,i);
+        }
+        return count;
+    }
+}
