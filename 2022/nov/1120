@@ -1,0 +1,38 @@
+https://leetcode.cn/problems/odd-even-jump/
+
+class Solution {
+    public int oddEvenJumps(int[] A) {
+
+        int count = 0;
+        for (int i = 0; i < A.length; i++) {
+            int curPos = i;
+            int step = 1;
+            while  (curPos< A.length -1) {
+                curPos = findTheNextPos(A,curPos,step % 2==1);
+                if (curPos == -1) break;
+                step++;
+            }
+            if  (curPos == A.length-1){
+                count++;
+            }
+
+        }
+        return count;
+
+    }
+    public int findTheNextPos(int[] A,int start,boolean isOdd) {
+        if (start == A.length-1) return  start;
+        int curValue = isOdd?Integer.MAX_VALUE:Integer.MIN_VALUE;
+        int pos = -1;
+        for (int i = start+1; i <A.length ; i++) {
+            if (isOdd && A[i]>=A[start] && A[i]<curValue) {
+                curValue=A[i];
+                pos = i;
+            } else if (!isOdd && A[i]<=A[start] && A[i]>curValue) {
+                curValue= A[i];
+                pos = i;
+            }
+        }
+        return pos;
+    }
+}
