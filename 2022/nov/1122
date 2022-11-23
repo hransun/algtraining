@@ -27,3 +27,38 @@ class Solution {
         return count;
     }
 }
+
+class Solution {
+    public int numSubmatrixSumTarget(int[][] matrix, int target) {
+        int count = 0;
+        // i, j start point
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                int[][] opt = new int[matrix.length][matrix[0].length];
+                //m,n end point and it could be the same point
+                for (int m = i; m < matrix.length; m++) {
+                    for (int n = j; n < matrix[i].length; n++) {
+                        if (m==i && n == j) {
+                            // start and end is the same
+                            opt[m][n] = matrix[m][n];
+                        }
+                        else if (m == i) {
+                            // same row
+                            opt[m][n] = opt[m][n-1] + matrix[m][n];
+                        } else if (n == j) {
+                            //same col
+                            opt[m][n] = opt[m-1][n] + matrix[m][n];
+                        } else {
+                            opt[m][n] = opt[m-1][n] + opt[m][n-1] - opt[m-1][n-1] + matrix[m][n];
+                        }
+                        if (opt[m][n] == target) count+=1;
+                    }
+
+                }
+
+            }
+
+        }
+        return count;
+    }
+}
