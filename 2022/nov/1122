@@ -62,3 +62,32 @@ class Solution {
         return count;
     }
 }
+
+
+class Solution {
+    public int numSubmatrixSumTarget(int[][] matrix, int target) {
+        int row = matrix.length, column = matrix[0].length,count = 0;
+        int[][] rowSum = new int[row][column]; // prefix sum
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                rowSum[i][j] = (j==0 ? 0: rowSum[i][j-1]) +matrix[i][j];
+            }
+        }
+        for (int l = 0; l < column; l++) { // window start column
+            for (int r = l; r < column; r++) { // window end column
+                Map<Integer,Integer> map = new HashMap<>(); // map cache previous matrix sum
+                map.put(0,1); //  calculate exact target
+                int windowSum =0;
+                for (int i = 0; i < row; i++) { // each row to increase
+                    int curRowSum = rowSum[i][r] - (l==0? 0 : rowSum[i][l-1]);
+                    windowSum += curRowSum; // cur windowsum
+                    count += map.getOrDefault(windowSum-target,0); // two sum q
+                    map.put(windowSum,map.getOrDefault(windowSum,0)+1); // add  cur sum to map
+                }
+            }
+
+        }
+        return count;
+
+    }
+}
