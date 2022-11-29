@@ -27,3 +27,34 @@ class Solution {
         return  true;
     }
 }
+
+class Solution {
+    public String longestPalindrome(String s) {
+        if (s == null || s.length() == 1) {
+            return s;
+        }
+        int n = s.length();
+        int maxLength = 1;
+        int left = 0;
+        char[] chars = s.toCharArray();
+        boolean[][] dp = new boolean[n][n]; // sub array start i ,  end j dp[i][j]
+        for (int  subLen = 1; subLen <=n;  subLen++) {
+            for (int i = 0; i + subLen-1 < n; i++) { // loop start point
+                int j = i + subLen -1; // end point because sublen including i and j
+                if (subLen == 1) {
+                    dp[i][j] = true;
+                } else if (subLen == 2) {
+                    dp[i][j] = (chars[i] == chars[j]);
+                } else {
+                    dp[i][j] = (chars[i] == chars[j] && dp[i+1][j-1] );
+                }
+                if (dp[i][j] && subLen > maxLength) {
+                    maxLength = subLen;
+                    left = i;
+                }
+            }
+        }
+        return new String(chars,left,maxLength);
+
+    }
+}
