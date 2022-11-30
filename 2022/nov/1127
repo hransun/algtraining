@@ -84,3 +84,60 @@ class Solution {
         return right - left -1; // right - left +1 - 2 (remove two pos of last loop which is not good)
     }
 }
+
+
+class Solution {
+    public String longestPalindrome(String s) {
+        char[] chars = s.toCharArray();
+        char[] newChars = preProcess(chars); // add chars to do manacher
+        int n = newChars.length;
+        int[] results = new int[n];
+        int center = 0;
+        int right =0;
+        for (int i = 1; i <n-1 ; i++) { // don't care first and last added char
+            int i_mirror = 2 * center - i; // i - center = center - i-mirror
+            if  (i < right) {
+               // 如果i不不超过右边界， results[i] 取 right – i 与 results[i_mirror] 的较⼩小值
+                // 因为实际是 I 为中心， 如果大就超过半径，右边界了
+                results[i] = Math.min(results[i_mirror],right - i );
+            } else results[i] = 0;
+
+            while (newChars[i + 1 + results[i]] == newChars[i-1-results[i]])
+                //以i为中⼼心， results[i]为半径再扩展⽐比对，并更更新results[i]
+                results[i]++;
+            //如果 i+result[i] 超过右边界，则更更新 center 和 right (拉⻋)
+            if (i + results[i] > right) {
+                center = i;
+                right = i +results[i];
+            }
+
+        }
+        int maxLen = 0;
+        int centerIndex  = 0;
+        for (int i = 1; i < n-1; i++) { // remove head and tail
+            if (results[i] >  maxLen) {
+                maxLen = results[i];
+                centerIndex = i;
+            }
+
+        }
+        int  start = (centerIndex - maxLen) /2;// because have  additional  chars 
+        return new String(chars,start,maxLen);
+
+
+    }
+    public char[] preProcess(char[] chars) {
+        int n = chars.length;
+        int index = 0;
+        char[] newChars = new char[2*n + 3];
+        newChars[index++] = '^';
+        for (int i = 0; i < n; i++) {
+            newChars[index++] = '#';
+            newChars[index++] = chars[i];
+        }
+        newChars[index++] = '#';
+        newChars[index++] = '$';
+        return newChars;
+
+    }
+}
