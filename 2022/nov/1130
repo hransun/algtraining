@@ -1,0 +1,21 @@
+https://leetcode.cn/problems/shortest-palindrome/
+
+class Solution {
+    public String shortestPalindrome(String s) {
+        char[] chars = s.toCharArray();
+        StringBuilder sb = new StringBuilder();
+        int length = chars.length;
+        for (int i = length-1; i >0 ; i--) {
+            if (isPalindrome(chars,0,i)) break;
+            sb.append(chars[i]);
+        }
+        return sb.append(s).toString();
+
+    }
+    public boolean isPalindrome(char[] chars,int start,int end) {
+        for (; start< end ; start++,end--) {
+            if (chars[start] != chars[end]) return false;
+        }
+        return true;
+    }
+}
