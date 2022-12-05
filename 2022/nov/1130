@@ -74,3 +74,57 @@ class Solution {
 
     }
 }
+
+// kmp
+class Solution {
+    public String shortestPalindrome(String s) {
+        if (s == null || s.length() <=1) return s;
+        char[] chars = s.toCharArray();
+        int n = chars.length;
+        int[] next = new int[n];
+        getNext(chars,next);
+        int i =  n -1;
+        int  longestIndex = 0; //找到最长前缀回文子串 再拼上所有后面的字符翻转
+        // s is pattern str and reverse s is the text str
+        // two pointers , i the last, longestIndex from start
+        while (i >=0 && longestIndex < n ) {
+            if (chars[i] == chars[longestIndex]) {
+                longestIndex++;
+                i--; // point to the next char to compare
+            } else {
+                if (next[longestIndex] == -1) {
+                    // start 
+                    i--;
+                    longestIndex=0;
+                } else {
+                    // use kmp find the next  char to compare
+                    longestIndex = next[longestIndex];
+                }
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        int m = n-1;
+        while (longestIndex<= m) {
+            sb.append(chars[m--]);
+        }
+        return sb.append(s).toString();
+
+
+    }
+    // next数组存放的是该位置 之前 的子串 最长前后缀重复长度
+    private void getNext(char[] pattern, int[] next) {
+        int j = 0; // suffix
+        int k = -1; //prefix
+        next[0] = -1; // 0位置前面没有字符了，所以默认存-1
+        int len = pattern.length;
+        while (j < len -1) { // j only increase not go backward
+            if (k == -1 || pattern[k] == pattern[j]) {
+                k++; // longest prefix
+                j++; // loop
+                next[j] = k; // prefix and  suffix the same length
+            } else {
+                k = next[k]; //使用next来找不匹配时的下一个移动位置
+            }
+        }
+    }
+}
