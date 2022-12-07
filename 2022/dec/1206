@@ -1,0 +1,48 @@
+https://leetcode.cn/problems/wildcard-matching/
+
+class Solution {
+    public boolean isMatch(String s, String p) {
+        // null and blank string case process
+        if (s == null || s == "") {
+            if (p == null || p == "") {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (p == null || p=="") {
+            return false;
+        }
+        char[] textChars = s.toCharArray();
+        char[] patternChars = p.toCharArray();
+        int m = textChars.length;
+        int n = patternChars.length;
+        // dp[m+1][n+1] s, p matching relations
+        boolean[][] dp =  new boolean[m+1][n+1];
+        // fill dp init values
+        dp[0][0] = true;
+        for (int i = 0;i <n;i++) {
+            if (patternChars[i] == '*') {
+                // dp[][] is previous char match condition
+                dp[0][i+1] = true;
+            } else {
+                break;
+            }
+        }
+        // dp for i , for j
+        for (int i = 1; i < m+1; i++) {
+            for (int j = 1; j < n+1 ; j++) {
+                // dp func ? , * , patter[j] == s[i] or not
+                if (textChars[i-1] == patternChars[j-1] || patternChars[j-1]=='?') {
+                    dp[i][j] = dp[i-1][j-1];
+                } else if (patternChars[j-1] == '*') {
+                    dp[i][j] = dp[i][j-1] || dp[i-1][j]; // not match * or match *
+                }
+
+            }
+
+        }
+        return dp[m][n];
+
+
+    }
+}
