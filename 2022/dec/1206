@@ -46,3 +46,73 @@ class Solution {
 
     }
 }
+
+
+class Solution {
+    public boolean isMatch(String s, String p) {
+        // null and blank string case process
+        if (s == null || s == "") {
+            if (p == null || p == "") {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (p == null || p=="") {
+            return false;
+        }
+        char[] textChars = s.toCharArray();
+        char[] patternChars = p.toCharArray();
+        //2.双指针逆序尾部⽐比对(结束条件:字符不不匹配、遇到*、超过起始)
+        int sRight = textChars.length -1; // original string from end
+        int pRight = patternChars.length -1; // pattern string from end
+        while (sRight >=0 && pRight >=0 && patternChars[pRight] != '*') {
+            if (textChars[sRight] == patternChars[pRight] ||
+            patternChars[pRight] == '?') {
+                sRight--;
+                pRight--;
+            } else {
+                return false;
+            }
+        }
+        //3.若p到达起始位置之前，只有s也到达起始位置之前才匹配，否则不不匹配
+        if (pRight < 0) {
+            return sRight <0;
+        }
+
+        //4.双指针正序头部⽐比对(结束条件:有⼀一个到达右指针、匹配不不成功)
+        int sLeft =0;
+        int pLeft = 0;
+        int sRecord = -1; // 回溯指针
+        int pRecord = -1;
+        while (sLeft <=sRight && pLeft<=pRight) {// left and right pointer not meet
+            if (patternChars[pLeft] == '*') {
+                // 4.1 若p中为*，按照空字符尝试匹配，p指针右移，记录p、s的回溯位置
+                pLeft++;
+                sRecord=sLeft; // back track text string does not move
+                pRecord=pLeft; // back track pattern alwasy move right, pleft
+            } else if (patternChars[pLeft]== '?' || textChars[sLeft]==patternChars[pLeft]) {
+                // 4.2 否则若双字符指针匹配或者p中字符为?，双指针右移
+                sLeft++;
+                pLeft++;
+            } else if (sRecord != -1 && sRecord+1 <=sRight) {
+                // 4.3 否则若可回溯，则尝试将*多匹配⼀一个字符
+                // sRecord is a valid pointer and sRecord not meet the sRight
+                sRecord++;
+                sLeft=sRecord;
+                pLeft=pRecord;
+            } else {
+                return false;
+            }
+        }
+        //5.剩余检查:验证p剩余字符是否全为 *，否则匹配不不成功
+        for (int i = pLeft; i <=pRight ; i++) {
+            if (patternChars[i]!='*') {
+                return false;
+            }
+        }
+        return true;
+
+
+
+    }
+}
