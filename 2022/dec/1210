@@ -1,0 +1,36 @@
+https://leetcode.com/problems/plus-one-linked-list/
+
+class Solution {
+    public ListNode plusOne(ListNode head) {
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode i = dummy; // loop the list
+        ListNode j = dummy; // point to the node before last 9
+        while (i.next != null) {
+            i = i.next; // that's why i.next can not be null
+            if (i.val != 9) {
+                j = i;
+            }
+        }
+        // i reach end of the list, j is b4 last 9
+        if (i.val !=9) {
+            i.val++;
+        } else {
+            // increase node b4 last 9 , actually after j all 9s
+            j.val++;
+            j = j.next;
+            while (j != null) {
+                j.val = 0;
+                j = j.next;
+            }
+
+        }
+
+        if (dummy.val == 0) {
+            return dummy.next;
+        }
+        // dummy already increase and it's hold carry pos
+        return dummy;
+
+    }
+}
