@@ -1,2 +1,47 @@
 https://leetcode.com/problems/4sum/
 
+class Solution {
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        Arrays.sort(nums);
+        List<List<Integer>> result = new ArrayList();
+        int n = nums.length;
+        for (int x = 0;x < n-3;x++) {// fix first element
+        // de duplicate of first element
+        if (x !=0 && nums[x]== nums[x-1]) continue;
+            for (int y = x+1 ;y < n-2;y++) { // fix 2nd element
+            // de duplicate
+            if (y != x+1 && nums[y] == nums[y-1]) continue;
+                // 2sum 2 pointers solution
+                int j = x+1;
+                int k = n-1;
+                while (j < k) {
+                    int sum = nums[x] + nums[y] + nums[j] + nums[k];
+                    
+                    if ( sum == target) {
+                        // add x, y, j, k to a temp list
+                        ArrayList<Integer> temp = new ArrayList();
+                        temp.add(nums[x]);
+                        temp.add(nums[y]);
+                        temp.add(nums[j]);
+                        temp.add(nums[k]);
+                        result.add(temp);
+                        j++;
+                        k--;
+                        // j , k duplicate
+                        while (j < k && nums[j] == nums[j-1]) j++;
+                        while (j < k && nums[k]== nums[k+1]) k--;
+
+                    }
+                    else if (sum > target) {
+                        k--;
+                    }
+                    else if (sum < target) {
+                        j++;
+                    }
+                }
+
+            }
+        }
+        return result;
+    }
+}
