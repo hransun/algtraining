@@ -1,0 +1,24 @@
+
+https://leetcode.com/problems/top-k-frequent-elements/submissions/870053014/
+
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        Map<Integer,Integer> map = new HashMap<>();
+        //  counter
+        for (int num:nums) {
+            map.put(num,map.getOrDefault(num,0)+1);
+        }
+        // lamda func to define comparator for heap.
+        Queue<Integer> heap = new PriorityQueue<>((n1, n2) -> map.get(n1) - map.get(n2));
+        for (int n:map.keySet()) {
+            heap.add(n);
+            if (heap.size()>k) heap.poll();
+        }
+        int[] rst = new int[k];
+        for (int i = k-1;i >=0 ;i--) {
+            rst[i] = (int)heap.poll();
+        }
+        return rst;
+        
+    }
+}
