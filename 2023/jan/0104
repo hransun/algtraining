@@ -1,0 +1,32 @@
+https://leetcode.com/problems/candy/
+
+class Solution {
+    public int candy(int[] ratings) {
+        int[] rst = new int[ratings.length];
+        for (int i =0;i < rst.length;i++) {
+            rst[i] = 1;
+        }
+
+        // cycle from left 
+        for (int i=1;i < rst.length;i++) {
+            if (ratings[i] > ratings[i-1])  {
+                rst[i] = rst[i-1]+1;
+            }
+        }
+
+        // cycle from right
+        // we need to calculate i = 0 .
+        for(int i = rst.length-2;i>=0;i--) {
+            if (ratings[i] > ratings[i+1]) {
+                rst[i] = Math.max(rst[i],rst[i+1]+1);
+            }
+        }
+
+        int sum = 0;
+        for (int i:rst) {
+            sum+= i;
+        }
+        return sum;
+        
+    }
+}
