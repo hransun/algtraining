@@ -1,0 +1,43 @@
+https://leetcode.com/problems/sort-transformed-array/
+
+class Solution {
+    private int transform(int x, int a, int  b , int c) {
+        return (a * x * x) + (b* x ) + c;
+    }
+    public int[] sortTransformedArray(int[] nums, int a, int b, int c) {
+        int[] answer =  new int[nums.length];
+        int left = 0, right = nums.length - 1;
+        int index = a >= 0 ? right: 0;
+
+        if (a < 0) { // get the min value
+            while (left <= right) {
+                int leftTransformedVal = transform(nums[left], a, b, c);
+                int rightTransformedVal = transform(nums[right], a, b, c);
+                if (leftTransformedVal < rightTransformedVal) {
+                    answer[index++] = leftTransformedVal;
+                    left++;
+                } else {
+                    answer[index++] = rightTransformedVal;
+                    right--;
+                }
+            }
+        }
+        else { // a > 0 , get max value
+                while (left <= right) {
+                    int leftTransformedVal = transform(nums[left], a, b, c);
+                    int rightTransformedVal = transform(nums[right], a, b, c);
+                    if (leftTransformedVal < rightTransformedVal) {
+                        answer[index--] = rightTransformedVal;
+                        right--;
+                    } else {
+                        answer[index--] = leftTransformedVal;
+                        left++;
+                    }
+                }
+
+            }
+        return answer;
+
+        
+    }
+}
