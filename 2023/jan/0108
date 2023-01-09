@@ -32,6 +32,32 @@ class Solution {
 
 https://leetcode.com/problems/russian-doll-envelopes/
 
+class Solution {
+    public int maxEnvelopes(int[][] envelopes) {
+        // coner case
+        if (envelopes == null ||envelopes.length == 0 ) return 0;
+        // sort the array
+        // ascending by x ,  decending by y
+        Arrays.sort(envelopes,(a,b)-> a[0]!= b[0]? a[0] - b[0]:b[1] - a[1]);
+        // dp init
+        int[] dp = new int[envelopes.length];
+        Arrays.fill(dp,1);
+        int rst = 1;
+        // dp formula
+        for (int i = 1; i <dp.length ; i++) {
+            for (int j = 0; j < i; j++) {
+                // width , height all large than
+                if (envelopes[i][0] > envelopes[j][0] && envelopes[i][1] > envelopes[j][1]) {
+                    dp[i] = Math.max(dp[i],dp[j] + 1);
+                }
+
+            }
+            rst = Math.max(rst,dp[i]);
+        }
+        return rst;
+    }
+}
+
 leetcode 366
 
 
