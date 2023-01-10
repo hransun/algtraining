@@ -61,5 +61,53 @@ class Solution {
 leetcode 366
 https://leetcode.com/problems/find-leaves-of-binary-tree/
 
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<List<Integer>> findLeaves(TreeNode root) {
+        List<List<Integer>> leaves = new ArrayList<>();
+        Map<TreeNode,Integer> nodeToDepth = new HashMap<>();
+        computeDepths(root,nodeToDepth);
+        int maxDepth = 0;
+        for (int depth: nodeToDepth.values()) {
+            maxDepth = Math.max(maxDepth,depth);
+        }
+        for (int i = 0; i < maxDepth+1; i++) {
+            leaves.add(new ArrayList<>());
+        }
+        for (Map.Entry<TreeNode,Integer> entry:nodeToDepth.entrySet()) {
+            leaves.get(entry.getValue())
+            .add(entry.getKey().val);
+        }
+        return leaves;
+        
+    }
+    // get the height/depth of the node and save it to nodeToDepth map
+    public int computeDepths(TreeNode node, Map<TreeNode,Integer> nodeToDepth) {
+        if (node == null) {
+            return -1;
+        }
+        int  leftDepth = computeDepths(node.left,nodeToDepth);
+        int rightDepth = computeDepths(node.right,nodeToDepth);
+        int depth = 1+ Math.max(leftDepth,rightDepth);
+        //before return save it  to the map
+        nodeToDepth.put(node,depth);
+        return depth;
+    }
+}
+
 
 
