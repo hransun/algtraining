@@ -1,1 +1,51 @@
 leetcode 272
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<Integer> closestKValues(TreeNode root, double target, int k) {
+        // create result
+        List<Integer> result = new ArrayList<>();
+        PriorityQueue<Integer> pq = new PriorityQueue<>((o1,o2)->(Math.abs(o1 - target) - Math.abs(o2 - target) >0 ? -1:1));
+
+        // during in order loop add k elements  to  PriorityQueue
+        inorder(root,target,k,pq);
+        // add queue element to  the result
+        while(!pq.isEmpty()) {
+            result.add(pq.poll());
+        }
+
+        // return result
+        return result;
+        
+    }
+
+    private void inorder(TreeNode root, double target, int k, PriorityQueue<Integer> heap) {
+        // in order iter the tree
+        if (root == null) return;
+        inorder(root.left,target,k,heap);
+        if  (heap.size() < k) {
+            heap.offer(root.val);
+        } else if (Math.abs((double)root.val - target) < Math.abs((double)heap.peek() - target)) {
+            heap.poll();
+            heap.offer(root.val);
+
+        }
+        inorder(root.right,target,k,heap);
+        
+}
+}
+leetcode 333
