@@ -1,3 +1,37 @@
 https://leetcode.com/problems/longest-consecutive-sequence/
 
+/**
+ * This code uses a HashSet to store the elements of the input array,
+ * which allows for O(1) lookups to check whether a given number is in the set.
+ * The outer loop iterates through the input array, and for each number
+ * it checks whether the number immediately before it is in the set.
+ * If it is not, then the current number is the start of a new sequence.
+ * The inner loop then iterates through the consecutive numbers,
+ * adding 1 to the current sequence length for each number that is in the set.
+ * The final result is the maximum sequence length found throughout the input array.
+ */
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        HashSet<Integer> set = new HashSet<>();
+        for (int num:nums) set.add(num);
+
+        int result = 0;
+        for (int num: nums) {
+            if (!set.contains(num-1)) {
+                // cur number is the start of seq
+                int cur = num;
+                int  curSequence = 1;
+                while (set.contains(cur+1)) {
+                    cur++;
+                    curSequence++;
+                }
+                result = Math.max(result,curSequence);
+            }
+
+        }
+        return result;
+    }
+}
+
+
 https://leetcode.com/problems/number-of-islands-ii/
