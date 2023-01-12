@@ -49,3 +49,69 @@ class Solution {
 }
 }
 leetcode 333
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+
+
+
+/**
+ * This solution uses a post-order traversal of the binary tree to find the largest subtree that is a valid BST.
+ * The function largestBSTSubtree takes as input the root of a binary tree, and it returns the size of the largest subtree that is a valid BST.
+ *
+ * It starts by initializing a variable maxSize to store the maximum size of the largest subtree that is a valid BST.
+ *
+ * The function isBST takes as input a tree node and returns an integer array of size 3 which contains the size of the subtree, the minimum value in the subtree, and the maximum value in the subtree.
+ *
+ * We traverse the tree in post-order fashion and for every visited node, recursively get the size of largest BST in left and right subtrees of the node. The returned value of the subtrees is an array which contains size of the largest BST, the minimum value and the maximum value in those subtrees.
+ *
+ * When we combine the left and right subtree and make sure that the current node is greater than max value of left subtree and smaller than min value of right subtree. We update the maximum size of BST found so far.
+ *
+ * The time complexity is O(n) because each node is visited once in the tree and the space complexity is O(h) where h is the height of the tree.
+ *
+ * It is important to note that this approach will not work if the tree is not a binary tree, if the tree have duplicate values.
+ */
+class Solution {
+    // global value to return
+    int maxSize =0;
+    public int largestBSTSubtree(TreeNode root) {
+        if (root == null) return 0;
+        isBST(root);
+        return maxSize;
+        
+    }
+
+    private int[] isBST(TreeNode root) {
+        // recursion
+        // 3 elements , size, min value, max value
+        if (root == null) return new int[] {0,Integer.MAX_VALUE,Integer.MIN_VALUE};
+        // post order iteration
+        int[] left = isBST(root.left);
+        int[] right = isBST(root.right);
+        // what if not bst , 0 element is for size, 1 is min, 2 is max
+        if (left[0] == -1 || right[0] == -1 || root.val <= left[2] || root.val >=right[1]) {
+            // less than left or larget than right is not bst
+            return new int[] {-1,Integer.MAX_VALUE,Integer.MIN_VALUE};
+
+        }
+        int size = 1+ left[0] + right[0]; // 0 element is the size of bst
+        maxSize = Math.max(size,maxSize);
+        return new int[] {size , Math.min(root.val,left[1]), Math.max(root.val,right[2])};
+
+        // what if is bst
+    }
+}
