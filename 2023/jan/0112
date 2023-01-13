@@ -35,3 +35,64 @@ class Solution {
 
 
 https://leetcode.com/problems/number-of-islands-ii/
+
+class Solution {
+    int[][] dirs = {{1,0},{-1,0},{0,1},{0,-1}};
+    int m, n ;
+    public List<Integer> numIslands2(int m, int n, int[][] positions) {
+        List<Integer> res = new ArrayList<>();
+        this.m = m;
+        this.n = n;
+        int[] roots = new int[m*n];//union find root for each element
+        Arrays.fill(roots,-1);
+
+        int count = 0;
+        // all island is 1 and  its own root
+        for (int[] pos : positions) {
+            int root = n * pos[0] + pos[1];
+            if  (roots[root] != -1) {
+                res.add(count);
+                continue;
+            }
+            roots[root] = root;
+            count++;
+             // 4  dir union find
+            for (int[] dir : dirs) {
+                int x = pos[0] + dir[0];
+                int y = pos[1] + dir[1];
+                int nb =  n * x + y;
+                if ( x < 0 ||  y <0 || x >=m ||  y >=n || roots[nb] == -1) continue;
+                // if it's 1
+                int rootNb = findIsland(roots,nb);
+                if (root !=  rootNb) {
+                    roots[root] = rootNb;
+                    count--;
+                    root = rootNb;
+                }
+            }
+            res.add(count);
+        }
+        return res;
+        
+    }
+
+    private int findIsland(int[] roots, int id) {
+        while (id != roots[id]) {
+            roots[id] = roots[roots[id]]; // path compress
+            id = roots[id];
+
+        }
+        return id;
+    }
+}
+/**
+In this problem we are given a set of positions, and for each position we will make it an island by adding it to our Union-Find data structure. We then check if any of the islands are connected by checking its neighbours, if the neighbour has a parent, we will add the new island to the parent of the neighbour island, thus reducing the number of islands.
+
+We are maintaining a roots array where each element is a parent of an island. If an island is not connected to any other island, it is its own parent.
+
+We are also keeping a count variable, which will store the number of distinct islands.
+
+In the end, we are returning the list of number of islands after each operation.
+
+The time complexity of this algorithm is O(k*log(mn)), where k is the number of positions, and mn is the number of cells in the grid.
+*/
