@@ -54,4 +54,130 @@ class Solution {
 
 https://leetcode.com/problems/word-ladder-ii/
 
+import java.util.*;
+
+//leetcode submit region begin(Prohibit modification and deletion)
+class Solution {
+    public List<List<String>> findLadders(String beginWord, String endWord, List<String> wordList) {
+        // save the result
+        List<List<String>> result = new ArrayList<>();
+        // add all dict word to the set
+        Set<String> dict = new HashSet<>(wordList);
+        if (!dict.contains(endWord)) return result;
+        dict.remove(beginWord);
+        //dict.add(endWord); // why
+        /**
+         * Additionally, a hash map can be used to store the parent of a transformed word,
+         * which can be used to trace back the path of transformations.
+         */
+        Map<String,List<String>> parentMap = new HashMap<>();
+        Queue<String> queue = new LinkedList<>();
+        queue.offer(beginWord);
+        boolean   found = false;
+        // bfs
+        while(!queue.isEmpty()) {
+            int size = queue.size();
+            Set<String> currentLevelWords = new HashSet<>(); // why
+            /**
+             * n the BFS algorithm, currentLevelWords is a set of words
+             * that were visited in the current level of the BFS.
+             * This set is used to keep track of which words have already
+             * been visited in the current level, so that they are not revisited in the same level.
+             *
+             * At the beginning of each iteration of the while loop, all the words in the queue are at the same level,
+             * and we want to find all the words that can be reached from those words in one step.
+             * To do this, we iterate over all the words in the queue, and for each word,
+             * we generate all possible words that can be formed by changing one letter.
+             * If the generated word is in the word list, we add it to the currentLevelWords set,
+             * and if it is not in the set, we add it to the queue for the next level.
+             *
+             * Once all the words in the current level have been visited,
+             * we remove them from the word list, so that they are not visited again.
+             * This is done by calling dict.removeAll(currentLevelWords),
+             * which removes all the words in the currentLevelWords set from the word list.
+             *
+             * By doing this, we ensure that we only visit each word once
+             * and that we only visit words that can be reached in the current level.
+             * This way, we can find the shortest path from the beginWord to the endWord.
+             */
+            for (int i =0;i < size;i++) {
+                String curr = queue.poll();
+                for (int j = 0; j < curr.length(); j++) {
+                    char[] currChars = curr.toCharArray();
+                    for (char c ='a';c <= 'z';c++) {
+                        currChars[j] = c; // replace every char from a - z
+                        String newWord = new String(currChars);
+                        if (dict.contains(newWord)) {
+                            // add neibours
+                            currentLevelWords.add(newWord);
+                            if (!parentMap.containsKey(newWord)) {
+                                parentMap.put(newWord,new ArrayList<>());
+                            }
+                            // newword 's parrent is curr
+                            parentMap.get(newWord).add(curr);
+                            if (newWord.equals(endWord)) {
+                                // found the end word and done
+                                found = true;
+                            }
+                        }
+                    }
+                }
+            }
+            if (found) {
+                break;
+            }
+            dict.removeAll(currentLevelWords); // why only visit word once
+            queue.addAll(currentLevelWords); // why already found list
+        }
+        dfs(result,new ArrayList<>(),endWord,beginWord,parentMap);
+        return result;
+
+
+        
+    }
+
+    /**
+     *The main reason for using DFS in this case is that it allows us to explore
+     *  all possible paths from the start word to the end word.
+     *  Since we are looking for all possible paths,
+     *  we want to explore all branches of the search tree.
+     *  DFS is a good choice for this because it explores all the branches of a tree
+     *  by going deep into the tree before exploring other branches.
+     *
+     * DFS also uses less memory than BFS because it does not need to keep track
+     * of all the nodes at each level like BFS does.
+     * In DFS we only need to keep track of the current path and the visited nodes,
+     * which makes it more memory efficient.
+     *
+     * Additionally, DFS is also simpler to implement,
+     * it is easy to write a function that recursively explores all the children of a node,
+     * and this is very useful to find all paths.
+     *
+     * Finally, by using a DFS traversal on the parentMap,
+     * we can construct all the paths from the endWord to beginWord
+     * and we can reverse them to get all the paths from beginWord to endWord.
+     */
+    private void dfs(List<List<String>> result,List<String> path,String curr,String start,
+                     Map<String,List<String>> parentMap) {
+        // from  end to start
+        path.add(0,curr);
+        if (curr.equals(start)) {
+            result.add(new ArrayList<>(path)); // add one path
+        } else {
+            if (parentMap.get(curr)!= null) {
+                List<String> parents = parentMap.get(curr); // why
+                for (String parent: parents) {
+                    dfs(result,path,parent,start,parentMap);
+                }
+
+            }
+
+        }
+        path.remove(0); // why
+
+    }
+}
+//leetcode submit region end(Prohibit modification and deletion)
+
+
 
