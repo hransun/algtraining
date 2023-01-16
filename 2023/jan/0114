@@ -4,20 +4,84 @@ https://leetcode.com/problems/interleaving-string/
 
 
 
+//leetcode submit region begin(Prohibit modification and deletion)
+
+/**
+ * This solution uses dynamic programming to check if s3 is an interleaving of s1 and s2.
+ * It uses a 2D boolean array dp with dimensions (m+1)x(n+1) where m is the length of s1
+ * and n is the length of s2.
+ * The boolean value dp[i][j] is true if s3[0...i+j-1] is an interleaving of s1[0...i-1] and s2[0...j-1].
+ *
+ * It first checks if the length of s1 + s2 is equal to the length of s3, if not return false.
+ * Then it initializes all the base cases and fills the rest of the dp array
+ * with the above mentioned logic and returns dp[m][n] which is the final result.
+ *
+ * It has a time complexity of O(mn) and space complexity of O(mn)
+ */
+class Solution {
+    public boolean isInterleave(String s1, String s2, String s3) {
+        if (s1.length() + s2.length() != s3.length()) return false;
+        boolean[][] dp = new boolean[s1.length()+1][s2.length()+1];
+        // i, j do not select empty string so  still  match
+        dp[0][0] = true;
+        /**
+        This loop is initializing the first column of the 2D boolean array dp.
+
+Here, i is the index for the string s1 and 0 is the index for the string s2. The loop starts from index 1 and goes till the end of the string s1.
+
+The value of dp[i][0] is set to the value of dp[i-1][0] ANDed with the comparison of the character at the index i-1 of s1 and the character at the index i-1 of s3.
+
+The dp[i-1][0] represents the substring of s1 and s3 until the i-1 index of s1 and s3. The comparison s1.charAt(i - 1) == s3.charAt(i - 1) checks if the current character of s1 and s3 are equal or not.
+
+This loop is used to initialize the first column of dp array with the values that are true if the characters of s1 and s3 are equal at the same index.
+
+So, this for loop helps in keeping track of the substring of s1 and s3 that are interleaved and updating the dp array accordingly.
+         */
+        for (int i = 1;i < s1.length()+1;i++) {
+            // not select s2 only compare s1 and s3
+            dp[i][0] = dp[i-1][0] && s1.charAt(i-1) == s3.charAt(i-1);
+        }
+
+        for (int j = 1; j < s2.length()+1; j++) {
+            dp[0][j] =  dp[0][j-1] && s2.charAt(j-1) == s3.charAt(j-1);
+        }
+
+        // compare s1 , s2 , s3 at i , j  , i+j
+        /**
+         * This nested for loop is used to fill the rest of the elements of the 2D boolean array dp after initializing the first column in the first for loop and first row in the second for loop.
+         *
+         * The outer loop iterates over the s1 string and the inner loop iterates over the s2 string.
+         *
+         * The value of dp[i][j] is set to the value of the OR operation of the following two conditions:
+         *
+         * dp[i-1][j] && s1.charAt(i-1)==s3.charAt(i+j-1)
+         * dp[i][j-1] && s2.charAt(j-1)==s3.charAt(i+j-1)
+         * The first condition checks if dp[i-1][j] is true and the characters at the index i-1 of s1 and i+j-1 of s3 are equal. If both these conditions are true, then the substring of s1 and s3 till index i-1 of s1 and i+j-1 of s3 is interleaved.
+         *
+         * The second condition checks if dp[i][j-1] is true and the characters at the index j-1 of s2 and i+j-1 of s3 are equal. If both these conditions are true, then the substring of s2 and s3 till index j-1 of s2 and i+j-1 of s3 is interleaved.
+         *
+         * The OR operation combines these two conditions and assigns the final value to dp[i][j].
+         *
+         * So, this nested for loop helps in keeping track of the substring of s1, s2 and s3 that are interleaved and updating the dp array accordingly.
+         *
+         * This nested for loop has a time complexity of O(m*n) where m is the length of s1 and n is the length of s2.
+         */
+        for (int i =1;i < s1.length()+1;i++) {
+            for  (int j =1;j < s2.length()+1;j++) {
+                dp[i][j] = dp[i-1][j] && s1.charAt(i-1) ==  s3.charAt(i+j-1) ||
+                        dp[i][j-1] && s2.charAt(j-1) == s3.charAt(i+j-1);
+            }
+        }
+        return dp[s1.length()][s2.length()];
+    }
+}
+//leetcode submit region end(Prohibit modification and deletion)
+
+
+
+
 
 
 https://leetcode.com/problems/alien-dictionary/
 
 
-
-
-https://leetcode.com/problems/course-schedule-ii/
-
-
-
-
-https://leetcode.com/problems/trapping-rain-water-ii/
-
-
-
-https://leetcode.com/problems/shortest-distance-from-all-buildings/
