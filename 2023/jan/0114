@@ -84,4 +84,88 @@ So, this for loop helps in keeping track of the substring of s1 and s3 that are 
 
 https://leetcode.com/problems/alien-dictionary/
 
+/**
+ * This solution uses a topological sort algorithm to order the characters of the alien language
+ * based on the given order of words. The solution first builds a directed graph
+ * where each character is a node and there is an edge from one character to another
+ * if the first character comes before the second character in the given order of words.
+ * Then it uses a queue to perform a topological sort on the graph,
+ * starting with the nodes with zero indegrees. If at the end,
+ * the length of the final string is not equal to the number of unique characters in the graph,
+ * it returns an empty string, indicating that the given order of words is not valid.
+ */
+class Solution {
+    public String alienOrder(String[] words) {
+        // is a graph  adj list
+        Map<Character, Set<Character>> graph = new HashMap<>();
+        int[] indegree = new int[26];
+        buildGraph(words,graph,indegree);
+        // resolve the test case ['abc','ab']
+        for (int i = 1; i < words.length ; i++) {
+            if (  words[i-1].length() > words[i].length() && words[i-1].startsWith(words[i])) return "";
+
+        }
+        return  topologicalSort(graph,indegree);
+        
+    }
+
+    // build graph
+    private void buildGraph(String[] words,Map<Character,Set<Character>>
+            graph,int[] indegree) {
+        for (String word:words) {
+            for (char c : word.toCharArray()) {
+                graph.put(c, new HashSet<>());
+            }
+        }
+        for (int i = 1; i < words.length ; i++) {
+            String first = words[i-1];
+            String second = words[i];
+            int length = Math.min(first.length(),second.length());
+            for (int j = 0; j < length; j++) {
+                char parent = first.charAt(j);
+                char child = second.charAt(j);
+                if (parent != child) {
+                    // add line from first to the second
+                    if (!graph.get(parent).contains(child)) {
+                        graph.get(parent).add(child);
+                        indegree[child-'a']++;
+                    }
+                    break;// we already find the diff  don't need to continue
+
+                }
+
+            }
+
+
+        }
+
+    }
+
+    // use bfs
+    private String topologicalSort(Map<Character,Set<Character>> graph,
+                                   int[] indegree) {
+        StringBuilder sb = new StringBuilder();
+        Queue<Character> q = new LinkedList<>();
+        for  (char c : graph.keySet()) {
+            if  (indegree[c-'a'] == 0) {
+                q.offer(c);
+            }
+        }
+        while (!q.isEmpty()) {
+            char   current = q.poll();
+            sb.append(current);
+            for (char child: graph.get(current)) {
+                indegree[child - 'a']--;
+                if (indegree[child-'a']==0) {
+                    q.offer(child);
+                }
+            }
+        }
+        if (sb.length() != graph.size()) {
+            return "";
+        }
+        return  sb.toString();
+    }
+}
+
 
