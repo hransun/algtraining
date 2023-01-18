@@ -55,6 +55,72 @@ time (v+e) , space (v+e)
 
 https://leetcode.com/problems/trapping-rain-water-ii/
 
+import java.util.PriorityQueue;
+
+//leetcode submit region begin(Prohibit modification and deletion)
+class Cell {
+    int r, c, height; // long, width,height
+    Cell(int r, int c,int  height) {
+        this.r = r;
+        this.c = c;
+        this.height = height;
+    }
+}
+class Solution {
+    public int trapRainWater(int[][] heightMap) {
+        // trap rain  water I : find left, right max and get the min of them.
+        // loop the array  calculate  diff of each elemen and min value. added  up.
+        if (heightMap == null || heightMap.length == 0 || heightMap[0].length == 0) {
+            return 0;
+        }
+
+        PriorityQueue<Cell> minHeap = new PriorityQueue<Cell>((a,b) -> a.height - b.height);
+        int m = heightMap.length, n = heightMap[0].length;
+        boolean[][] visited = new boolean[m][n];
+
+        // add all the edges
+        for (int i = 0; i < m; i++) {
+            visited[i][0] = visited[i][n-1] = true;
+            minHeap.offer(new Cell(i,0,heightMap[i][0]));
+            minHeap.offer(new Cell(i,n-1,heightMap[i][n-1]));
+        }
+        for (int i = 0;i < n;i++) {
+            visited[0][i] = visited[m-1][i] = true;
+            minHeap.offer(new Cell(0,i,heightMap[0][i]));
+            minHeap.offer(new Cell(m-1,i,heightMap[m-1][i]));
+        }
+
+        int[] dx = {0,-1,0,1};
+        int[] dy = {1,0,-1,0};
+        int res = 0;
+
+        // run heap
+        while(!minHeap.isEmpty()) {
+            Cell cell = minHeap.poll();
+            for (int i = 0; i < 4; i++) {
+                int r = cell.r + dx[i];
+                int  c = cell.c + dy[i];
+                if ( r <0 || r>= m || c < 0 || c >= n || visited[r][c]) {
+                    continue;
+                }
+                visited[r][c] = true;
+                res += Math.max(0, cell.height - heightMap[r][c]);
+                /**
+                 * we are adding the neighbor cell to the heap with the maximum height
+                 * between the current height of the neighbor and the height of
+                 * the cell that was just removed from the heap.
+                 */
+                // only neighbor high than center can hold water.
+                minHeap.offer(new Cell(r,c,Math.max(heightMap[r][c],cell.height)));
+            }
+        }
+        return res;
+        
+    }
+}
+//leetcode submit region end(Prohibit modification and deletion)
+
+
 
 
 https://leetcode.com/problems/shortest-distance-from-all-buildings/
