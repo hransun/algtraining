@@ -7,6 +7,73 @@ https://leetcode.com/problems/implement-rand10-using-rand7/description/
 321
 https://leetcode.com/problems/create-maximum-number/
 
+class Solution {
+    public int[] maxNumber(int[] nums1, int[] nums2, int k) {
+        int[] maxNum = new int[k];
+        for (int i = Math.max(0,k - nums2.length); i <= Math.min(k,nums1.length) ; i++) {
+            // start : i = 0 or k big than all size of nums2,
+            // end : i < k and i < nums1 size
+            int[] candidate = merge(getMaxArray(nums1,i),getMaxArray(nums2,k-i),k);
+            if (isGreater(candidate,0,maxNum,0)) {
+                maxNum = candidate;
+            }
+
+        }
+        return  maxNum;
+    }
+
+    private int[] merge(int[] nums1,int[] nums2,int k) {
+        int[] res = new int[k];
+        for (int i = 0, j=0, r=0; r < k ; r++) {
+            res[r] = isGreater(nums1,i,nums2,j) ?nums1[i++]:nums2[j++];
+            
+        }
+        return res;
+
+    }
+
+    private boolean isGreater(int[] nums1, int i, int[] nums2,int j) {
+        while (i < nums1.length && j < nums2.length && nums1[i] == nums2[j]) {
+            i++;
+            j++;
+        }
+        return j == nums2.length || (i < nums1.length && nums1[i] > nums2[j]);
+
+    }
+
+    private int[] getMaxArray(int[] nums,int k) {
+        /**
+         * The getMaxArray() function is a helper function that is used to get the maximum number that can be created using k digits from a given array. The function takes in two parameters: an array of integers, nums, and an integer, k, which represents the number of digits to be used to create the maximum number.
+         *
+         * The function starts by initializing an empty array, res, of size k to store the maximum number.
+         *
+         * Then, it uses two pointers, i and j, to iterate through the input array, nums. The pointer i iterates through all the elements of the input array, while the pointer j keeps track of the current position in the res array.
+         *
+         * For each element in the input array, the function first checks if the remaining elements in the input array are enough to fill the remaining positions in the res array. If not, it means that we don't need to consider the current element, so the loop continues.
+         *
+         * Otherwise, the function compares the current element with the previous element in the res array. If the current element is greater than the previous element, it means that the previous element can be replaced with the current element without affecting the maximum number. So, the function decrements the pointer j to remove the previous element and insert the current element.
+         *
+         * If the current element is not greater than the previous element, the function simply adds the current element to the res array and increments the pointer j.
+         *
+         * Finally, the function returns the res array, which contains the maximum number that can be created using k digits from the input array.
+         */
+        int[] res = new int[k];
+        for (int i = 0, j = 0; i <nums.length ; i++) {
+            while (nums.length-i > k - j && j > 0 && nums[i] > res[j-1]) {
+                // con1: rest of elements > rest of res
+                // con2: already have element in res
+                // con3 : curr element is bigger
+                j--;
+            }
+            if (j < k) {
+                res[j++] = nums[i];
+            }
+        }
+        return res;
+
+    }
+}
+
 312
 https://leetcode.com/problems/burst-balloons/
 
