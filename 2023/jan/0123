@@ -1,6 +1,14 @@
 319
 https://leetcode.com/problems/bulb-switcher/
 
+class Solution {
+    public int bulbSwitch(int n) {
+        // only n has odd factors and n's sqrt has odd factors.
+        return (int)Math.sqrt(n);
+        
+    }
+}
+
 470
 
 https://leetcode.com/problems/implement-rand10-using-rand7/description/
