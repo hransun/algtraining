@@ -1,0 +1,39 @@
+59. 设计Twitter
+ ___       _   _____                                    
+(  _`\  _ ( )_(_   _)_                         _        
+| (_) )(_)| ,_) | | (_)   __     __   _ __    (_)   _   
+|  _ <'| || |   | | | | /'_ `\ /'__`\( '__)   | | /'_`\
+| (_) )| || |_  | | | |( (_) |(  ___/| |    _ | |( (_) )
+(____/'(_)`\__) (_) (_)`\__  |`\____)(_)   (_)(_)`\___/'
+                       ( )_) |                          
+                        \___/'     
+题目描述
+请实现一个Twitter
+输入输出
+输入
+每行都是Twitter服务器收到的一个消息：
+•	UserID Publish TweetID: publish a tweet
+•	UserID Subscribe UserID: subscribe a user
+•	UserID Unsubscribe UserID: unsubscribe a user
+•	UserID Get: get a user's tweets
+当UserID=-1时，表示输入结束
+输出
+•	当输入是Get时，输出这个用户关注的所有人(包括自己)的最近10条tweets列表
+示例输入
+5 Publish 3
+3 Publish 4
+1 Subscribe 2
+2 Publish 5
+1 Subscribe 3
+1 Get
+1 Unsubscribe 2
+1 Subscribe 7
+1 Subscribe 3
+1 Get
+7 Publish 8
+1 Get
+-1
+示例输出
+5 4
+4
+8 4
