@@ -1,3 +1,73 @@
 https://leetcode.com/problems/reorder-list/
 
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public void reorderList(ListNode head) {
+        if (head == null || head.next == null || head.next.next == null) {
+            return ;
+        }
+        // find mid
+        ListNode mid = findMid(head);
+        // why secondhead is mid.next
+        // even or odd findmid return the node just before second list
+        ListNode secondHead = mid.next;
+        // break two list
+        mid.next = null;
+        secondHead = reverse(secondHead);
+        head = merge(head,secondHead);
+
+        
+    }
+
+    private ListNode reverse(ListNode head) {
+        if (head == null || head.next == null) return head;
+        ListNode pre = null;
+        ListNode cur = head;
+        while (cur != null) {
+            ListNode next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+        // cur is null out of the loop
+        return pre;
+    }
+
+    private ListNode findMid(ListNode head) {
+        // slow point to the node just before mid pointer
+        //  fast step 1  ahead of slow
+        ListNode fast = head.next;
+        ListNode slow = head;
+        while (fast != null && fast.next != null ) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
+
+    private ListNode merge(ListNode head1, ListNode head2) {
+        ListNode cur = head1;
+        while (head2 != null) {
+            // head2.next saved
+            ListNode tmp = head2.next;
+            head2.next = cur.next;
+            cur.next = head2;
+            // cur -> head2 - > cur.next
+            cur = cur.next.next;
+            // head 2 move fwd
+            head2 = tmp;
+        }
+        return head1;
+    }
+}
+
 https://leetcode.com/problems/reverse-nodes-in-k-group/description/
