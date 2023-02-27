@@ -71,3 +71,68 @@ class Solution {
 }
 
 https://leetcode.com/problems/reverse-nodes-in-k-group/description/
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode reverseKGroup(ListNode head, int k) {
+        if (head == null || k <=1) {
+            return head;
+        }
+        // dummy node  unify the first sub-problem
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+        // pre.next point to the sublist to be reversed (next sub list)
+        ListNode pre = dummy;
+        int count = k;
+
+        while (head != null) {
+            count--;
+            if (count == 0) {
+                // reverse
+                pre = reverse(pre,head.next); //  segments two points of head
+                // reset k and head
+                count = k;
+                head = pre.next;
+            } else {
+                // continue next
+                head = head.next;
+            }
+        }
+        return dummy.next;
+        
+    }
+
+    private ListNode reverse(ListNode preHead,ListNode nextHead) {
+        // reverse between prehead and  next head, two pointers pre and cur
+        // pre -> | (start of segment) tail - > cur....| next segment , next head
+        ListNode tail = preHead.next; // tail actually is the first node of segment
+        ListNode cur = tail.next;
+        // reverse
+        // two pointers , pre-head and cur
+        while (cur != nextHead) {
+            // mark next pointer  # 3 pointer
+            // two , two reverse
+            ListNode tmp = cur.next;
+            // reverse cur to prev
+            cur.next = preHead.next;
+            // prehead.next always point to cur
+            preHead.next = cur;
+            // cur move fw
+            cur = tmp;
+        }
+        // 1 -> 4
+        tail.next = nextHead;
+        // node just before next head like 2-> 3
+        //return 1
+        return tail;
+    }
+}
