@@ -43,3 +43,47 @@ class Solution {
 }
 
 https://leetcode.com/problems/3sum/
+
+class Solution {
+    public List<List<Integer>> threeSum(int[] array) {
+        List<List<Integer>> res = new ArrayList<>();
+        //int[] array = nums;
+        if (array == null || array.length < 3) return res;
+        Arrays.sort(array);
+        int fix = 0; // fix 1 - left - right
+        while (fix < array.length-2) {
+            int left = fix +1;
+            int  right = array.length -1;
+            int rest = 0 - array[fix];
+            while (left < right) {
+                if (array[left] + array[right] == rest) {
+                    List<Integer> list = new ArrayList<>();
+                    list.add(array[fix]);
+                    list.add(array[left++]); // won't out of bound when  remove  dup
+                    list.add(array[right--]); // won't out of bound when remove dup
+                    res.add(list);
+                    // skip  duplicated element
+                    // left > fix so left > 0
+                    while (left < right &&  array[left] == array[left-1]) {
+                        left++;
+                    }
+                    while (left < right && array[right] == array[right+1]) {
+                        right--;
+                    }
+                }
+                else if (array[left] + array[right] < rest) {
+                    left++;
+                } else {
+                    right--;
+                }
+            }
+            fix++;
+            // remove dup
+            while (fix < array.length - 2 && array[fix] == array[fix-1]) {
+                fix++;
+            }
+        }
+        return res;
+        
+    }
+}
