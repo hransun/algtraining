@@ -1,1 +1,25 @@
 https://leetcode.com/problems/moving-average-from-data-stream/
+
+class MovingAverage {
+    private Deque<Integer> queue;
+    private int sum;
+    private int size;
+
+
+    public MovingAverage(int size) {
+        this.queue = new LinkedList<>();
+        this.sum = 0;
+        this.size = size;
+    }
+    
+    public double next(int val) {
+        if (queue.size() == size) {
+            int last = queue.pollFirst();
+            sum -= last;
+        }
+        queue.offerLast(val);
+        sum += val;
+        return sum * 1.0 / queue.size();
+        
+    }
+}
