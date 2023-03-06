@@ -19,3 +19,31 @@ class Solution {
 }
 
 https://leetcode.com/problems/sort-colors/
+
+class Solution {
+    public void sortColors(int[] nums) {
+        int left = 0;
+        int right = nums.length-1;
+        int cur = 0;
+        // left , right is not sure, cur and left is start together, 1 no, move
+        // , 2  , already move to right
+        while (cur <=right) {
+            if (nums[cur] == 0) {
+                swap(nums,cur++,left++);
+            } else if (nums[cur] == 1) {
+                cur++;
+            } else {
+                // swap from right is not sure 1
+                swap(nums,cur,right--);
+            }
+        }
+
+
+        
+    }
+    private void swap(int[] arr, int i, int j) {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+    }
+}
