@@ -1,4 +1,26 @@
 https://leetcode.com/problems/remove-nth-node-from-end-of-list/
 
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        if (head==null || head.next == null) return null;
+        ListNode dummy = new ListNode(-1);
+        // if only have 2 nodes. add dummy nodes.
+        ListNode slow = dummy;
+        ListNode fast = dummy;
+        dummy.next = head;
+        while (n >0) {
+            fast = fast.next;
+            n--;
+        }
+        while (fast.next != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        slow.next = slow.next.next;
+        return dummy.next;
+        
+    }
+}
+
 https://leetcode.com/problems/partition-list/
 
