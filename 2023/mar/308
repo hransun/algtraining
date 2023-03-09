@@ -1,1 +1,51 @@
 https://leetcode.com/problems/copy-list-with-random-pointer/
+
+/*
+// Definition for a Node.
+class Node {
+    int val;
+    Node next;
+    Node random;
+
+    public Node(int val) {
+        this.val = val;
+        this.next = null;
+        this.random = null;
+    }
+}
+*/
+
+import java.util.HashMap;
+import java.util.Map;
+
+class Solution {
+    public Node copyRandomList(Node head) {
+        if (head == null) return head;
+        Map<Node,Node> map = new HashMap<>();
+        Node cur = head;
+        while (cur != null) {
+            // clone points
+            if (!map.containsKey(cur)) {
+                Node curCopy = new Node(cur.val);
+                map.put(cur, curCopy);
+            }
+            if (cur.next != null && !map.containsKey((cur.next))) {
+                Node nextCopy = new Node(cur.next.val);
+                map.put(cur.next,nextCopy);
+            }
+            if (cur.random != null && !map.containsKey(cur.random)) {
+                Node randomCopy = new Node(cur.random.val);
+                map.put(cur.random,randomCopy);
+            }
+            // link points
+            if (cur.next != null) {
+                map.get(cur).next = map.get(cur.next);
+            }
+            if (cur.random != null) {
+                map.get(cur).random = map.get(cur.random);
+            }
+            cur = cur.next;
+        }
+        return map.get(head);
+    }
+}
