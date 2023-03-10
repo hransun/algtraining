@@ -1,1 +1,24 @@
 https://leetcode.com/problems/gas-station/
+
+class Solution {
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+        if (gas == null || cost == null) return -1;
+        // we want to return to previous  that' why start at n
+        int start = gas.length -1;
+        int end = 0;
+        int sum = gas[start] - cost[start];
+        while (end < start) {
+            if (sum < 0) {
+                // move back
+                sum += gas[--start] - cost[start];
+            } else {
+                // move foward
+                sum += gas[end] - cost[end];
+                end++;
+            }
+        }
+        // we calculate sum and make sure sum >=0-> return start
+        return sum >=0 ? start:-1;
+        
+    }
+}
