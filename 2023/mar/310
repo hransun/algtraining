@@ -25,3 +25,49 @@ class Solution {
 
 https://leetcode.com/problems/evaluate-reverse-polish-notation/
 
+
+class Solution {
+    public int evalRPN(String[] tokens) {
+        Stack<Integer> stack = new Stack<>();
+        for (String t: tokens) {
+            if (!isOP(t)) {
+                stack.push(Integer.parseInt(t));
+            } else {
+                int op2 = stack.pop();
+                int op1 = stack.pop();
+                int x = calc(op1,op2,t);
+                stack.push(x);
+            }
+        }
+        return stack.pop();
+        
+    }
+
+    private boolean isOP(String s) {
+        if (s.equals("+") || s.equals("-") || s.equals("*")
+        || s.equals("/")) {
+            return true;
+        }
+        return false;
+    }
+
+    private int  calc(int op1, int op2, String op) {
+        int rst = 0 ;
+        switch (op) {
+            case "+":
+                rst =  op1 + op2;
+                break;
+            case "-":
+                rst =  op1 - op2;
+                break;
+            case "*":
+                rst =  op1 * op2;
+                break;
+            case "/":
+                rst =  op1 /  op2;
+                break;
+        }
+        return rst;
+    }
+}
+
