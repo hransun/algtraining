@@ -77,3 +77,41 @@ class Solution {
 
 https://leetcode.com/problems/inorder-successor-in-bst/
 
+class Solution {
+    public TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
+            if (root == null) return root;
+            // case 1 with right node
+        if (p.right != null) {
+            return searchLeftMost(p.right);
+        }
+        // case 2 without right node
+        else {
+            return searchParent(root,p);
+        }
+        
+    }
+
+    private TreeNode searchLeftMost(TreeNode root) {
+        while (root.left != null) {
+            root = root.left;
+        }
+        return root;
+    }
+    // search from root to the p , return last parent of p
+    // which p.val < parent.val
+    // like two pointers
+    private TreeNode searchParent(TreeNode root, TreeNode p) {
+        TreeNode par = null;
+        TreeNode cur = root;
+        while ( cur != p) {
+            if (cur.val > p.val) {
+                par = cur;
+                cur = cur = cur.left;
+            } else {
+                cur = cur.right;
+            }
+        }
+        return par;
+    }
+}
+
