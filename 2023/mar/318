@@ -1,3 +1,28 @@
 https://leetcode.com/problems/symmetric-tree/
 
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        if (root == null) return true;
+        Deque<TreeNode> deque = new LinkedList<>();
+        deque.offerFirst(root.left);
+        deque.offerLast(root.right);
+        while (!deque.isEmpty()) {
+            TreeNode left = deque.pollFirst();
+            TreeNode right = deque.pollLast();
+            // check
+            if (left == null && right == null)  continue;
+            if (left == null || right == null  || left.val != right.val){
+                return false;
+            }
+            // add new elements
+            // add left
+            deque.offerFirst(left.right);
+            deque.offerFirst(left.left);
+            deque.offerLast(right.left);
+            deque.offerLast(right.right);
+        }
+        return true;
+    }
+}
+
 https://leetcode.com/problems/binary-tree-upside-down/
