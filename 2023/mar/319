@@ -82,6 +82,46 @@ https://leetcode.com/problems/spiral-matrix-ii/
 
 https://leetcode.com/problems/sort-an-array/ merge sort 
 
+class Solution {
+    public int[] sortArray(int[] nums) {
+        if (nums == null) return nums;
+        int[] helper = new int[nums.length];
+        doSort(nums,helper,0,nums.length-1);
+        return nums;
+        
+    }
+    private void doSort(int[] nums,int[] helper, int start, int  end) {
+        if (start >= end) return; // until one element return
+        int mid = (start + end) / 2;
+        doSort(nums,helper,start,mid);
+        doSort(nums,helper,mid+1,end);
+        merge(nums,helper,start,mid,end);
+    }
+
+    private void merge(int[] nums,int[] helper,int aStart, int aEnd , int bEnd) {
+        // copy processing data to tmp array
+        for (int i = aStart; i <= bEnd ; i++) {
+            helper[i] = nums[i];
+        }
+        // merge sort these data
+        int aCur = aStart;
+        int bCur = aEnd+1;
+        for (int i = aStart; i <=bEnd ; i++) {
+            if (aCur > aEnd) {
+                nums[i] = helper[bCur++];
+            } else if (bCur > bEnd) {
+                nums[i] = helper[aCur++];
+            } else if (helper[aCur] <= helper[bCur]) {
+                nums[i] = helper[aCur++];
+            } else {
+                nums[i] = helper[bCur++];
+            }
+
+        }
+
+    }
+}
+
 https://leetcode.com/problems/search-in-rotated-sorted-array/
 
 https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/
