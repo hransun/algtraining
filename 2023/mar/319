@@ -206,7 +206,18 @@ class Solution {
 }
 
 https://leetcode.com/problems/path-sum/
-#  https://leetcode.com/problems/path-sum/
+
+class Solution {
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+        if (root == null) return false;
+
+        int sum = targetSum - root.val;
+        if (root.left == null && root.right == null  ) {
+            return sum==0;
+        }
+        return  (hasPathSum(root.left,sum) || hasPathSum(root.right,sum));
+    }
+}
 #  https://leetcode.com/problems/path-sum-ii/
 #  https://leetcode.com/problems/path-sum-iii/
 https://leetcode.com/problems/path-sum-iv/
