@@ -286,5 +286,58 @@ class Solution {
 
 # delete node in a BST
 # https://leetcode.com/problems/delete-node-in-a-bst/
+
+class Solution {
+    public TreeNode deleteNode(TreeNode root, int key) {
+        if (root == null) return root;
+        TreeNode dummy = new TreeNode(-1);
+        dummy.left = root;
+        TreeNode prev = dummy;
+        TreeNode cur = root;
+        // find the node
+        while (cur != null && cur.val != key) {
+            prev = cur;
+            if (cur.val < key) {
+                cur = cur.right;
+            } else {
+                cur = cur.left;
+            }
+        }
+        if (cur== null) return dummy.left;
+        // found it
+        TreeNode target = cur;
+        // case 1 two child
+        if (cur.left != null && cur.right != null) {
+            // looking  for min of  right tree
+            prev = cur;
+            cur = cur.right;
+            while (cur.left != null) {
+                prev = cur;
+                cur = cur.left;
+            }
+            target.val = cur.val;
+        }
+        // case 2 , only one or no child
+        if (cur.left == null) {
+            // only have right  tree
+            if (prev.left == cur) {
+                prev.left = cur.right;
+            } else {
+                prev.right =  cur.right;
+            }
+        } else {
+            // only have left tree
+            if (prev.left == cur) {
+                prev.left = cur.left;
+            } else {
+                prev.right =  cur.left;
+            }
+
+        }
+        return dummy.left;
+
+        
+    }
+}
 # largest bst subtree
 # https://leetcode.com/problems/largest-bst-subtree/
