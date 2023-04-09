@@ -93,6 +93,82 @@ class Solution {
 }
 
 
+// union find solution
+class Solution {
+    public int numIslands(char[][] grid) {
+        if (grid == null || grid[0].length ==0) return 0;
+        int count = 0;
+        int row = grid.length;
+        int col = grid[0].length;
+        int[] groupTag = new int[row * col];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                //  water is a  goup , 1 is each group
+                groupTag[i*col + j] = grid[i][j] == '1'?i * col + j:-1;
+            }
+        }
+        // union  find
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (grid[i][j] == '0') {
+                    continue;
+                }
+                // grid[i][j] = '1'
+                if (j + 1 < col  && grid[i][j+1] == '1') {
+                    union(i,j,i,j+1,groupTag,col);
+                }
+                if (i +1< row  && grid[i+1][j] == '1') {
+                    union(i,j,i+1,j,groupTag,col);
+                }
+            }
+        }
+        for (int i = 0; i <col * row ; i++) {
+            if (groupTag[i] == i ) {
+                // root if fa[root] == root
+                count++;
+            }
+        }
+        return count;
+        
+    }
+
+    private void find(int smIndex , int bgIndex,   int[] tag) {
+        // find the root , compress path ,
+        while (tag[smIndex] != bgIndex) {
+            // test bgIndex is smIndex father, if not  going up
+            int tmp = tag[bgIndex];
+            // path compress, father - > son changed to both  point to the same fater
+            tag[bgIndex] = tag[smIndex];
+            bgIndex = tmp;
+        }
+        tag[bgIndex] = tag[smIndex];
+    }
+
+    private void union(int i1 , int  j1 , int  i2, int  j2,int[] tag, int n) {
+        int index1 = i1 * n + j1;
+        int index2 = i2 * n + j2;
+        if (tag[index1] == tag[index2]) {
+            // already unioned
+            return;
+        }
+        if (tag[index1] < tag[index2]) {
+            if (tag[index2] != index2) {
+                find(index1,index2,tag);
+            }
+            tag[index2] = tag[index1]; // index2 point to itself in parent's array
+        } else {
+            // root of index 1 big
+            if (tag[index1] != index1) {
+                find(index2,index1,tag);
+            }
+            tag[index1] = tag[index2];
+        }
+
+    }
+
+}
+
+
 https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/ 
 
 https://leetcode.com/problems/factor-combinations/
