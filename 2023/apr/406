@@ -224,6 +224,50 @@ class Solution {
     }
 }
 
+class Solution {
+    public int kthSmallest(int[][] matrix, int k) {
+        if (matrix == null) {
+            return Integer.MIN_VALUE;
+        }
+        int row = matrix.length;
+        int col = matrix[0].length;
+        int  start = matrix[0][0]  ;
+        int end = matrix[row-1][col-1];
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+            int count = noLarger(matrix,mid);
+            if (count < k ) {
+                // either start move or end move
+                start = mid+1 ;
+            } else {
+                // either start move or end move
+                end = mid-1 ;
+            }
+        }
+        //
+        return start ;
+        
+    }
+
+    private int  noLarger(int[][] m , int cur) {
+        int count = 0;
+        int row = m.length;
+        int col = m[0].length;
+        int i = 0;
+        int j = col -1;
+        while  ( i < row && j >=0) {
+            if (cur < m[i][j]) {
+                // move to the left
+                j--;
+            } else {
+                count  += j + 1; // all element  left of j  , included is less than cur
+                i++;
+            }
+        }
+        return count;
+    }
+
+
 
 
 https://leetcode.com/problems/factor-combinations/
