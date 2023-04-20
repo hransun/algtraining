@@ -460,5 +460,49 @@ class Solution {
 
 https://leetcode.com/problems/find-k-pairs-with-smallest-sums/
 
+class Solution {
+    public List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
+        List<List<Integer>> list = new ArrayList<>();
+        if (nums1 == null || nums2 == null ||
+        nums1.length == 0 || nums2.length ==0 || k <=0) {
+            return list;
+        }
+
+        PriorityQueue<int[]> minHeap = new PriorityQueue<int[]>(
+                new Comparator<int[]>() {
+                    @Override
+                    public int compare(int[]o1, int[]o2) {
+                        int sum1 = nums1[o1[0]] + nums2[o1[1]];
+                        int sum2 = nums1[o2[0]] + nums2[o2[1]];
+                        if  (sum1 == sum2) {
+                            return 0;
+                        } else {
+                            return  sum1 < sum2 ? -1:1;
+                        }
+
+                    }
+                }
+        );
+
+        for (int i = 0; i < nums1.length; i++) {
+            // nums1 take 1-len, nums2 take 0
+            minHeap.add(new int[] {i,0});
+        }
+        while (!minHeap.isEmpty() && k > 0) {
+            int[] cur = minHeap.poll();
+            List<Integer> pair = new ArrayList<>();
+            pair.add(nums1[cur[0]]);
+            pair.add(nums2[cur[1]]);
+            list.add(pair);
+            if (++cur[1] <  nums2.length) { // cur[1] +=1  -> nums2 index ++
+                minHeap.add(cur);
+            }
+            k--;
+        }
+        return list;
+        
+    }
+}
+
 
 
