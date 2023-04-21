@@ -1,5 +1,46 @@
 https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/
 
+// dfs solution
+class Solution {
+    public int countComponents(int n, int[][] edges) {
+        List<List<Integer>> graph = new ArrayList<>();
+        Set<Integer> visited = new HashSet<>();
+        int count = 0;
+        // build graph
+        constructGraph(edges,graph,n);
+        for (int i = 0; i < n; i++) {
+            if (!visited.contains(i)) {
+                dfsHelper(i,graph,visited);
+                count++;
+            }
+        }
+        return count;
+
+    }
+    private void constructGraph(int[][] edges, List<List<Integer>> neis, int n) {
+        for (int i = 0; i < n; i++) {
+            neis.add(new ArrayList<Integer>());
+        }
+        // add neighbors
+        for (int[] edge : edges) {
+            // non direction graph
+            neis.get(edge[0]).add(edge[1]);
+            neis.get(edge[1]).add(edge[0]);
+        }
+    }
+
+    // dfs recursion helper call
+    private void dfsHelper(int cur, List<List<Integer>> neis, Set<Integer> visited) {
+        visited.add(cur);
+        List<Integer> nei = neis.get(cur);
+        for (Integer i: nei) {
+            if (!visited.contains(i))
+                dfsHelper(i,neis,visited);
+        }
+    }
+}
+
+
 https://leetcode.com/problems/course-schedule/
 
 https://leetcode.com/problems/walls-and-gates/
