@@ -40,6 +40,52 @@ class Solution {
     }
 }
 
+//bfs solution
+class Solution {
+    // bfs solution
+    public int countComponents(int n, int[][] edges) {
+
+        List<List<Integer>> neis = new ArrayList<>();
+        boolean[] isVisited = new boolean[n];
+        constructGraph(edges,neis,n);
+        int count = 0;
+        for (int i = 0; i < n; i++) {
+            if (!isVisited[i]) {
+                bfsHelper(i,neis,isVisited);
+                count++;
+            }
+        }
+        return count;
+    }
+    private void bfsHelper(int enter,List<List<Integer>> neis,boolean[] isVisited) {
+        isVisited[enter] = true;
+        Deque<Integer> queue = new LinkedList<>();
+        queue.offerLast(enter);
+        while (!queue.isEmpty()) {
+            int cur = queue.pollFirst();
+            for (Integer i: neis.get(cur)) {
+                if (!isVisited[i]) {
+                    queue.offerLast(i);
+                    isVisited[i] = true;
+                }
+            }
+        }
+    }
+
+    private void constructGraph(int[][] edges, List<List<Integer>> neis, int n) {
+        //1. Create List
+        for (int i = 0; i < n; i++) {
+            neis.add(new ArrayList<Integer>());
+        }
+        //2. Add neighbors
+        for (int[] edge : edges) {
+            System.out.println(edge[0] + " " + edge[1]);
+            neis.get(edge[0]).add(edge[1]);
+            neis.get(edge[1]).add(edge[0]);
+        }
+    }
+}
+
 
 https://leetcode.com/problems/course-schedule/
 
