@@ -87,6 +87,40 @@ class Solution {
 }
 
 
+// union find solutionß
+class Solution {
+    public int countComponents(int n, int[][] edges) {
+        int[] root = new int[n];
+        for (int i = 0; i < n; i++) {
+            root[i] = i;
+        }
+        for(int[] edge: edges){
+            //
+            int parent = findRoot(root,edge[0]);
+            int child = findRoot(root,edge[1]);
+            root[child]= parent;
+
+
+        }
+        int count =0;
+        for (int i = 0; i < n; i++) {
+            if (root[i] == i) {
+                count++;
+            }
+        }
+        return count;
+    }
+    private int findRoot(int[] root,int cur) {
+        // all the way going up
+        while (cur != root[cur]) {
+            root[cur]=root[root[cur]];
+            cur = root[cur];
+        }
+        return cur;
+    }
+}ß
+
+
 https://leetcode.com/problems/course-schedule/
 
 https://leetcode.com/problems/walls-and-gates/
