@@ -123,6 +123,57 @@ class Solution {
 
 https://leetcode.com/problems/course-schedule/
 
+// dfs solution
+
+class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        if (prerequisites == null || prerequisites.length==0
+        || prerequisites[0]== null ||
+        prerequisites[0].length ==0)
+            return true;
+        // build a graph
+        List<List<Integer>> neighborList = new ArrayList<>();
+        initLists(prerequisites,neighborList,numCourses);
+        int[] status = new int[numCourses];
+        // dfs
+        for (int i = 0; i < numCourses; i++) {
+            if (status[i]==0 && !dfsHelper(neighborList,status , i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void initLists(int[][] prerequisites,
+                           List<List<Integer>> neighborList,
+                           int numCourses) {
+        for (int i = 0; i < numCourses; i++) {
+            List<Integer> neighbor = new ArrayList<>();
+            neighborList.add(neighbor);
+        }
+        // adj list
+        for(int[] course: prerequisites) {
+            neighborList.get(course[1]).add(course[0]);
+        }
+    }
+    private boolean dfsHelper(
+            List<List<Integer>> neighborList,
+            int[] status,
+            int cur
+    ) { // 0 -> no visit, 1-> visited , -1 -> on current track still
+        status[cur] = -1;
+        for (int i: neighborList.get(cur)) {
+            // current loop already visit -> have circle, or dfs return false
+            if (status[i] == -1 || !dfsHelper(neighborList,status,i)) {
+                return false;
+            }
+
+        }
+        status[cur] = 1;
+        return true;
+    }
+}
+
 https://leetcode.com/problems/walls-and-gates/
 
 https://leetcode.com/problems/candy/
